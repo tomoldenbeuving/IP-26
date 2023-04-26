@@ -9,7 +9,7 @@ df = pd.read_excel("https://tud365-my.sharepoint.com/personal/toldenbeuving_tude
 
 p = df.iloc[42:64,1]*rho_water*g
 
-g = -df.iloc[97:119,2]*rho_staal*g
+G = -df.iloc[97:119,2]*rho_staal*g
 
-q = p+g
+q = p+G
 
