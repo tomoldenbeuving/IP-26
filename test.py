@@ -20,7 +20,7 @@ G = -df.iloc[97:119,2]*rho_staal*g
 x_G = df.iloc[97:119,0]
 G_func = interpolate.interp1d(x_G,G)
 
-x = np.arange(0.0,147.0,0.05)
+x = np.arange(0.0,150.0,0.05)
 
 
 p = p_func(x)
