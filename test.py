@@ -33,12 +33,15 @@ G_func = interpolate.interp1d(x_G,G)
 x = np.arange(0.0,Loa,0.05)
 
 
-p = p_func(x)
-G = G_func(x)
+p_int = p_func(x)
+G_int = G_func(x)
 
-q= p+G
+q= p_int+G_int
 
-V = integrate.cumtrapz(x,q,initial=0)
+V = integrate.cumulative_trapezoid(q,x,initial=0)
+M = integrate.cumulative_trapezoid(V,x,initial=0)
+theta = integrate.cumulative_trapezoid(M,x,initial=0)
+w = integrate.cumulative_trapezoid(theta,x,initial=0)
 
 def plot(x,y):
     plt.plot(x,y)
