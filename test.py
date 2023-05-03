@@ -38,14 +38,17 @@ x_I = df.iloc[97:119,0]
 x_I = np.append(nul,x_I)
 x_I = np.append(x_I,eind)
 I_func = interpolate.interp1d(x_I,I)
-I_func=np.where(I_func==0, np.nan, I_func)
 
-x = np.arange(0.0,Loa,0.05)
+
+x = np.arange(0.0,Loa,0.5)
 
 
 p = p_func(x)
 G = G_func(x)
 I= I_func(x)
+
+
+
 
 #index=[np.arange(0,1)]
 
@@ -55,13 +58,19 @@ q= p+G
 
 V = integrate.cumtrapz(x,q,initial=0)
 M = integrate.cumtrapz(x,V,initial=0)
-phi=(integrate.cumtrapz(x,M,initial=0))/(E_staal*I)
+phiEI=(integrate.cumtrapz(x,M,initial=0))
 
+
+#plt.plot(x,phi)
+phi=np.zeros(len(x))
+for i in range(len(x)):
+    if phiEI[i] == 0 or I[i] == 0:
+        phi[i]= 0
+    else:
+        phi[i]=phiEI[i]/(E_staal*I[i])
+   
 
 plt.plot(x,phi)
-
-
-
 def plotp():
     plt.plot(x,p)
     plt.xlabel('L.O.A. [m]')
