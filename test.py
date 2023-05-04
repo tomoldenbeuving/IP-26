@@ -14,10 +14,10 @@ nul = np.zeros(1)
 Loa= df.iloc[0,1]
 eind = np.array([Loa])
 
-p = df.iloc[42:64,1]*rho_water*g
+p = df.iloc[44:64,1]*rho_water*g
 p = np.append(nul,p)
 p = np.append(p,nul)
-x_p = df.iloc[42:64,0]
+x_p = df.iloc[44:64,0]
 x_p = np.append(nul,x_p)
 x_p = np.append(x_p,eind)
 p_func = interpolate.interp1d(x_p,p)
