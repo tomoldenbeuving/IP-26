@@ -115,6 +115,12 @@ class plot():
         plt.show()
 
 
+#GM dwarsrichting
+It_x = df.iloc[27,1]
+displacement = df.iloc[18,1]
+BM_t = It_x/displacement
 
+KB = df.iloc[20,3]
+KG = df.iloc[26,3]
 
-GM = KB + BM - KG 
+GM_t = KB + BM_t - KG 
