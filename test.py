@@ -120,3 +120,4 @@ def momentlijn():
     return momentlijn
 
 
+plotp()
