@@ -7,6 +7,7 @@ rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
+tp=0.008
 df = pd.read_excel("IP.xlsx")
 df = df.round(4)
 nul = np.zeros(1)
@@ -19,11 +20,11 @@ p = np.append(p,nul)
 x_p = df.iloc[42:64,0]
 x_p = np.append(nul,x_p)
 x_p = np.append(x_p,eind)
-p_func = interpolate.interp1d(x_p,p,fill_value=0)
+p_func = interpolate.interp1d(x_p,p)
 
 
 
-G = -df.iloc[97:119,2]*rho_staal*g
+G = -df.iloc[97:119,2]*tp*rho_staal*g
 G = np.append(nul,G)
 G = np.append(G,nul)
 x_G = df.iloc[97:119,0]
@@ -61,7 +62,7 @@ M = integrate.cumtrapz(x,V,initial=0)
 phiEI=(integrate.cumtrapz(x,M,initial=0))
 
 
-#plt.plot(x,phi)
+
 phi=np.zeros(len(x))
 for i in range(len(x)):
     if phiEI[i] == 0 or I[i] == 0:
@@ -70,7 +71,9 @@ for i in range(len(x)):
         phi[i]=phiEI[i]/(E_staal*I[i])
    
 
-plt.plot(x,phi)
+
+
+
 def plotp():
     plt.plot(x,p)
     plt.xlabel('L.O.A. [m]')
@@ -118,3 +121,4 @@ def momentlijn():
 
 
 
+plotp()
