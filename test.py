@@ -114,13 +114,19 @@ class plot():
         plt.grid()
         plt.show()
 
-
+LCB = df.iloc[20,1]
+LCF = df.iloc[26,1]
 #GM dwarsrichting
 It_x = df.iloc[27,1]
 displacement = df.iloc[18,1]
 BM_t = It_x/displacement
-
 KB = df.iloc[20,3]
 KG = df.iloc[26,3]
 
 GM_t = KB + BM_t - KG 
+
+#GM langsrichting
+It_y = df.iloc[27,2]
+BM_l = It_y/displacement
+GM_l = KB +BM_l-KG
+
