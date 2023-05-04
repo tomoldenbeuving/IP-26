@@ -72,7 +72,6 @@ for i in range(len(x)):
    
 
 #plots in een class runnen met plot.q() om bijv q te ploten
-
 class plot():
     def p():
         plt.plot(x,p)
