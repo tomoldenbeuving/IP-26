@@ -24,7 +24,7 @@ p_func = interpolate.interp1d(x_p,p)
 
 
 
-G = -df.iloc[97:119,2]*tp*rho_staal*g
+G = -df.iloc[98:119,2]*tp*rho_staal*g
 G = np.append(nul,G)
 G = np.append(G,nul)
 x_G = df.iloc[97:119,0]
@@ -32,7 +32,7 @@ x_G = np.append(nul,x_G)
 x_G = np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
 
-I = df.iloc[97:119,6]
+I = df.iloc[98:119,6]
 I = np.append(nul,I)
 I = np.append(I,nul)
 x_I = df.iloc[97:119,0]
