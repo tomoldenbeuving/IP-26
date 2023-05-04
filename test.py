@@ -7,7 +7,7 @@ rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
-tp=0.008
+tp=0.053
 df = pd.read_excel("IP.xlsx",'Blad1')
 df = df.round(4)
 nul = np.zeros(1)
@@ -22,9 +22,7 @@ x_p = np.append(nul,x_p)
 x_p = np.append(x_p,eind)
 p_func = interpolate.interp1d(x_p,p)
 
-
-
-G = -df.iloc[98:119,2]*rho_staal*g
+G = -df.iloc[98:119,2]*tp*rho_staal*g
 G = np.append(nul,G)
 G = np.append(G,nul)
 x_G = df.iloc[98:119,0]
@@ -97,6 +95,13 @@ class plot():
         plt.title('Nettobelasting uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
+
+    def alles():
+        plt.figure(figsize=(16,9))
+        plt.plot(x,q)
+        plt.plot(x,G)
+        plt.plot(x,p)
+
         
     def V():
         plt.plot(x,V)
@@ -115,6 +120,9 @@ class plot():
         plt.show()
 
 
+plot.G()
+plot.p()
+plot.q()
+plot.alles()
 
-
-GM = KB + BM - KG 
+#GM = KB + BM - KG 
