@@ -122,3 +122,5 @@ def momentlijn():
 
 
 plotp()
+plotG()
+plotq()
