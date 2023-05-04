@@ -24,7 +24,7 @@ p_func = interpolate.interp1d(x_p,p)
 
 
 
-G = -df.iloc[98:119,2]*tp*rho_staal*g
+G = -df.iloc[98:119,2]*rho_staal*g
 G = np.append(nul,G)
 G = np.append(G,nul)
 x_G = df.iloc[98:119,0]
@@ -120,4 +120,6 @@ def momentlijn():
     return momentlijn
 
 
+plotp()
+plotG()
 plotq()
