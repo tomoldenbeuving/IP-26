@@ -71,53 +71,50 @@ for i in range(len(x)):
         phi[i]=phiEI[i]/(E_staal*I[i])
    
 
+#plots in een class runnen met plot.q() om bijv q te ploten
+
+class plot():
+    def p():
+        plt.plot(x,p)
+        plt.xlabel('L.O.A. [m]')
+        plt.ylabel('Opwaartsekracht (p) [N/m]')
+        plt.title('Opwaartsekracht uitgezet tegen de totale lengte')
+        plt.grid()
+        plt.show()
+
+    def G():
+        plt.plot(x,G)
+        plt.xlabel('L.O.A. [m]')
+        plt.ylabel('Zwaartekracht als verdeelde belasting (G) [N/m]')
+        plt.title('Zwaartekracht uitgezet tegen de totale lengte')
+        plt.grid()
+        plt.show()
+
+    def q():
+        plt.plot(x,q)
+        plt.xlabel('L.O.A. [m]')
+        plt.ylabel('Nettobelasting (q) [N/m]')
+        plt.title('Nettobelasting uitgezet tegen de totale lengte')
+        plt.grid()
+        plt.show()
+        
+    def V():
+        plt.plot(x,V)
+        plt.xlabel('L.O.A. [m]')
+        plt.ylabel('Dwarskracht (V) [N]')
+        plt.title('Dwarskracht uitgezet tegen de totale lengte')
+        plt.grid()
+        plt.show()
+
+    def M():
+        plt.plot(x,M)
+        plt.xlabel('L.O.A. [m]')
+        plt.ylabel('Moment (M) [Nm]')
+        plt.title('Intern moment uitgezet tegen de totale lengte')
+        plt.grid()
+        plt.show()
 
 
 
-def plotp():
-    plt.plot(x,p)
-    plt.xlabel('L.O.A. [m]')
-    plt.ylabel('Opwaartsekracht (p) [N]')
-    plt.title('Opwaartsekracht uitgezet tegen de totale lengte')
-    plt.grid()
-    plt.show()
-    return plotp
 
-def plotG():
-    plt.plot(x,G)
-    plt.xlabel('L.O.A. [m]')
-    plt.ylabel('Zwaartekracht (G) [N]')
-    plt.title('Zwaartekracht uitgezet tegen de totale lengte')
-    plt.grid()
-    plt.show()
-    return plotG
-
-def plotq():
-    plt.plot(x,q)
-    plt.xlabel('L.O.A. [m]')
-    plt.ylabel('Nettobelasting (q) [N]')
-    plt.title('Nettobelasting uitgezet tegen de totale lengte')
-    plt.grid()
-    plt.show()
-    return plotq
-    
-def dwarskrachtlijn():
-    plt.plot(x,V)
-    plt.xlabel('L.O.A. [m]')
-    plt.ylabel('Dwarskracht (V) [N]')
-    plt.title('Dwarskracht uitgezet tegen de totale lengte')
-    plt.grid()
-    plt.show()
-    return dwarskrachtlijn
-
-def momentlijn():
-    plt.plot(x,M)
-    plt.xlabel('L.O.A. [m]')
-    plt.ylabel('Moment (M) [Nm]')
-    plt.title('Intern moment uitgezet tegen de totale lengte')
-    plt.grid()
-    plt.show()
-    return momentlijn
-
-
-plotp()
+GM = KB + BM - KG 
