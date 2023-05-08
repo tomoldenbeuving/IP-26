@@ -119,11 +119,7 @@ class plot():
         plt.grid()
         plt.show()
 
-    def alles():
-        plt.figure(figsize=(16,9))
-        plt.plot(x,q)
-        plt.plot(x,G)
-        plt.plot(x,p)
+    
 
         
     def V():
@@ -145,17 +141,26 @@ class plot():
     def phi():
         plt.plot(x,phi)
         plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Moment (M) [Nm]')
-        plt.title('Intern moment uitgezet tegen de totale lengte')
+        plt.ylabel('hoekverdraaing (phi) [radialen]')
+        plt.title('de hoekverdraaing')
         plt.grid()
         plt.show()
     def v():
         plt.plot(x,v)
         plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Moment (M) [Nm]')
-        plt.title('Intern moment uitgezet tegen de totale lengte')
+        plt.ylabel('doorbuiging (v) [m]')
+        plt.title('doorbuiging')
         plt.grid()
         plt.show()
+    def alles():
+        plt.figure(figsize=(16,9))
+        plt.plot(x,q)
+        plt.plot(x,G)
+        plt.plot(x,p)
+        plt.plot(x,phi)
+        plt.plot(x,v)
+        plt.plot(x,M)
+
 
 
 LCB = df.iloc[20,1]
