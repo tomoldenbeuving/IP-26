@@ -22,8 +22,6 @@ Ch=2.39  #container hoogte
 Cw=30E3  #container weight
 
 
-
-
 p = df.iloc[42:64,1]*rho_water*g
 x_p = df.iloc[42:64,0]
 p = np.append(nul,p)
@@ -31,14 +29,13 @@ p = np.append(p,nul)
 p_func = interpolate.interp1d(x_p,p)
 
 
-
 G = -df.iloc[97:119,2]*rho_staal*g
 x_G = df.iloc[97:119,0]
 G_func = interpolate.interp1d(x_G,G)
 
+
 I = df.iloc[97:119,6]
 x_I = df.iloc[97:119,0]
-
 I_func = interpolate.interp1d(x_I,I)
 G = G_func(x)
 I= I_func(x)
