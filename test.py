@@ -16,9 +16,9 @@ Loa= df.iloc[0,1]
 eind = np.array([Loa])
 
 #containers
-Cl=5.9   #container lengte
-Cb=2.35  #container breedte
-Ch=2.39  #container hoogte
+Cl=6.06   #container lengte
+Cb=2.44  #container breedte
+Ch=2.59   #container hoogte
 Cw=30E3  #container weight
 
 
