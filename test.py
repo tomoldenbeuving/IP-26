@@ -54,6 +54,8 @@ I_func = interpolate.interp1d(x_I,I)
 G = G_func(x)
 I= I_func(x)
 p= np.zeros(len(x))
+
+# for loop zodat nadat het onderwater stopt p altijd 0
 for i in range(len(x)):
     if x[i] < min(onderwater):
         p[i] = 0
@@ -67,7 +69,7 @@ for i in range(len(x)):
 #I=np.delete(I_func(x),index)
 
 q= p+G
-
+# integratie lijnen
 V = integrate.cumtrapz(x,q,initial=0)
 M = integrate.cumtrapz(x,V,initial=0)
 phiEI=(integrate.cumtrapz(x,M,initial=0))
@@ -76,6 +78,8 @@ vEI=(integrate.cumtrapz(x,phiEI,initial=0))
 
 
 phi=np.zeros(len(x))
+# for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
+
 for i in range(len(x)):
     if I[i] == 0:
         phi[i]= 0
