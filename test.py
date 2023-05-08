@@ -54,7 +54,6 @@ M = integrate.cumtrapz(x,V,initial=0)
 phiEI=(integrate.cumtrapz(x,M,initial=0))
 
 
-
 phi=np.zeros(len(x))
 for i in range(len(x)):
     if phiEI[i] == 0 or I[i] == 0:
@@ -112,6 +111,8 @@ class plot():
         plt.grid()
         plt.show()
 
+
+
 LCB = df.iloc[20,1]
 LCF = df.iloc[26,1]
 #GM dwarsrichting
@@ -128,4 +129,3 @@ It_y = df.iloc[27,2]
 BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
 
-plot.G()
