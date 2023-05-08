@@ -27,7 +27,7 @@ Cw=30E3  #container weight
 
 p=np.zeros(len(x))
 
-p = df.iloc[42:64,1]*rho_water*g
+p = -df.iloc[42:64,1]*rho_water*g
 p = np.append(p,nul)
 p = np.append(nul,p)
 x_p = df.iloc[42:64,0]
@@ -38,7 +38,7 @@ x_p = np.append(x_p,max(onderwater))
 p_func = interpolate.interp1d(x_p,p)
 
 
-G = -df.iloc[97:119,2]*rho_staal*g
+G = df.iloc[97:119,2]*rho_staal*g
 G=np.append(G,nul)
 x_G = df.iloc[97:119,0]
 x_G=np.append(x_G,eind)
@@ -120,11 +120,7 @@ class plot():
         plt.grid()
         plt.show()
 
-    def alles():
-        plt.figure(figsize=(16,9))
-        plt.plot(x,q)
-        plt.plot(x,G)
-        plt.plot(x,p)
+    
 
         
     def V():
@@ -146,17 +142,26 @@ class plot():
     def phi():
         plt.plot(x,phi)
         plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Moment (M) [Nm]')
-        plt.title('Intern moment uitgezet tegen de totale lengte')
+        plt.ylabel('hoekverdraaing (phi) [radialen]')
+        plt.title('de hoekverdraaing')
         plt.grid()
         plt.show()
     def v():
         plt.plot(x,v)
         plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Moment (M) [Nm]')
-        plt.title('Intern moment uitgezet tegen de totale lengte')
+        plt.ylabel('doorbuiging (v) [m]')
+        plt.title('doorbuiging')
         plt.grid()
         plt.show()
+    def alles():
+        plt.figure(figsize=(16,9))
+        plt.plot(x,q)
+        plt.plot(x,G)
+        plt.plot(x,p)
+        plt.plot(x,phi)
+        plt.plot(x,v)
+        plt.plot(x,M)
+
 
 
 LCB = df.iloc[20,1]
