@@ -57,8 +57,10 @@ p=np.zeros(len(x))
 for i in range(len(x)):
     if x[i] < min(onderwater):
         p[i] = 0
+    elif x[i] > max(onderwater):
+        p[i]=0
     else:
-        p[i]=p_func(x)
+        p[i]=p_func(x[i])
 
 #index=[np.arange(0,1)]
 
