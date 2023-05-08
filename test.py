@@ -53,7 +53,7 @@ I_func = interpolate.interp1d(x_I,I)
 
 G = G_func(x)
 I= I_func(x)
-p=np.zeros(len(x))
+p= np.zeros(len(x))
 for i in range(len(x)):
     if x[i] < min(onderwater):
         p[i] = 0
@@ -76,7 +76,7 @@ phiEI=(integrate.cumtrapz(x,M,initial=0))
 
 phi=np.zeros(len(x))
 for i in range(len(x)):
-    if phiEI[i] == 0 or I[i] == 0:
+    if I[i] == 0:
         phi[i]= 0
     else:
         phi[i]=phiEI[i]/(E_staal*I[i])
