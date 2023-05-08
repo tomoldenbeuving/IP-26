@@ -19,6 +19,8 @@ eind = np.array([Loa])
 
 p = df.iloc[42:64,1]*rho_water*g
 x_p = df.iloc[42:64,0]
+p = np.append(nul,p)
+p = np.append(p,nul)
 p_func = interpolate.interp1d(x_p,p)
 
 
