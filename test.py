@@ -15,6 +15,12 @@ nul = np.zeros(1)
 Loa= df.iloc[0,1]
 eind = np.array([Loa])
 
+#containers
+Cl=5.9   #container lengte
+Cb=2.35  #container breedte
+Ch=2.39  #container hoogte
+Cw=30E3  #container weight
+
 p = df.iloc[43:64,1]*rho_water*g
 p = np.append(nul,p)
 p = np.append(p,nul)
@@ -130,3 +136,4 @@ It_y = df.iloc[27,2]
 BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
 
+plot.G()
