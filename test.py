@@ -7,7 +7,7 @@ rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
-tp=0.053
+tp=0.008
 df = pd.read_excel("IP.xlsx",'Blad1')
 df = df.round(4)
 nul = np.zeros(1)
@@ -120,9 +120,6 @@ class plot():
         plt.show()
 
 
-plot.G()
-plot.p()
-plot.q()
-plot.alles()
 
-#GM = KB + BM - KG 
+
+GM = KB + BM - KG 
