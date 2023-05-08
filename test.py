@@ -17,6 +17,12 @@ eind = np.array([Loa])
 onderwater= df.iloc[42:64,0]
 
 x=np.arange(0,Loa,0.5)
+#containers
+Cl=5.9   #container lengte
+Cb=2.35  #container breedte
+Ch=2.39  #container hoogte
+Cw=30E3  #container weight
+
 
 p=np.zeros(len(x))
 
@@ -99,6 +105,13 @@ class plot():
         plt.title('Nettobelasting uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
+
+    def alles():
+        plt.figure(figsize=(16,9))
+        plt.plot(x,q)
+        plt.plot(x,G)
+        plt.plot(x,p)
+
         
     def V():
         plt.plot(x,V)
@@ -125,10 +138,11 @@ BM_t = It_x/displacement
 KB = df.iloc[20,3]
 KG = df.iloc[26,3]
 
-GM_t = KB + BM_t - KG 
+GM = KB + BM - KG 
 
 #GM langsrichting
 It_y = df.iloc[27,2]
 BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
 
+plot.G()
