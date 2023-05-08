@@ -71,6 +71,7 @@ q= p+G
 V = integrate.cumtrapz(x,q,initial=0)
 M = integrate.cumtrapz(x,V,initial=0)
 phiEI=(integrate.cumtrapz(x,M,initial=0))
+vEI=(integrate.cumtrapz(x,phiEI,initial=0))
 
 
 
@@ -80,7 +81,13 @@ for i in range(len(x)):
         phi[i]= 0
     else:
         phi[i]=phiEI[i]/(E_staal*I[i])
-   
+
+v=np.zeros(len(x))
+for i in range(len(x)):
+    if I[i] == 0:
+        v[i]= 0
+    else:
+        v[i]=phiEI[i]/(E_staal*I[i])
 
 #plots in een class runnen met plot.q() om bijv q te ploten
 class plot():
@@ -130,6 +137,22 @@ class plot():
         plt.title('Intern moment uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
+
+    def phi():
+        plt.plot(x,phi)
+        plt.xlabel('L.O.A. [m]')
+        plt.ylabel('Moment (M) [Nm]')
+        plt.title('Intern moment uitgezet tegen de totale lengte')
+        plt.grid()
+        plt.show()
+    def v():
+        plt.plot(x,v)
+        plt.xlabel('L.O.A. [m]')
+        plt.ylabel('Moment (M) [Nm]')
+        plt.title('Intern moment uitgezet tegen de totale lengte')
+        plt.grid()
+        plt.show()
+
 
 LCB = df.iloc[20,1]
 LCF = df.iloc[26,1]
