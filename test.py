@@ -16,12 +16,13 @@ Loa= df.iloc[0,1]
 eind = np.array([Loa])
 
 
+x=np.arange(0,Loa,0.05)
 
+p=np.zeros(len(x))
 
 p = df.iloc[42:64,1]*rho_water*g
 x_p = df.iloc[42:64,0]
-p = np.append(nul,p)
-p = np.append(p,nul)
+
 p_func = interpolate.interp1d(x_p,p)
 
 
@@ -37,8 +38,11 @@ I_func = interpolate.interp1d(x_I,I)
 G = G_func(x)
 I= I_func(x)
 
-
-#test
+for i in range(len(x)):
+    if x[i] < min(x_p):
+        p[i] = 0.
+    elif x[i] > max(x_p):
+        p[i] = 0.
 
 #index=[np.arange(0,1)]
 
