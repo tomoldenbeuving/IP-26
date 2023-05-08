@@ -18,9 +18,9 @@ onderwater= df.iloc[42:64,0]
 
 x=np.arange(0,Loa,0.5)
 #containers
-Cl=5.9   #container lengte
-Cb=2.35  #container breedte
-Ch=2.39  #container hoogte
+Cl=6.06   #container lengte
+Cb=2.44  #container breedte
+Ch=2.59   #container hoogte
 Cw=30E3  #container weight
 
 
@@ -37,12 +37,12 @@ x_p = np.append(x_p,max(onderwater))
 p_func = interpolate.interp1d(x_p,p)
 
 
-
 G = -df.iloc[97:119,2]*rho_staal*g
 G=np.append(G,nul)
 x_G = df.iloc[97:119,0]
 x_G=np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
+
 
 I = df.iloc[97:119,6]
 I=np.append(I,nul)
