@@ -140,11 +140,9 @@ BM_t = It_x/displacement
 KB = df.iloc[20,3]
 KG = df.iloc[26,3]
 
-GM = KB + BM - KG 
+GM = KB + BM_t - KG 
 
 #GM langsrichting
 It_y = df.iloc[27,2]
 BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
-
-plot.G()
