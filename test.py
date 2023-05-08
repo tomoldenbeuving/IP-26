@@ -17,6 +17,7 @@ eind = np.array([Loa])
 onderwater= df.iloc[42:64,0]
 
 x=np.arange(0,Loa,0.5)
+
 #containers
 Cl=6.06   #container lengte
 Cb=2.44  #container breedte
@@ -173,3 +174,9 @@ GM = KB + BM_t - KG
 It_y = df.iloc[27,2]
 BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
+
+#Kritische belasting moment
+n=234
+G_cont=n*Cw*g
+sigma_max=190E6
+M_cont=
