@@ -1,3 +1,7 @@
+import pandas as pd
+import numpy as np
+from scipy import integrate, interpolate
+
 rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
