@@ -14,35 +14,45 @@ df = df.round(4)
 nul = np.zeros(1)
 Loa= df.iloc[0,1]
 eind = np.array([Loa])
+onderwater= df.iloc[42:64,0]
 
-
-x=np.arange(0,Loa,0.05)
+x=np.arange(0,Loa,0.5)
 
 p=np.zeros(len(x))
 
 p = df.iloc[42:64,1]*rho_water*g
+p = np.append(p,nul)
+p = np.append(nul,p)
 x_p = df.iloc[42:64,0]
+x_p = np.append(0,x_p)
+x_p = np.append(x_p,max(onderwater))
+
 
 p_func = interpolate.interp1d(x_p,p)
 
 
 
 G = -df.iloc[97:119,2]*rho_staal*g
+G=np.append(G,nul)
 x_G = df.iloc[97:119,0]
+x_G=np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
 
 I = df.iloc[97:119,6]
-x_I = df.iloc[97:119,0]
+I=np.append(I,nul)
 
+x_I = df.iloc[97:119,0]
+x_I=np.append(x_I,eind)
 I_func = interpolate.interp1d(x_I,I)
+
 G = G_func(x)
 I= I_func(x)
-
+p=np.zeros(len(x))
 for i in range(len(x)):
-    if x[i] < min(x_p):
-        p[i] = 0.
-    elif x[i] > max(x_p):
-        p[i] = 0.
+    if x[i] < min(onderwater):
+        p[i] = 0
+    else:
+        p[i]=p_func(x)
 
 #index=[np.arange(0,1)]
 
