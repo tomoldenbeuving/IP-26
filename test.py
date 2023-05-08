@@ -26,7 +26,7 @@ Cw=30E3  #container weight
 
 p=np.zeros(len(x))
 
-p = df.iloc[42:64,1]*rho_water*g
+p = -df.iloc[42:64,1]*rho_water*g
 p = np.append(p,nul)
 p = np.append(nul,p)
 x_p = df.iloc[42:64,0]
@@ -37,7 +37,7 @@ x_p = np.append(x_p,max(onderwater))
 p_func = interpolate.interp1d(x_p,p)
 
 
-G = -df.iloc[97:119,2]*rho_staal*g
+G = df.iloc[97:119,2]*rho_staal*g
 G=np.append(G,nul)
 x_G = df.iloc[97:119,0]
 x_G=np.append(x_G,eind)
