@@ -162,6 +162,7 @@ class plot():
         plt.plot(x,v)
         plt.plot(x,M)
 
+#momentstelling stabiliteit
 
 
 LCB = df.iloc[20,1]
