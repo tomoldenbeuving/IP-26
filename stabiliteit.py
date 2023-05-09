@@ -13,11 +13,11 @@ nul = np.zeros(1)
 Loa= df.iloc[0,1]
 eind = np.array([Loa])
 onderwater= df.iloc[42:64,0]
+Lwl=df.iloc[4,1]
 
 LCB = df.iloc[20,1]
 LCF = df.iloc[26,1]
 
-#momentstelling stabiliteit
 
 
 #GM dwarsrichting
@@ -33,3 +33,6 @@ GM = KB + BM_t - KG
 It_y = df.iloc[27,2]
 BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
+
+#momentstelling stabiliteit
+Msl=rho_water*g*displacement*GM_l*(trim_max/Lwl)
