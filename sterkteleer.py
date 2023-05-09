@@ -47,7 +47,7 @@ x_I=np.append(x_I,eind)
 I_func = interpolate.interp1d(x_I,I)
 
 G_containerschip=F_containerschip/g
-G = G_func(x)+G_containerschip
+G = G_func(x)
 I= I_func(x)
 p= np.zeros(len(x))
 
@@ -64,14 +64,14 @@ for i in range(len(x)):
 
 #I=np.delete(I_func(x),index)
 
-q= p+G
+q= p+G+G_containerschip
 # integratie lijnen
 V = integrate.cumtrapz(x,q,initial=0) 
 M = integrate.cumtrapz(x,V,initial=0)
 phiEI=(integrate.cumtrapz(x,M,initial=0))
 vEI=(integrate.cumtrapz(x,phiEI,initial=0))
 
-
+plt.plot(x,q)
 phi=np.zeros(len(x))
 # for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
 
