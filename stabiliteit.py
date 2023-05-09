@@ -29,3 +29,4 @@ GM = KB + BM_t - KG
 It_y = df.iloc[27,2]
 BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
+me
