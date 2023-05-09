@@ -16,6 +16,10 @@ onderwater= df.iloc[42:64,0]
 
 LCB = df.iloc[20,1]
 LCF = df.iloc[26,1]
+
+#momentstelling stabiliteit
+
+
 #GM dwarsrichting
 It_x = df.iloc[27,1]
 displacement = df.iloc[18,1]
