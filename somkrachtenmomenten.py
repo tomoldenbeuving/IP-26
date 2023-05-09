@@ -20,5 +20,9 @@ from container import F_containerschip
 
 F_c=sum(F_containerschip)
 
-som_F=G+P+F_c
+from sterkteleer import F_tank
+
+F_tank=F_tank
+
+som_F=G+P+F_c+F_tank
 

@@ -98,6 +98,8 @@ y=H-KG_y
 
 moment_max=(sigma_max*I_midship)/y
 
-
+#Ballast tank
+V_tank=df.iloc[32,1]
+F_tank=V_tank*rho_water*g
 
 
