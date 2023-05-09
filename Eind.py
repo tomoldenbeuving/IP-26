@@ -74,4 +74,3 @@ class plot():
         plt.plot(x,M)
 
 
-plot.V()
