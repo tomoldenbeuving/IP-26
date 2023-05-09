@@ -45,4 +45,3 @@ zwaartepuntafstandenL[0]=containerbegin+Cl/2
 for i in range(aCL-1):
     zwaartepuntafstandenL[i+1]=zwaartepuntafstandenL[i]+Cl
 
-
