@@ -35,4 +35,6 @@ BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
 
 #momentstelling stabiliteit
+trim_max = 0.02
+
 Msl=rho_water*g*displacement*GM_l*(trim_max/Lwl)
