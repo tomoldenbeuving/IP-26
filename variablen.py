@@ -1,0 +1,11 @@
+rho_staal = 7.85E3
+E_staal=210E9
+rho_water = 1.025E3
+g = 9.81
+tp=0.008
+df = pd.read_excel("IP.xlsx",'VB schip van Goris')
+df = df.round(4)
+nul = np.zeros(1)
+Loa= df.iloc[0,1]
+eind = np.array([Loa])
+onderwater= df.iloc[42:64,0]
