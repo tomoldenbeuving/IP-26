@@ -96,7 +96,7 @@ H=df.iloc[2,1]
 KG_y=df.iloc[21,3]
 y=H-KG_y
 
-moment_max=(sigma_max/I_midship)/y
+moment_max=(sigma_max*I_midship)/y
 
 
 

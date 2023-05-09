@@ -72,3 +72,6 @@ class plot():
         plt.plot(x,phi)
         plt.plot(x,v)
         plt.plot(x,M)
+
+
+plot.V()
