@@ -41,8 +41,8 @@ sigma_max=190E6
 F_container= Cw*g*atiers*arij                    # kracht van containers op hetzelfde zwaartepunt
 aCL=np.int32(n/arij/atiers)                   #aantal container waarvan het zwaartepunt afstand nodig is
 zwaartepuntafstandenL=np.zeros(aCL)
-
-for i in range(aCL):
-    zwaartepuntafstandenL[i]= containerbegin + Cl
+zwaartepuntafstandenL[0]=containerbegin+Cl/2
+for i in range(aCL-1):
+    zwaartepuntafstandenL[i+1]=zwaartepuntafstandenL[i]+Cl
 
 
