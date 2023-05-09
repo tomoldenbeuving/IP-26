@@ -92,8 +92,12 @@ for i in range(len(x)):
 # Maximaal toelaatbaar moment
 sigma_max=190E6
 I_midship=df.iloc[110, 7]
-y=df.iloc[3,1]-df.iloc[22,3]
+H=df.iloc[2,1]
+KG_y=df.iloc[21,3]
+y=H-KG_y
 
 moment_max=(sigma_max/I_midship)/y
+
+print(moment_max)
 
 
