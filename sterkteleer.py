@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
-from container import G_containerschip
+
 
 rho_staal = 7.85E3
 E_staal=210E9
