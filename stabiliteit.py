@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
+import math as m
 
 rho_staal = 7.85E3
 E_staal=210E9
@@ -35,6 +36,6 @@ BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
 
 #momentstelling stabiliteit
-trim_max = 0.02
+theta = 7*m.pi/180
 
-Msl=rho_water*g*displacement*GM_l*(trim_max/Lwl)
+Msl=rho_water*g*displacement*GM_l*theta
