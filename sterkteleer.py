@@ -1,3 +1,10 @@
+#%%
+import pandas as pd
+import numpy as np
+from scipy import integrate, interpolate
+import matplotlib.pyplot as plt
+
+
 rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
@@ -80,3 +87,12 @@ for i in range(len(x)):
         v[i]= 0
     else:
         v[i]=phiEI[i]/(E_staal*I[i])
+
+# Maximaal toelaatbaar moment
+sigma_max=190E6
+I_midship=df.iloc[110, 7]
+y=df.iloc[3,1]-df.iloc[22,3]
+
+moment_max=(sigma_max/I_midship)/y
+
+
