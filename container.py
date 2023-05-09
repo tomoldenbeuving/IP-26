@@ -34,10 +34,14 @@ abay= 6
 # waar de verdeelde belasting van de container begint in de lengte-as dus y-as
 containerbegin = 180.363
 containereind  = 216.711
+
 #het gewicht van de containers punt belasting
 G_cont=n*Cw*g
 sigma_max=190E6
-F_container= Cw*n*g 
-print(Loa)
+F_container= Cw*g 
+
+np.zeros(n/abay)
+for i in range(containerbegin:containereind):
+    zwaartepuntafstandenL[i]= conatainerbegin + Cl
 
 
