@@ -98,6 +98,6 @@ y=H-KG_y
 
 moment_max=(sigma_max/I_midship)/y
 
-print(moment_max)
+
 
 
