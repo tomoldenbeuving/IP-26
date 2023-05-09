@@ -38,7 +38,7 @@ containereind  = 216.711
 #het gewicht van de containers punt belasting
 G_cont=n*Cw*g
 sigma_max=190E6
-F_container= Cw*g*atiers*arij                    # kracht van containers op hetzelfde zwaartepunt
+F_container= -Cw*g*atiers*arij                    # kracht van containers op hetzelfde zwaartepunt
 aCL=np.int32(n/arij/atiers)                   #aantal container waarvan het zwaartepunt afstand nodig is
 zwaartepuntafstandenL=np.zeros(aCL)
 zwaartepuntafstandenL[0]=containerbegin+Cl/2
@@ -55,7 +55,7 @@ M_funccontainer = interpolate.interp1d(x_Mcontainer,M_container)
 
 
 for i in range(len(x)):
-    if x[i] in range(round(containerbegin),round(containereind)):
+    if x[i] > zwaartepuntafstandenL[0] and x[i] < zwaartepuntafstandenL[aCL-1]:
         M_containerschip[i]= M_funccontainer(x[i])
     else:
         M_containerschip[i]= 0
