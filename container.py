@@ -49,13 +49,15 @@ for i in range(aCL-1):
     zwaartepuntafstandenL[i+1]=zwaartepuntafstandenL[i]+Cl
 
 M_container= F_container*zwaartepuntafstandenL
-x_Mcontainer=zwaartepuntafstandenL
-M_containerschip = np.zeros(len(x))
-M_funccontainer = interpolate.interp1d(x_Mcontainer,M_container)
+
+Fcontainers=np.ones(aCL)*F_container
+x_Fcontainer=zwaartepuntafstandenL
+F_containerschip = np.zeros(len(x))
+F_funccontainer = interpolate.interp1d(x_Fcontainer,Fcontainers)
 
 
 for i in range(len(x)):
     if x[i] > zwaartepuntafstandenL[0] and x[i] < zwaartepuntafstandenL[aCL-1]:
-        M_containerschip[i]= M_funccontainer(x[i])
+        F_containerschip[i]= F_funccontainer(x[i])
     else:
-        M_containerschip[i]= 0
+        F_containerschip[i]= 0
