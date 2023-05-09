@@ -30,6 +30,7 @@ It_y = df.iloc[27,2]
 BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
 
-
+trim_max = 1
+Lwl = 100
 
 M_max = rho_water*g*displacement*GM_l*(trim_max/Lwl)
