@@ -34,7 +34,15 @@ abay= 6
 # waar de verdeelde belasting van de container begint in de lengte-as dus y-as
 containerbegin = 180.363
 containereind  = 216.711
+
 #het gewicht van de containers punt belasting
 G_cont=n*Cw*g
 sigma_max=190E6
-M_cont=
+F_container= Cw*g*atiers*arij                    # kracht van containers op hetzelfde zwaartepunt
+aCL=np.int32(n/arij/atiers)                   #aantal container waarvan het zwaartepunt afstand nodig is
+zwaartepuntafstandenL=np.zeros(aCL)
+zwaartepuntafstandenL[0]=containerbegin+Cl/2
+for i in range(aCL-1):
+    zwaartepuntafstandenL[i+1]=zwaartepuntafstandenL[i]+Cl
+
+
