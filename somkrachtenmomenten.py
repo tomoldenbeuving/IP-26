@@ -1,7 +1,6 @@
 #%%
 import pandas as pd
 import numpy as np
-from scipy import integrate, interpolate
 
 df = pd.read_excel("IP.xlsx",'VB schip van Goris')
 
@@ -17,4 +16,9 @@ from sterkteleer import p
 
 P=sum(p)
 
+from container import F_containerschip
+
+F_c=sum(F_containerschip)
+
+som_F=G+P+F_c
 
