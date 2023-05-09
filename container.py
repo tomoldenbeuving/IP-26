@@ -14,7 +14,7 @@ nul = np.zeros(1)
 Loa= df.iloc[0,1]
 eind = np.array([Loa])
 onderwater= df.iloc[42:64,0]
-
+x=np.arange(0,Loa,0.5)
 
 #containers
 Cl=6.06   #container lengte
@@ -42,6 +42,20 @@ F_container= Cw*g*atiers*arij                    # kracht van containers op hetz
 aCL=np.int32(n/arij/atiers)                   #aantal container waarvan het zwaartepunt afstand nodig is
 zwaartepuntafstandenL=np.zeros(aCL)
 zwaartepuntafstandenL[0]=containerbegin+Cl/2
+
+
+
 for i in range(aCL-1):
     zwaartepuntafstandenL[i+1]=zwaartepuntafstandenL[i]+Cl
 
+M_container= F_container*zwaartepuntafstandenL
+x_Mcontainer=zwaartepuntafstandenL
+M_containerschip = np.zeros(len(x))
+M_funccontainer = interpolate.interp1d(x_Mcontainer,M_container)
+
+
+for i in range(len(x)):
+    if x[i] in range(round(containerbegin),round(containereind)):
+        M_containerschip[i]= M_funccontainer(x[i])
+    else:
+        M_containerschip[i]= 0
