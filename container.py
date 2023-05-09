@@ -81,4 +81,3 @@ for i in range(len(x)):
     else:
         G_containerschip[i]= 0
 
-Q= G_containerschip

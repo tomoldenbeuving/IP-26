@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
-from container import Q
+from container import F_containerschip
 
 rho_staal = 7.85E3
 E_staal=210E9
@@ -46,6 +46,7 @@ x_I = df.iloc[97:119,0]
 x_I=np.append(x_I,eind)
 I_func = interpolate.interp1d(x_I,I)
 
+G_containerschip=F_containerschip/g
 G = G_func(x)+G_containerschip
 I= I_func(x)
 p= np.zeros(len(x))
@@ -71,7 +72,7 @@ phiEI=(integrate.cumtrapz(x,M,initial=0))
 vEI=(integrate.cumtrapz(x,phiEI,initial=0))
 
 
-plt.plot(x,V)
+
 
 phi=np.zeros(len(x))
 # for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
