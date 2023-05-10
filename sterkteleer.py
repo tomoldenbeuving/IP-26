@@ -102,4 +102,14 @@ moment_max=(sigma_max*I_midship)/y
 V_tank=df.iloc[32,1]
 G_tank=V_tank*rho_water
 arm_tank= df.iloc[34,1] 
-begin_tank=df.iloc[]
+
+tank = -df.iloc[92:96,1]*rho_water*g
+x_tank = df.iloc[92:96,0]
+tank_func=interpolate.interp1d(x_tank,tank)
+
+tanklast=np.zeros(len(x))
+for i in range(len(x)):
+    if x[i] < x_tank[0] and x[i] > max(x_tank):
+        tanklast[i]= 0
+    else:
+        tanklast[i] =tank_func(x[i])
