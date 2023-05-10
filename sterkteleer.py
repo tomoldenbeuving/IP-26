@@ -64,14 +64,14 @@ for i in range(len(x)):
 
 #I=np.delete(I_func(x),index)
 
-q= p+G
+q= p+G+G_containerschip
 # integratie lijnen
 V = integrate.cumtrapz(x,q,initial=0) 
 M = integrate.cumtrapz(x,V,initial=0)
 phiEI=(integrate.cumtrapz(x,M,initial=0))
 vEI=(integrate.cumtrapz(x,phiEI,initial=0))
 
-plt.plot(x,M)
+plt.plot(x,V)
 phi=np.zeros(len(x))
 # for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
 

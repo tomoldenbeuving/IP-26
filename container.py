@@ -68,7 +68,7 @@ for i in range(len(x)):
 
 
 
-G_container=Cw*atiers*arij/20
+G_container=Cw*atiers*arij/20 # per 5 cm, dus delen door 20
 Gcontainers=np.ones(aCL)*G_container
 x_Gcontainer=zwaartepuntafstandenL
 G_containerschip = np.zeros(len(x))
