@@ -32,17 +32,17 @@ x_p = np.append(x_p,max(onderwater))
 p_func = interpolate.interp1d(x_p,p)
 
 
-G = df.iloc[97:119,2]*rho_staal*g*tp_factor
+G = df.iloc[101:123,2]*rho_staal*g*tp_factor
 G=np.append(G,nul)
-x_G = df.iloc[97:119,0]
+x_G = df.iloc[101:123,0]
 x_G=np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
 
 
-I = df.iloc[97:119,6]*tp_factor
+I = df.iloc[101:123,6]*tp_factor
 I=np.append(I,nul)
 
-x_I = df.iloc[97:119,0]
+x_I = df.iloc[101:123,0]
 x_I=np.append(x_I,eind)
 I_func = interpolate.interp1d(x_I,I)
 
@@ -91,7 +91,7 @@ for i in range(len(x)):
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
-I_midship=df.iloc[110, 7]
+I_midship=df.iloc[114, 7]
 H=df.iloc[2,1]
 KG_y=df.iloc[21,3]
 y=H-KG_y
