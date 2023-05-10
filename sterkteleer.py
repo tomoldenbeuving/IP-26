@@ -102,3 +102,4 @@ moment_max=(sigma_max*I_midship)/y
 V_tank=df.iloc[32,1]
 G_tank=V_tank*rho_water
 arm_tank= df.iloc[34,1] 
+begin_tank=df.iloc[]
