@@ -22,7 +22,7 @@ F_c=sum(F_containerschip)
 
 from sterkteleer import F_tank
 
-F_tank=F_tank
+F_last = P - G - F_c - F_tank 
 
-som_F=G+P+F_c+F_tank
 
+# %%
