@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
-from container import F_containerschip
+
 
 rho_staal = 7.85E3
 E_staal=210E9
@@ -46,7 +46,7 @@ x_I = df.iloc[97:119,0]
 x_I=np.append(x_I,eind)
 I_func = interpolate.interp1d(x_I,I)
 
-G_containerschip=F_containerschip/g
+
 G = G_func(x)
 I= I_func(x)
 p= np.zeros(len(x))
@@ -64,7 +64,7 @@ for i in range(len(x)):
 
 #I=np.delete(I_func(x),index)
 
-q= p+G-G_containerschip
+q= p+G
 # integratie lijnen
 V = integrate.cumtrapz(x,q,initial=0) 
 M = integrate.cumtrapz(x,V,initial=0)
