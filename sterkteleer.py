@@ -9,7 +9,7 @@ rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
-tp=0.008
+tp_factor=1
 df = pd.read_excel("IP.xlsx",'VB schip van Goris')
 df = df.round(4)
 nul = np.zeros(1)
@@ -32,14 +32,14 @@ x_p = np.append(x_p,max(onderwater))
 p_func = interpolate.interp1d(x_p,p)
 
 
-G = df.iloc[97:119,2]*rho_staal*g
+G = df.iloc[97:119,2]*rho_staal*g*tp_factor
 G=np.append(G,nul)
 x_G = df.iloc[97:119,0]
 x_G=np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
 
 
-I = df.iloc[97:119,6]
+I = df.iloc[97:119,6]*tp_factor
 I=np.append(I,nul)
 
 x_I = df.iloc[97:119,0]
