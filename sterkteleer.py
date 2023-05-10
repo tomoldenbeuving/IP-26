@@ -71,7 +71,7 @@ M = integrate.cumtrapz(x,V,initial=0)
 phiEI=(integrate.cumtrapz(x,M,initial=0))
 vEI=(integrate.cumtrapz(x,phiEI,initial=0))
 
-plt.plot(x,V)
+
 phi=np.zeros(len(x))
 # for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
 
@@ -101,6 +101,7 @@ moment_max=(sigma_max*I_midship)/y
 #Ballast tank
 V_tank=df.iloc[32,1]
 G_tank=V_tank*rho_water
-arm_tank=  
+arm_tank= df.iloc[34,1] 
 
+begintank= 
 
