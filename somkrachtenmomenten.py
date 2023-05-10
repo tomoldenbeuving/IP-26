@@ -8,21 +8,24 @@ g=9.81
 rho_water=1025
 
 #som van de krachten
-from sterkteleer import G
-
-G=sum(G)
-
-from sterkteleer import p
-
-P=sum(p)
-
+from sterkteleer import G, p, F_containerschip,tanklast
 from container import F_containerschip
 
-F_c=sum(F_containerschip)
 
-from sterkteleer import F_tank
+G=sum(G)
+P=sum(p)
+F_c=sum(F_containerschip)
+F_tank=sum(tanklast)
+
 
 F_last = P - G - F_c - F_tank 
 
+# som van momenten
+x_tank = df.iloc[92:96,0]
+x_last = "ff in de opdrachten opzoeken"
+COB = df.iloc[20,1]
+COV = df.iloc[21,1]
+
+arm_c = (P*COB-G*COV-F_tank*x_tank-F_last*x_last)/F_c
 
 # %%
