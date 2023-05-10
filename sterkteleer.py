@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
-
+from container import G_containerschip
 
 rho_staal = 7.85E3
 E_staal=210E9
@@ -64,14 +64,14 @@ for i in range(len(x)):
 
 #I=np.delete(I_func(x),index)
 
-q= p+G
+q= p+G+G_containerschip
 # integratie lijnen
 V = integrate.cumtrapz(x,q,initial=0) 
 M = integrate.cumtrapz(x,V,initial=0)
 phiEI=(integrate.cumtrapz(x,M,initial=0))
 vEI=(integrate.cumtrapz(x,phiEI,initial=0))
 
-plt.plot(x,M)
+plt.plot(x,V)
 phi=np.zeros(len(x))
 # for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
 
@@ -100,6 +100,7 @@ moment_max=(sigma_max*I_midship)/y
 
 #Ballast tank
 V_tank=df.iloc[32,1]
-F_tank=V_tank*rho_water*g
+G_tank=V_tank*rho_water
+arm_tank=  
 
 
