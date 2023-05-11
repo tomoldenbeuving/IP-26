@@ -85,6 +85,20 @@ for i in range(len(x)):
 
 
 
+x_platform=[11.8,16.2]
+F_last=
+Last_func=interpolate.interp1d(F_last,x_platform)
+vb_last=np.zeros(len(x))
+
+for i in range(len(x)):
+    if x[i] > min(x_platform) and x[i] < max(x_platform):
+        vb_last = Last_func(x[i])
+    else:
+        vb_last= 0  	
+
+
+
+
 
 
 q= p+G+G_containerschip*g+tanklast
