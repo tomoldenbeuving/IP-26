@@ -27,4 +27,4 @@ COV = df.iloc[21,1]
 
 arm_c = (P*COB-G*COV-F_tank*x_tank-F_last*x_last)/F_c
 
-# %%
+
