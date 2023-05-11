@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 
-from sterkteleer import G, p, F_containerschip,tanklast
+from sterkteleer import G, p,tanklast
 from container import F_containerschip
 
 df = pd.read_excel("IP.xlsx",'VB schip van Goris')
@@ -27,4 +27,4 @@ COV = df.iloc[21,1]
 
 arm_c = (P*COB-G*COV-F_tank*x_tank-F_last*x_last)/F_c
 
-# %%
+
