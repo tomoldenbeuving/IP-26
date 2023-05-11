@@ -3,13 +3,13 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
-from container import F_containerschip
+from container import G_containerschip
 
 rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
-tp=0.008
+tp_factor=1
 df = pd.read_excel("IP.xlsx",'VB schip van Goris')
 df = df.round(4)
 nul = np.zeros(1)
@@ -32,22 +32,22 @@ x_p = np.append(x_p,max(onderwater))
 p_func = interpolate.interp1d(x_p,p)
 
 
-G = df.iloc[97:119,2]*rho_staal*g
+G = df.iloc[101:123,2]*rho_staal*g*tp_factor
 G=np.append(G,nul)
-x_G = df.iloc[97:119,0]
+x_G = df.iloc[101:123,0]
 x_G=np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
 
 
-I = df.iloc[97:119,6]
+I = df.iloc[101:123,6]*tp_factor
 I=np.append(I,nul)
 
-x_I = df.iloc[97:119,0]
+x_I = df.iloc[101:123,0]
 x_I=np.append(x_I,eind)
 I_func = interpolate.interp1d(x_I,I)
 
-G_containerschip=F_containerschip/g
-G = G_func(x)+G_containerschip
+
+G = G_func(x)
 I= I_func(x)
 p= np.zeros(len(x))
 
@@ -64,14 +64,36 @@ for i in range(len(x)):
 
 #I=np.delete(I_func(x),index)
 
-q= p+G
+#Ballast tank
+V_tank=df.iloc[32,1]
+G_tank=V_tank*rho_water
+arm_tank= df.iloc[34,1] 
+
+tank = df.iloc[92:97,1]*rho_water*g*df.iloc[35,1]/100
+x_tank = df.iloc[92:97,0]
+tank_func=interpolate.interp1d(x_tank,tank)
+
+tanklast=np.zeros(len(x))
+
+
+
+for i in range(len(x)):
+    if x[i] > min(x_tank) and x[i] < max(x_tank):
+        tanklast[i]= tank_func(x[i])
+    else:
+        tanklast[i] = 0
+
+
+
+
+
+q= p+G+G_containerschip*g+tanklast
+plt.plot(q)
 # integratie lijnen
 V = integrate.cumtrapz(x,q,initial=0) 
 M = integrate.cumtrapz(x,V,initial=0)
 phiEI=(integrate.cumtrapz(x,M,initial=0))
 vEI=(integrate.cumtrapz(x,phiEI,initial=0))
-
-
 
 
 phi=np.zeros(len(x))
@@ -93,15 +115,10 @@ for i in range(len(x)):
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
-I_midship=df.iloc[110, 7]
+I_midship=df.iloc[114, 7]
 H=df.iloc[2,1]
 KG_y=df.iloc[21,3]
 y=H-KG_y
 
 moment_max=(sigma_max*I_midship)/y
-
-#Ballast tank
-V_tank=df.iloc[32,1]
-F_tank=V_tank*rho_water*g
-
 

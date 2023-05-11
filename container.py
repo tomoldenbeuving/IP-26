@@ -7,7 +7,7 @@ rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
-tp=0.008
+tp_factor=1
 df = pd.read_excel("IP.xlsx",'VB schip van Goris')
 df = df.round(4)
 nul = np.zeros(1)
@@ -68,7 +68,7 @@ for i in range(len(x)):
 
 
 
-G_container=Cw*atiers*arij
+G_container=Cw*atiers*arij/20 # per 5 cm, dus delen door 20
 Gcontainers=np.ones(aCL)*G_container
 x_Gcontainer=zwaartepuntafstandenL
 G_containerschip = np.zeros(len(x))
