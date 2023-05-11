@@ -83,11 +83,11 @@ for i in range(len(x)):
     else:
         tanklast[i] = 0
 
-
+from somkrachtenmomenten import F_last
 
 x_platform=[11.8,16.2]
-
 Last_func=interpolate.interp1d(F_last,x_platform)
+
 vb_last=np.zeros(len(x))
 
 for i in range(len(x)):
