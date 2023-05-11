@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 from sterkteleer import G, p,tanklast
-from container import F_containerschip
+from container import G_cont
 
 df = pd.read_excel("IP.xlsx",'VB schip van Goris')
 g=9.81
@@ -13,7 +13,7 @@ rho_water=1025
 #som van de krachten
 G=sum(G)
 P=sum(p)
-F_c=sum(F_containerschip)
+F_c=G_cont
 F_tank=sum(tanklast)
 
 F_last = -P + -G + -F_c + -F_tank
