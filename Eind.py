@@ -1,6 +1,6 @@
 
 import matplotlib.pyplot as plt
-from sterkteleer import x,p,G,q,V,M,phi,v
+from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,G_containerschip,vb_last
 
 
 
@@ -31,9 +31,30 @@ class plot():
         plt.grid()
         plt.show()
 
-    
+    def vb():
+        figure = plt.figure(figsize=(10,8))
+        ax = plt.subplot(111)
+        plt.plot(x,q,label="Totale belasting")
+        plt.plot(x,p,'--',label="Buoancy")
+        plt.plot(x,G,'--',label="Gewicht")
+        plt.plot(x,G_containerschip*9.81,'--',label="Containers")
+        plt.plot(x,tanklast,'--',label="Balasttank")
+        plt.plot(x,vb_last,'--',label="Last")
+        plt.xlabel('L.O.A. [m]')
+        plt.ylabel('Nettobelasting (q) [N/m]')
+        plt.title('Belasting uitgezet tegen de totale lengte')
+        plt.grid()
+        plt.legend()
+        # Shrink current axis's height by 10% on the bottom
+        box = ax.get_position()
+        ax.set_position([box.x0, box.y0 + box.height * 0.1,
+                        box.width, box.height * 0.9])
 
-        
+        # Put a legend below current axis
+        ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1),
+                fancybox=True, shadow=True, ncol=3)
+        plt.show()
+ 
     def V():
         plt.plot(x,V)
         plt.xlabel('L.O.A. [m]')
@@ -72,4 +93,5 @@ class plot():
         plt.plot(x,phi)
         plt.plot(x,v)
         plt.plot(x,M)
+
 
