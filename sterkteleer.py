@@ -86,7 +86,7 @@ for i in range(len(x)):
 
 
 x_platform=[11.8,16.2]
-F_last=
+
 Last_func=interpolate.interp1d(F_last,x_platform)
 vb_last=np.zeros(len(x))
 
