@@ -16,7 +16,7 @@ P=sum(p)
 F_c=G_cont
 F_tank=sum(tanklast)
 
-F_last = 0-P + -G + -F_c + -F_tank
+F_last = -P + -G + -F_c + -F_tank
 
 
 # som van momenten
