@@ -88,7 +88,7 @@ for i in range(len(x)):
 
 
 q= p+G+G_containerschip*g+tanklast
-plt.plot(q)
+
 # integratie lijnen
 V = integrate.cumtrapz(x,q,initial=0) 
 M = integrate.cumtrapz(x,V,initial=0)
@@ -112,7 +112,7 @@ for i in range(len(x)):
     else:
         v[i]=phiEI[i]/(E_staal*I[i])
 
-print('Tom valt op mannen')
+
 # Maximaal toelaatbaar moment
 sigma_max=190E6
 I_midship=df.iloc[114, 7]
