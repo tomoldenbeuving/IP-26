@@ -39,4 +39,5 @@ GM_l = KB +BM_l-KG
 trim_max = 7/180*np.pi   #of negatieve trimhoek
 
 Msl=rho_water*g*displacement*GM_l*(trim_max/Lwl)
+#Msl=rho_water*g*displacement*GM_l*theta
 BB1=IL/displacement*np.tan(theta)
