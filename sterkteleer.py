@@ -83,23 +83,8 @@ for i in range(len(x)):
     else:
         tanklast[i] = 0
 
-from somkrachtenmomenten import F_last
 
-x_platform=[11.8,16.2]
-Last_func=interpolate.interp1d(F_last,x_platform)
-
-vb_last=np.zeros(len(x))
-
-for i in range(len(x)):
-    if x[i] > min(x_platform) and x[i] < max(x_platform):
-        vb_last = Last_func(x[i])
-    else:
-        vb_last= 0  	
-
-
-
-
-
+	
 
 q= p+G+G_containerschip*g+tanklast
 
@@ -136,3 +121,17 @@ y=H-KG_y
 
 moment_max=(sigma_max*I_midship)/y
 
+
+from somkrachtenmomenten import F_last
+
+
+x_platform=[11.8,16.2]
+Last_func=interpolate.interp1d(F_last,x_platform)
+
+vb_last=np.zeros(len(x))
+
+for i in range(len(x)):
+    if x[i] > min(x_platform) and x[i] < max(x_platform):
+        vb_last = Last_func(x[i])
+    else:
+        vb_last= 0  
