@@ -110,7 +110,7 @@ for i in range(len(x)):
     if I[i] == 0:
         v[i]= 0
     else:
-        v[i]=phiEI[i]/(E_staal*I[i])
+        v[i]=vEI[i]/(E_staal*I[i])
 
 
 # Maximaal toelaatbaar moment
