@@ -88,7 +88,6 @@ for i in range(len(x)):
 
 
 q= p+G+G_containerschip*g+tanklast
-plt.plot(q)
 # integratie lijnen
 V = integrate.cumtrapz(x,q,initial=0) 
 M = integrate.cumtrapz(x,V,initial=0)
