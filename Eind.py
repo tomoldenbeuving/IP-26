@@ -73,4 +73,3 @@ class plot():
         plt.plot(x,v)
         plt.plot(x,M)
 
-
