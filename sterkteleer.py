@@ -112,7 +112,7 @@ for i in range(len(x)):
     else:
         v[i]=phiEI[i]/(E_staal*I[i])
 
-
+print('Tom valt op mannen')
 # Maximaal toelaatbaar moment
 sigma_max=190E6
 I_midship=df.iloc[114, 7]
