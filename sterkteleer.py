@@ -64,7 +64,31 @@ for i in range(len(x)):
 
 #I=np.delete(I_func(x),index)
 
-q= p+G+G_containerschip
+#Ballast tank
+V_tank=df.iloc[32,1]
+G_tank=V_tank*rho_water
+arm_tank= df.iloc[34,1] 
+
+tank = df.iloc[92:97,1]*rho_water*g*df.iloc[35,1]/100
+x_tank = df.iloc[92:97,0]
+tank_func=interpolate.interp1d(x_tank,tank)
+
+tanklast=np.zeros(len(x))
+
+
+
+for i in range(len(x)):
+    if x[i] > min(x_tank) and x[i] < max(x_tank):
+        tanklast[i]= tank_func(x[i])
+    else:
+        tanklast[i] = 0
+
+
+
+
+
+q= p+G+G_containerschip*g+tanklast
+plt.plot(q)
 # integratie lijnen
 V = integrate.cumtrapz(x,q,initial=0) 
 M = integrate.cumtrapz(x,V,initial=0)
@@ -98,19 +122,3 @@ y=H-KG_y
 
 moment_max=(sigma_max*I_midship)/y
 
-#Ballast tank
-V_tank=df.iloc[32,1]
-G_tank=V_tank*rho_water
-arm_tank= df.iloc[34,1] 
-
-tank = -df.iloc[92:96,1]*rho_water*g
-x_tank = df.iloc[92:96,0]
-tank_func=interpolate.interp1d(x_tank,tank)
-
-tanklast=np.zeros(len(x))
-
-for i in range(len(x)):
-    if x[i] < x_tank[0] and x[i] > max(x_tank):
-        tanklast[i]= 0
-    else:
-        tanklast[i] =tank_func(x[i])
