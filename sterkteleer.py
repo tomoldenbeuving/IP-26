@@ -122,7 +122,7 @@ for i in range(len(x)):
 q= p+G+G_containerschip*g+tanklast+vb_last
 
 # integratie lijnen
-V = integrate.cumtrapz(x,q,initial=0) 
+V = integrate.cumtrapz(q,x,initial=0) 
 M = integrate.cumtrapz(x,V,initial=0)
 phiEI=(integrate.cumtrapz(x,M,initial=0))
 vEI=(integrate.cumtrapz(x,phiEI,initial=0))
