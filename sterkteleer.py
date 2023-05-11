@@ -122,16 +122,35 @@ y=H-KG_y
 moment_max=(sigma_max*I_midship)/y
 
 
-from somkrachtenmomenten import F_last
+
+from container import G_cont
+#som van de krachten
+G=sum(G)
+P=sum(p)
+F_c=G_cont
+F_tank=sum(tanklast)
+
+F_last = -P + -G + -F_c + -F_tank
+
+
+# som van momenten
+x_tank = df.iloc[33,1]
+x_last = 13.5
+COB = df.iloc[20,1]
+COV = df.iloc[21,1]
+
+arm_c = (P*COB-G*COV-F_tank*x_tank-F_last*x_last)/F_c
+
+
 
 
 x_platform=[11.8,16.2]
-Last_func=interpolate.interp1d(F_last,x_platform)
+F_last_overopp=F_last/(x_platform[0]*x_platform[1])
 
 vb_last=np.zeros(len(x))
 
 for i in range(len(x)):
     if x[i] > min(x_platform) and x[i] < max(x_platform):
-        vb_last = Last_func(x[i])
+        vb_last = F_last_overopp
     else:
         vb_last= 0  
