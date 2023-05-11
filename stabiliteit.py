@@ -35,6 +35,7 @@ BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
 
 #momentstelling stabiliteit
-trim_max = 0.02
+trim_max = 7/180*np.pi   #of negatieve trimhoek
 
 Msl=rho_water*g*displacement*GM_l*(trim_max/Lwl)
+BB1=IL/displacement*np.tan(theta)
