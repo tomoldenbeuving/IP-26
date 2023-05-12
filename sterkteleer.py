@@ -84,6 +84,7 @@ for i in range(len(x)):
         tanklast[i] = 0
 
 
+
 #last op platfrom uitrekenen	
 from container import G_cont
 #som van de krachten
