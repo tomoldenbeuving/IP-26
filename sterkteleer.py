@@ -95,6 +95,9 @@ F_tank=sum(tanklast)
 
 F_last = -P + -G_punt + -F_c + -F_tank
 
+#tijdelijke last
+F_last = 99399464.7
+
 
 # som van momenten
 x_tank = df.iloc[33,1]
