@@ -93,11 +93,11 @@ P_punt=sum(p)
 F_c=G_cont
 F_tank=sum(tanklast)
 
+
 F_last = -P_punt + -G_punt + -F_c + -G_tank
-
-
 #tijdelijke last
-F_last = 99399464.7
+
+#F_last = 99399464.7
 
 
 # som van momenten
@@ -106,7 +106,7 @@ x_last = 13.5
 COB = df.iloc[20,1]
 COV = df.iloc[21,1]
 
-arm_c = (P_punt*COB-G_punt*COV-F_tank*x_tank-F_last*x_last)/F_c
+arm_c = -1*(P_punt*COB +G_punt*COV +F_tank*x_tank +F_last*x_last)/F_c
 
 from container import abay, Cl
 
