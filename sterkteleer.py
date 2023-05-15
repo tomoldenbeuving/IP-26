@@ -66,10 +66,10 @@ for i in range(len(x)):
 
 #Ballast tank
 V_tank=df.iloc[32,1]
-G_tank=V_tank*rho_water
+G_tank=V_tank*rho_water*g
 arm_tank= df.iloc[34,1] 
 
-tank = df.iloc[92:97,1]*rho_water*g*df.iloc[35,1]/100
+tank = df.iloc[92:97,1]*rho_water*g#*(df.iloc[35,1]/100)
 x_tank = df.iloc[92:97,0]
 tank_func=interpolate.interp1d(x_tank,tank)
 
@@ -93,9 +93,7 @@ P_punt=sum(p)
 F_c=G_cont
 F_tank=sum(tanklast)
 
-F_last = -P_punt + -G_punt + -F_c + -F_tank
-
-print(F_last/(P_punt+G_punt+F_c+F_tank))
+F_last = -P_punt + -G_punt + -F_c + -G_tank
 
 
 #tijdelijke last
