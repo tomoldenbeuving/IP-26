@@ -16,6 +16,7 @@ class plot():
 
     def G():
         plt.plot(x,G)
+        
         plt.xlabel('L.O.A. [m]')
         plt.ylabel('Zwaartekracht als verdeelde belasting (G) [N/m]')
         plt.title('Zwaartekracht uitgezet tegen de totale lengte')
@@ -94,5 +95,3 @@ class plot():
         plt.plot(x,M)
 
 plot.vb()
-plot.V()
-plot.M()

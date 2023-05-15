@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
-from container import G_containerschip
+from container import abay, Cl, G_cont
 
 rho_staal = 7.85E3
 E_staal=210E9
@@ -45,6 +45,7 @@ I_func = interpolate.interp1d(x_I,I)
 
 G = G_func(x)
 I= I_func(x)
+p= np.zeros(len(x))
 # for loop zodat nadat het onderwater stopt p altijd 0
 for i in range(len(x)):
     if x[i] < min(onderwater):
@@ -80,11 +81,10 @@ for i in range(len(x)):
 #last op platfrom uitrekenen	
 
 #som van de krachten
-from container import G_cont
-G_punt=sum(G)
-P_punt=sum(p)
+G_punt=integrate.cumulative_trapezoid(G,x,initial=0) 
+P_punt=integrate.cumulative_trapezoid(p,x,initial=0) 
 F_c=G_cont
-F_tank=sum(tanklast)
+F_tank=integrate.cumulative_trapezoid(tanklast,x,initial=0) 
 
 
 F_last = -P_punt + -G_punt + -F_c + -G_tank
@@ -99,11 +99,10 @@ x_last = 13.5
 COB = df.iloc[20,1]
 COV = df.iloc[21,1]
 
-arm_c = -1*(P_punt*COB +G_punt*COV +F_tank*x_tank +F_last*x_last)/F_c
+arm_c = -1*(P_punt*COB +G_punt*COV +G_tank*x_tank +F_last*x_last)/F_c
 
 
 #verdeeldebelasting container
-from container import abay, Cl
 
 start_cont=arm_c-(0.5*abay*Cl)
 eind_cont=arm_c+(0.5*abay*Cl)
