@@ -32,7 +32,7 @@ class plot():
         plt.show()
 
     def vb():
-        figure = plt.figure(figsize=(10,8))
+        figure = plt.figure(figsize=(10,15))
         ax = plt.subplot(111)
         plt.plot(x,-q,label="Totale belasting")
         plt.plot(x,-p,'--',label="Buoancy")
