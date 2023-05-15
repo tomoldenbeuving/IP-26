@@ -84,6 +84,7 @@ for i in range(len(x)):
         tanklast[i] = 0
 
 
+
 #last op platfrom uitrekenen	
 from container import G_cont
 #som van de krachten
@@ -93,6 +94,9 @@ F_c=G_cont
 F_tank=sum(tanklast)
 
 F_last = -P + -G_punt + -F_c + -F_tank
+
+#tijdelijke last
+F_last = 99399464.7
 
 
 # som van momenten

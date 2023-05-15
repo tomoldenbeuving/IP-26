@@ -94,7 +94,6 @@ class plot():
         plt.plot(x,v)
         plt.plot(x,M)
 
-
 plot.vb()
 plot.V()
 plot.M()
