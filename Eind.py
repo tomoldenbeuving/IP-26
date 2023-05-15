@@ -95,3 +95,5 @@ class plot():
         plt.plot(x,M)
 
 plot.vb()
+plot.M()
+plot.V()
