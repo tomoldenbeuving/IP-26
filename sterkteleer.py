@@ -108,7 +108,19 @@ COV = df.iloc[21,1]
 
 arm_c = (P_punt*COB-G_punt*COV-F_tank*x_tank-F_last*x_last)/F_c
 
+from container import abay, Cl
 
+start_cont=arm_c-(0.5*abay*Cl)
+eind_cont=arm_c+(0.5*abay*Cl)
+G_cont_overlengte=G_cont/(eind_cont-start_cont)
+
+vb_cont=np.zeros(len(x))
+
+for i in range(len(x)):
+    if x[i] > (start_cont) and x[i] < (eind_cont):
+        vb_cont[i] = G_cont_overlengte
+    else:
+        vb_cont[i]= 0 
 
 
 x_platform=[11.8,16.2]
@@ -124,7 +136,7 @@ for i in range(len(x)):
 
 
 
-q= p+G+G_containerschip*g+tanklast+vb_last
+q= p+G+vb_cont+tanklast+vb_last
 
 # integratie lijnen
 V = integrate.cumtrapz(q,x,initial=0) 

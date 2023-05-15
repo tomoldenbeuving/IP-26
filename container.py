@@ -37,6 +37,10 @@ containereind  = 216.711
 
 #het gewicht van de containers punt belasting
 G_cont=n*Cw*g
+
+
+
+
 sigma_max=190E6
 F_container= Cw*atiers*arij*g                    # kracht van containers op hetzelfde zwaartepunt
 aCL=np.int32(n/arij/atiers)                   #aantal container waarvan het zwaartepunt afstand nodig is
