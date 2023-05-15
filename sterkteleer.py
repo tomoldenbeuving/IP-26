@@ -1,4 +1,3 @@
-#%%
 import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
@@ -27,8 +26,6 @@ p = np.append(nul,p)
 x_p = df.iloc[42:64,0]
 x_p = np.append(0,x_p)
 x_p = np.append(x_p,max(onderwater))
-
-
 p_func = interpolate.interp1d(x_p,p)
 
 
@@ -41,7 +38,6 @@ G_func = interpolate.interp1d(x_G,G)
 
 I = df.iloc[101:123,6]*tp_factor
 I=np.append(I,nul)
-
 x_I = df.iloc[101:123,0]
 x_I=np.append(x_I,eind)
 I_func = interpolate.interp1d(x_I,I)
@@ -49,8 +45,6 @@ I_func = interpolate.interp1d(x_I,I)
 
 G = G_func(x)
 I= I_func(x)
-p= np.zeros(len(x))
-
 # for loop zodat nadat het onderwater stopt p altijd 0
 for i in range(len(x)):
     if x[i] < min(onderwater):
@@ -69,13 +63,11 @@ V_tank=df.iloc[32,1]
 G_tank=V_tank*rho_water*g
 arm_tank= df.iloc[34,1] 
 
-tank = df.iloc[92:97,1]*rho_water*g#*(df.iloc[35,1]/100)
+tank = df.iloc[92:97,1]*rho_water*g*(df.iloc[35,1]/100)
 x_tank = df.iloc[92:97,0]
 tank_func=interpolate.interp1d(x_tank,tank)
 
 tanklast=np.zeros(len(x))
-
-
 
 for i in range(len(x)):
     if x[i] > min(x_tank) and x[i] < max(x_tank):
@@ -86,8 +78,9 @@ for i in range(len(x)):
 
 
 #last op platfrom uitrekenen	
-from container import G_cont
+
 #som van de krachten
+from container import G_cont
 G_punt=sum(G)
 P_punt=sum(p)
 F_c=G_cont
@@ -108,6 +101,8 @@ COV = df.iloc[21,1]
 
 arm_c = -1*(P_punt*COB +G_punt*COV +F_tank*x_tank +F_last*x_last)/F_c
 
+
+#verdeeldebelasting container
 from container import abay, Cl
 
 start_cont=arm_c-(0.5*abay*Cl)
@@ -123,6 +118,7 @@ for i in range(len(x)):
         vb_cont[i]= 0 
 
 
+#verdeeldebelasting last op platform
 x_platform=[11.8,16.2]
 F_last_overlengte=F_last/(x_platform[1]-x_platform[0])
 
@@ -136,6 +132,7 @@ for i in range(len(x)):
 
 
 
+#verdeelde belasting
 q= p+G+vb_cont+tanklast+vb_last
 
 # integratie lijnen
