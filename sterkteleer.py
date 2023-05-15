@@ -96,7 +96,7 @@ F_tank=sum(tanklast)
 F_last = -P + -G_punt + -F_c + -F_tank
 
 #tijdelijke last
-F_last = 99399464.7
+#F_last = 99399464.7
 
 
 # som van momenten
@@ -111,7 +111,7 @@ arm_c = (P*COB-G_punt*COV-F_tank*x_tank-F_last*x_last)/F_c
 
 
 x_platform=[11.8,16.2]
-F_last_overopp=F_last/(x_platform[0]*x_platform[1])
+F_last_overopp=F_last/(x_platform[1]-x_platform[0])
 
 vb_last=np.zeros(len(x))
 
