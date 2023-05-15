@@ -66,10 +66,10 @@ for i in range(len(x)):
 
 #Ballast tank
 V_tank=df.iloc[32,1]
-G_tank=V_tank*rho_water
+G_tank=V_tank*rho_water*g
 arm_tank= df.iloc[34,1] 
 
-tank = df.iloc[92:97,1]*rho_water*g*df.iloc[35,1]/100
+tank = df.iloc[92:97,1]*rho_water*g#*(df.iloc[35,1]/100)
 x_tank = df.iloc[92:97,0]
 tank_func=interpolate.interp1d(x_tank,tank)
 
@@ -89,11 +89,12 @@ for i in range(len(x)):
 from container import G_cont
 #som van de krachten
 G_punt=sum(G)
-P=sum(p)
+P_punt=sum(p)
 F_c=G_cont
 F_tank=sum(tanklast)
 
-F_last = -P + -G_punt + -F_c + -F_tank
+F_last = -P_punt + -G_punt + -F_c + -G_tank
+
 
 #tijdelijke last
 F_last = 99399464.7
@@ -105,19 +106,19 @@ x_last = 13.5
 COB = df.iloc[20,1]
 COV = df.iloc[21,1]
 
-arm_c = (P*COB-G_punt*COV-F_tank*x_tank-F_last*x_last)/F_c
+arm_c = (P_punt*COB-G_punt*COV-F_tank*x_tank-F_last*x_last)/F_c
 
 
 
 
 x_platform=[11.8,16.2]
-F_last_overopp=F_last/(x_platform[1]-x_platform[0])
+F_last_overlengte=F_last/(x_platform[1]-x_platform[0])
 
 vb_last=np.zeros(len(x))
 
 for i in range(len(x)):
     if x[i] > min(x_platform) and x[i] < max(x_platform):
-        vb_last[i] = F_last_overopp
+        vb_last[i] = F_last_overlengte
     else:
         vb_last[i]= 0      
 
