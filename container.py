@@ -37,6 +37,10 @@ containereind  = 216.711
 
 #het gewicht van de containers punt belasting
 G_cont=n*Cw*g
+
+
+
+
 sigma_max=190E6
 F_container= Cw*atiers*arij*g                    # kracht van containers op hetzelfde zwaartepunt
 aCL=np.int32(n/arij/atiers)                   #aantal container waarvan het zwaartepunt afstand nodig is
@@ -68,7 +72,7 @@ for i in range(len(x)):
 
 
 
-G_container=Cw*atiers*arij/20 # per 5 cm, dus delen door 20
+G_container=Cw*atiers*arij/20*g # per 5 cm, dus delen door 20
 Gcontainers=np.ones(aCL)*G_container
 x_Gcontainer=zwaartepuntafstandenL
 G_containerschip = np.zeros(len(x))
@@ -80,4 +84,5 @@ for i in range(len(x)):
         G_containerschip[i]= G_funccontainer(x[i])
     else:
         G_containerschip[i]= 0
+
 

@@ -1,6 +1,5 @@
-
 import matplotlib.pyplot as plt
-from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,G_containerschip,vb_last
+from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,vb_cont,vb_last
 
 
 
@@ -17,6 +16,7 @@ class plot():
 
     def G():
         plt.plot(x,G)
+        
         plt.xlabel('L.O.A. [m]')
         plt.ylabel('Zwaartekracht als verdeelde belasting (G) [N/m]')
         plt.title('Zwaartekracht uitgezet tegen de totale lengte')
@@ -32,14 +32,14 @@ class plot():
         plt.show()
 
     def vb():
-        figure = plt.figure(figsize=(10,8))
+        figure = plt.figure(figsize=(10,15))
         ax = plt.subplot(111)
-        plt.plot(x,q,label="Totale belasting")
-        plt.plot(x,p,'--',label="Buoancy")
-        plt.plot(x,G,'--',label="Gewicht")
-        plt.plot(x,G_containerschip*9.81,'--',label="Containers")
-        plt.plot(x,tanklast,'--',label="Balasttank")
-        plt.plot(x,vb_last,'--',label="Last")
+        plt.plot(x,-q,label="Totale belasting")
+        plt.plot(x,-p,'--',label="Buoancy")
+        plt.plot(x,-G,'--',label="Gewicht")
+        plt.plot(x,-vb_cont,'--',label="Containers")
+        plt.plot(x,-tanklast,'--',label="Balasttank")
+        plt.plot(x,-vb_last,'--',label="Last")
         plt.xlabel('L.O.A. [m]')
         plt.ylabel('Nettobelasting (q) [N/m]')
         plt.title('Belasting uitgezet tegen de totale lengte')
@@ -94,6 +94,4 @@ class plot():
         plt.plot(x,v)
         plt.plot(x,M)
 
-
 plot.vb()
-plot.V()
