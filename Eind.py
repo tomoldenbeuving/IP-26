@@ -1,6 +1,6 @@
 
 import matplotlib.pyplot as plt
-from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,G_containerschip,vb_last
+from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,vb_cont,vb_last
 
 
 
@@ -37,7 +37,7 @@ class plot():
         plt.plot(x,-q,label="Totale belasting")
         plt.plot(x,-p,'--',label="Buoancy")
         plt.plot(x,-G,'--',label="Gewicht")
-        plt.plot(x,-G_containerschip*9.81,'--',label="Containers")
+        plt.plot(x,-vb_cont,'--',label="Containers")
         plt.plot(x,-tanklast,'--',label="Balasttank")
         plt.plot(x,-vb_last,'--',label="Last")
         plt.xlabel('L.O.A. [m]')
