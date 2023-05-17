@@ -121,8 +121,8 @@ for i in range(len(x)):
 
 
 #verdeeldebelasting last op platform
-x_platform=[11.8,16.2]
-F_last_overlengte=F_last/(x_platform[1]-x_platform[0])
+x_platform=np.arange(11.8,16.2,0.5)
+F_last_overlengte=F_last/(len(x_platform))
 
 vb_last=np.zeros(len(x))
 
