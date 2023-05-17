@@ -1,9 +1,6 @@
 import matplotlib.pyplot as plt
 from sterkteleer import x,p,G,q,V,M,theta,v,tanklast,vb_cont,vb_last
 
-
-
-
 class plot():
 
     def vb():
