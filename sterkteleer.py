@@ -81,8 +81,8 @@ for i in range(len(x)):
 #last op platfrom uitrekenen	
 
 #som van de krachten
-G_punt=sum(G)
-P_punt=sum(p)
+G_punt=integrate.quad(G_func,0,Loa)
+P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
 F_c=G_cont
 F_tank=sum(tanklast)
 
