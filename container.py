@@ -8,7 +8,7 @@ E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
 tp_factor=1
-df = pd.read_excel("IP.xlsx",'VB schip van Goris')
+df = pd.read_excel("IP.xlsx",'chonker')
 df = df.round(4)
 nul = np.zeros(1)
 Loa= df.iloc[0,1]
@@ -22,15 +22,14 @@ Cb=2.44  #container breedte
 Ch=2.59   #container hoogte
 Cw=30E3  #container weight
 
-containerdata = pd.read_excel("IP.xlsx","Container")
 #aantal containers
-n=containerdata.iloc[4,1]
+n=234
 #aantal rijen in de hoogte
-atiers=containerdata.iloc[0,1]
+atiers=3
 #aantal containers in breedte
-arij=containerdata.iloc[1,1]
+arij=13
 #aantal containers in lengte
-abay= containerdata.iloc[2,1]
+abay= 6
 
 # waar de verdeelde belasting van de container begint in de lengte-as dus y-as
 containerbegin = 180.363
