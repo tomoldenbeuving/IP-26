@@ -176,6 +176,14 @@ for i in range(len(x)):
     else:
         v[i]=vEI[i]/(E_staal*I[i])
 
+#Waarde en locatie maximale doorbuiging
+max_index = np.argmax(phi)
+phi_max = phi[max_index]
+Loc_phi_max = x[max_index]
+v_phimax = np.interp(Loc_phi_max, x, v)
+D=v_phimax
+
+v= v + D
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
