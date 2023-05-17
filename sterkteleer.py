@@ -136,6 +136,7 @@ for i in range(len(x)):
 
 #verdeelde belasting
 q= p+G+vb_cont+tanklast+vb_last
+plt.plot(x,q)
 
 # integratie lijnen
 V = integrate.cumtrapz(q,x,initial=0) 
