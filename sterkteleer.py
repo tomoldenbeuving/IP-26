@@ -64,7 +64,7 @@ V_tank=df.iloc[32,1]
 G_tank=V_tank*rho_water*g
 arm_tank= df.iloc[34,1] 
 
-tank = df.iloc[92:97,1]*rho_water*g*(50/100)
+tank = df.iloc[92:97,1]*rho_water*g*(df.iloc[35,1]/100)
 x_tank = df.iloc[92:97,0]
 tank_func=interpolate.interp1d(x_tank,tank)
 
