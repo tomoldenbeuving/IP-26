@@ -142,7 +142,7 @@ plt.plot(x,q)
 V = integrate.cumtrapz(q,x,initial=0) 
 M = integrate.cumtrapz(V,x,initial=0)
 phiEI=(integrate.cumtrapz(M,x,initial=0))
-vEI=(integrate.cumtrapz(phiEI,x,initial=0))
+
 
 phi=np.zeros(len(x))
 # for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
@@ -176,6 +176,16 @@ for i in range(len(x)):
     except ZeroDivisionError:
         v[i] = 0
 
+#Waarde en locatie maximale hoekverdraaiing
+max_index = np.argmax(phi)
+phi_max = phi[max_index]
+Loc_phi_max = x[max_index]
+
+#Integratie constanten
+v_phimax = np.interp(Loc_phi_max, x, v)
+D=v_phimax
+
+v= v + D
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
