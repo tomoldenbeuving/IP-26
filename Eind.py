@@ -74,6 +74,7 @@ class plot():
         plt.show()
 
     def theta():
+        figure = plt.figure(figsize=(10,12))
         plt.plot(x,theta)
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$Hoekverdraaiing\; (\theta)[rad]$')
@@ -81,6 +82,7 @@ class plot():
         plt.grid()
         plt.show()
     def v():
+        figure = plt.figure(figsize=(10,12))
         plt.plot(x,v)
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$Doorbuiging \; (v) [m]$')
