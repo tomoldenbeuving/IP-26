@@ -64,7 +64,7 @@ V_tank=df.iloc[32,1]
 G_tank=V_tank*rho_water*g
 arm_tank= df.iloc[34,1] 
 
-tank = df.iloc[92:97,1]*rho_water*g*(df.iloc[35,1]/100)
+tank = df.iloc[92:97,1]*rho_water*g#*(df.iloc[35,1]/100)
 x_tank = df.iloc[92:97,0]
 tank_func=interpolate.interp1d(x_tank,tank)
 
@@ -107,7 +107,9 @@ arm_c = -1*(P_punt[0]*COB +G_punt[0]*COV +G_tank*x_tank +F_last*x_last)/F_c
 
 start_cont=arm_c-(0.5*abay*Cl)
 eind_cont=arm_c+(0.5*abay*Cl)
-G_cont_overlengte=G_cont/(eind_cont-start_cont)
+
+x_vd=np.arange(start_cont,eind_cont,0.5)
+G_cont_overlengte=G_cont/(len(x_vd))
 
 vb_cont=np.zeros(len(x))
 
