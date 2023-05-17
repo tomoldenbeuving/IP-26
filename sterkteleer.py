@@ -167,7 +167,8 @@ M_max = M[max_index]
 Loc_M_max = x[max_index]
 
 #Integratie constanten
-
+phi_loc_Mmax = np.interp(Loc_M_max, x, phi)
+C=phi_loc_Mmax
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
