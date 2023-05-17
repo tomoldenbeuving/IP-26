@@ -56,33 +56,35 @@ class plot():
         plt.show()
  
     def V():
-        plt.plot(x,V)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Dwarskracht (V) [N]')
-        plt.title('Dwarskracht uitgezet tegen de totale lengte')
+        figure = plt.figure(figsize=(10,12))
+        plt.plot(x,-V)
+        plt.xlabel(r'$L_{oa} [m]$')
+        plt.ylabel(r'$Dwarskracht (V) [N]$')
+        plt.title(r'Dwarskracht uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
 
     def M():
+        figure = plt.figure(figsize=(10,12))
         plt.plot(x,M)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Moment (M) [Nm]')
-        plt.title('Intern moment uitgezet tegen de totale lengte')
+        plt.xlabel(r'$L_{oa} [m]$')
+        plt.ylabel(r'$Moment (M) [Nm]$')
+        plt.title(r'Intern moment uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
 
     def phi():
         plt.plot(x,phi)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('hoekverdraaing (phi) [radialen]')
-        plt.title('de hoekverdraaing')
+        plt.xlabel(r'$L_{oa} [m]$')
+        plt.ylabel(r'$hoekverdraaing (phi) [radialen]$')
+        plt.title(r'de hoekverdraaing')
         plt.grid()
         plt.show()
     def v():
         plt.plot(x,v)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('doorbuiging (v) [m]')
-        plt.title('doorbuiging')
+        plt.xlabel(r'$L_{oa} [m]$')
+        plt.ylabel(r'$doorbuiging (v) [m]$')
+        plt.title(r'doorbuiging')
         plt.grid()
         plt.show()
     def alles():
@@ -97,3 +99,4 @@ class plot():
 plot.vb()
 plot.V()
 plot.M()
+plot.phi()

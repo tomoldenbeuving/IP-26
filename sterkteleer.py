@@ -36,7 +36,7 @@ x_G=np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
 
 
-I = df.iloc[101:123,6]*tp_factor
+I = df.iloc[101:123,7]*tp_factor
 I=np.append(I,nul)
 x_I = df.iloc[101:123,0]
 x_I=np.append(x_I,eind)
@@ -160,6 +160,13 @@ for i in range(len(x)):
     else:
         v[i]=vEI[i]/(E_staal*I[i])
 
+#Waarde en locatie maximaal moment
+max_index = np.argmax(M)
+M_max = M[max_index]
+Loc_M_max = x[max_index]
+
+#Integratie constanten
+
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
@@ -168,7 +175,7 @@ H=df.iloc[2,1]
 KG_y=df.iloc[21,3]
 y=H-KG_y
 
-moment_max=(sigma_max*I_midship)/y
+M_max_toelaatbaar=(sigma_max*I_midship)/y
 
 
 
