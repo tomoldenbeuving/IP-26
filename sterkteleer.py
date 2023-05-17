@@ -36,7 +36,7 @@ x_G=np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
 
 
-I = df.iloc[101:123,6]*tp_factor
+I = df.iloc[101:123,7]*tp_factor
 I=np.append(I,nul)
 x_I = df.iloc[101:123,0]
 x_I=np.append(x_I,eind)
@@ -164,6 +164,9 @@ for i in range(len(x)):
 max_index = np.argmax(M)
 M_max = M[max_index]
 Loc_M_max = x[max_index]
+
+#Integratie constanten
+
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6

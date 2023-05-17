@@ -99,3 +99,4 @@ class plot():
 plot.vb()
 plot.V()
 plot.M()
+plot.phi()
