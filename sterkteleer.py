@@ -136,6 +136,7 @@ for i in range(len(x)):
 
 #verdeelde belasting
 q= p+G+vb_cont+tanklast+vb_last
+plt.plot(x,q)
 
 # integratie lijnen
 V = integrate.cumtrapz(q,x,initial=0) 
@@ -143,23 +144,14 @@ M = integrate.cumtrapz(V,x,initial=0)
 phiEI=(integrate.cumtrapz(M,x,initial=0))
 vEI=(integrate.cumtrapz(phiEI,x,initial=0))
 
-
 phi=np.zeros(len(x))
 # for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
 
 for i in range(len(x)):
     try:
         phi[i]=phiEI[i]/(E_staal*I[i])
-    except ZeroDivisionError:
-        phi[i] = 0
 
-v=np.zeros(len(x))
-for i in range(len(x)):
-    try: 
-        v[i]=vEI[i]/(E_staal*I[i])
-    except ZeroDivisionError:
-        v[i] = 0
-        
+
 
 #Waarde en locatie maximaal moment
 max_index = np.argmax(M)
@@ -167,6 +159,20 @@ M_max = M[max_index]
 Loc_M_max = x[max_index]
 
 #Integratie constanten
+phi_Mmax = np.interp(Loc_M_max, x, phi)
+C=phi_Mmax
+
+phi= phi + C
+
+
+vEI=(integrate.cumtrapz(phi,x,initial=0))
+
+v=np.zeros(len(x))
+for i in range(len(x)):
+    if I[i] == 0:
+        v[i]= 0
+    else:
+        v[i]=vEI[i]/(E_staal*I[i])
 
 
 # Maximaal toelaatbaar moment

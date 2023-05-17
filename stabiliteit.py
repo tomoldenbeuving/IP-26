@@ -8,7 +8,7 @@ rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
-tp_factor=1
+tp_factor= 1
 df = pd.read_excel("IP.xlsx",'VB schip van Goris')
 df = df.round(4)
 nul = np.zeros(1)
@@ -28,7 +28,7 @@ It_z=df.iloc[27,3]
 displacement = df.iloc[18,1]
 BM_t = It_x/displacement
 KB = df.iloc[20,3]
-KG = df.iloc[26,3]
+KG = df.iloc[21,3]
 Z_cont= Ch*atiers/2+D
 KGnieuw=(KG*displacement*g*rho_water+ Z_cont*G_cont)/(displacement*g*rho_water+G_cont)
 
