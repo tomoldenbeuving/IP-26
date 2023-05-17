@@ -22,14 +22,15 @@ Cb=2.44  #container breedte
 Ch=2.59   #container hoogte
 Cw=30E3  #container weight
 
+containerdata = pd.read_excel("IP.xlsx","Container")
 #aantal containers
-n=234
+n=containerdata.iloc[4,1]
 #aantal rijen in de hoogte
-atiers=3
+atiers=containerdata.iloc[0,1]
 #aantal containers in breedte
-arij=13
+arij=containerdata.iloc[1,1]
 #aantal containers in lengte
-abay= 6
+abay= containerdata.iloc[2,1]
 
 # waar de verdeelde belasting van de container begint in de lengte-as dus y-as
 containerbegin = 180.363
