@@ -81,10 +81,10 @@ for i in range(len(x)):
 #last op platfrom uitrekenen	
 
 #som van de krachten
-G_punt=integrate.cumulative_trapezoid(G,x,initial=0) 
-P_punt=integrate.cumulative_trapezoid(p,x,initial=0) 
+G_punt=sum(G)
+P_punt=sum(p)
 F_c=G_cont
-F_tank=integrate.cumulative_trapezoid(tanklast,x,initial=0) 
+F_tank=sum(tanklast)
 
 
 F_last = -P_punt + -G_punt + -F_c + -G_tank
