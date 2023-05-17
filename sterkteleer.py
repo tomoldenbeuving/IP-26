@@ -87,7 +87,7 @@ F_c=G_cont
 F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
 
 
-F_last = -P_punt[0]  -G_punt[0]  -F_c  -F_tank[0]
+F_last = -P_punt[0]  -G_punt[0]  -F_c  -G_tank
 #tijdelijke last
 
 #F_last = 99399464.7
