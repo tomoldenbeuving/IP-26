@@ -76,15 +76,15 @@ class plot():
     def phi():
         plt.plot(x,phi)
         plt.xlabel(r'$L_{oa} [m]$')
-        plt.ylabel(r'$hoekverdraaing (phi) [radialen]$')
-        plt.title(r'de hoekverdraaing')
+        plt.ylabel(r'$Hoekverdraaing (\theta) [rad]$')
+        plt.title(r'Hoekverdraaing uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
     def v():
         plt.plot(x,v)
         plt.xlabel(r'$L_{oa} [m]$')
-        plt.ylabel(r'$doorbuiging (v) [m]$')
-        plt.title(r'doorbuiging')
+        plt.ylabel(r'$Doorbuiging (v) [m]$')
+        plt.title(r'Doorbuiging uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
     def alles():
