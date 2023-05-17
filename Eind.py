@@ -1,36 +1,11 @@
 import matplotlib.pyplot as plt
-from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,vb_cont,vb_last
+from sterkteleer import x,p,G,q,V,M,theta,v,tanklast,vb_cont,vb_last
 
 
 
 
 #plots in een class runnen met plot.q() om bijv q te ploten
 class plot():
-    def p():
-        plt.plot(x,p)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Opwaartsekracht (p) [N/m]')
-        plt.title('Opwaartsekracht uitgezet tegen de totale lengte')
-        plt.grid()
-        plt.show()
-
-    def G():
-        plt.plot(x,G)
-        
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Zwaartekracht als verdeelde belasting (G) [N/m]')
-        plt.title('Zwaartekracht uitgezet tegen de totale lengte')
-        plt.grid()
-        plt.show()
-
-    def q():
-        plt.plot(x,q)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Nettobelasting (q) [N/m]')
-        plt.title('Nettobelasting uitgezet tegen de totale lengte')
-        plt.grid()
-        plt.show()
-
     def vb():
         figure = plt.figure(figsize=(10,15))
         ax = plt.subplot(111)
@@ -73,31 +48,21 @@ class plot():
         plt.grid()
         plt.show()
 
-    def phi():
-        plt.plot(x,phi)
+    def theta():
+        figure = plt.figure(figsize=(10,12))
+        plt.plot(x,theta)
         plt.xlabel(r'$L_{oa} [m]$')
-        plt.ylabel(r'$hoekverdraaing \; (phi)[radialen]$')
-        plt.title(r'de hoekverdraaing')
+        plt.ylabel(r'$Hoekverdraaiing\; (\theta)[rad]$')
+        plt.title(r'Hoekverdraaiing uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
     def v():
+        figure = plt.figure(figsize=(10,12))
         plt.plot(x,v)
         plt.xlabel(r'$L_{oa} [m]$')
-        plt.ylabel(r'$doorbuiging \; (v) [m]$')
-        plt.title(r'doorbuiging')
+        plt.ylabel(r'$Doorbuiging \; (v) [m]$')
+        plt.title(r'Doorbuiging uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
-    def alles():
-        plt.figure(figsize=(16,9))
-        plt.plot(x,q)
-        plt.plot(x,G)
-        plt.plot(x,p)
-        plt.plot(x,phi)
-        plt.plot(x,v)
-        plt.plot(x,M)
+    
 
-plot.vb()
-plot.V()
-plot.M()
-plot.phi()
-plot.v()
