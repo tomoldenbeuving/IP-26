@@ -36,7 +36,7 @@ x_G=np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
 
 
-I = df.iloc[101:123,7]*tp_factor
+I = df.iloc[101:123,6]*tp_factor
 I=np.append(I,nul)
 x_I = df.iloc[101:123,0]
 x_I=np.append(x_I,eind)
@@ -87,7 +87,7 @@ F_c=G_cont
 F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
 
 
-F_last = -P_punt[0]  -G_punt[0]  -F_c  -G_tank
+F_last = -P_punt[0]  -G_punt[0]  -F_c  -F_tank[0]
 #tijdelijke last
 
 #F_last = 99399464.7
@@ -108,8 +108,8 @@ arm_c = -1*(P_punt[0]*COB +G_punt[0]*COV +G_tank*x_tank +F_last*x_last)/F_c
 start_cont=arm_c-(0.5*abay*Cl)
 eind_cont=arm_c+(0.5*abay*Cl)
 
-
-G_cont_overlengte=G_cont/(eind_cont-start_cont)
+x_vd=np.arange(start_cont,eind_cont,0.5)
+G_cont_overlengte=G_cont/(len(x_vd))
 
 vb_cont=np.zeros(len(x))
 
@@ -137,7 +137,7 @@ for i in range(len(x)):
 #verdeelde belasting
 q= p+G+vb_cont+tanklast+vb_last
 
-# integratie lijnen dwarskracht en moment
+# integratie lijnen
 V = integrate.cumtrapz(q,x,initial=0) 
 M = integrate.cumtrapz(V,x,initial=0)
 
@@ -178,10 +178,6 @@ D=v_phimax
 #Uiteindelijke doorbuigingslijn
 v= v + D
 
-#Waarde en locatie maximale doorbuiging
-vmax_index = np.argmin(v)
-v_max = v[vmax_index] #Waarde maximale doorbuiging (absoluut)
-Loc_v_max = x[vmax_index] #Locatie maximale doorbuiging
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
@@ -190,7 +186,7 @@ H=df.iloc[2,1]
 KG_y=df.iloc[21,3]
 y=H-KG_y
 
-M_max_toelaatbaar=(sigma_max*I_midship)/y
+moment_max=(sigma_max*I_midship)/y
 
 
 
