@@ -64,7 +64,7 @@ V_tank=df.iloc[32,1]
 G_tank=V_tank*rho_water*g
 arm_tank= df.iloc[34,1] 
 
-tank = df.iloc[92:97,1]*rho_water*g*(df.iloc[35,1]/100)
+tank = df.iloc[92:97,1]*rho_water*g*(50/100)
 x_tank = df.iloc[92:97,0]
 tank_func=interpolate.interp1d(x_tank,tank)
 
@@ -84,10 +84,10 @@ for i in range(len(x)):
 G_punt=integrate.quad(G_func,0,Loa)
 P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
 F_c=G_cont
-F_tank=sum(tanklast)
+F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
 
 
-F_last = -P_punt[0]  -G_punt[0]  -F_c  -G_tank
+F_last = -P_punt[0]  -G_punt[0]  -F_c  -F_tank[0]
 #tijdelijke last
 
 #F_last = 99399464.7
