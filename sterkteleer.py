@@ -148,9 +148,7 @@ phi=np.zeros(len(x))
 # for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
 
 for i in range(len(x)):
-    if I[i] == 0:
-        phi[i]= 0
-    else:
+    try:
         phi[i]=phiEI[i]/(E_staal*I[i])
 
 
