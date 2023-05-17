@@ -74,7 +74,7 @@ class plot():
         plt.show()
 
     def phi():
-        plt.plot(x,phi+C)
+        plt.plot(x,phi)
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$hoekverdraaing (phi) [radialen]$')
         plt.title(r'de hoekverdraaing')
