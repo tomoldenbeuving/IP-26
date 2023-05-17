@@ -167,7 +167,7 @@ C=phi_Mmax
 phi= phi + C
 
 
-vEI=(integrate.cumtrapz(phi,x,initial=0))
+vEI=integrate.cumtrapz(phi,x,initial=0)
 
 v=np.zeros(len(x))
 for i in range(len(x)):
