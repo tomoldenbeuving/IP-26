@@ -98,7 +98,8 @@ x_tank = df.iloc[33,1]
 x_last = 13.5
 COB = df.iloc[20,1]
 COV = df.iloc[21,1]
-
+#tijdelijke arm
+#arm_c=216
 arm_c = -1*(P_punt[0]*COB +G_punt[0]*COV +G_tank*x_tank +F_last*x_last)/F_c
 
 
