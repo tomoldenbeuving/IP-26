@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,vb_cont,vb_last
+from sterkteleer import x,p,G,q,V,M,theta,v,tanklast,vb_cont,vb_last
 
 
 
@@ -73,18 +73,18 @@ class plot():
         plt.grid()
         plt.show()
 
-    def phi():
-        plt.plot(x,phi)
+    def theta():
+        plt.plot(x,theta)
         plt.xlabel(r'$L_{oa} [m]$')
-        plt.ylabel(r'$hoekverdraaing \; (phi)[radialen]$')
-        plt.title(r'de hoekverdraaing')
+        plt.ylabel(r'$Hoekverdraaiing\; (\theta)[rad]$')
+        plt.title(r'Hoekverdraaiing uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
     def v():
         plt.plot(x,v)
         plt.xlabel(r'$L_{oa} [m]$')
-        plt.ylabel(r'$doorbuiging \; (v) [m]$')
-        plt.title(r'doorbuiging')
+        plt.ylabel(r'$Doorbuiging \; (v) [m]$')
+        plt.title(r'Doorbuiging uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
     def alles():
@@ -92,12 +92,12 @@ class plot():
         plt.plot(x,q)
         plt.plot(x,G)
         plt.plot(x,p)
-        plt.plot(x,phi)
+        plt.plot(x,theta)
         plt.plot(x,v)
         plt.plot(x,M)
 
 plot.vb()
 plot.V()
 plot.M()
-plot.phi()
+plot.theta()
 plot.v()
