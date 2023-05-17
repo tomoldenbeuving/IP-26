@@ -160,6 +160,10 @@ for i in range(len(x)):
     else:
         v[i]=vEI[i]/(E_staal*I[i])
 
+#Waarde en locatie maximaal moment
+max_index = np.argmax(M)
+M_max = M[max_index]
+Loc_M_max = x[max_index]
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
@@ -168,7 +172,7 @@ H=df.iloc[2,1]
 KG_y=df.iloc[21,3]
 y=H-KG_y
 
-moment_max=(sigma_max*I_midship)/y
+M_max_toelaatbaar=(sigma_max*I_midship)/y
 
 
 
