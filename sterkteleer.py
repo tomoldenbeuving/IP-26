@@ -87,7 +87,7 @@ F_c=G_cont
 F_tank=sum(tanklast)
 
 
-F_last = -P_punt + -G_punt + -F_c + -G_tank
+F_last = -P_punt  -G_punt  -F_c  -G_tank
 #tijdelijke last
 
 #F_last = 99399464.7
