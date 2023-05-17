@@ -137,11 +137,9 @@ for i in range(len(x)):
 #verdeelde belasting
 q= p+G+vb_cont+tanklast+vb_last
 
-
 # integratie lijnen dwarskracht en moment
 V = integrate.cumtrapz(q,x,initial=0) 
 M = integrate.cumtrapz(V,x,initial=0)
-
 
 #Hoekverdraaiing zonder integratie constante
 phiEI=(integrate.cumtrapz(M,x,initial=0))
@@ -182,8 +180,8 @@ v= v + D
 
 #Waarde en locatie maximale doorbuiging
 vmax_index = np.argmax(v)
-v_max = v[vmax_index] #Waarde maximale Hoekverdraaiing
-Loc_v_max = x[vmax_index] #Locatie maximale hoekverdraaiing
+v_max = v[vmax_index] #Waarde maximale doorbuiging
+Loc_v_max = x[vmax_index] #Locatie maximale doorbuiging
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
