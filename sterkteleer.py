@@ -148,17 +148,18 @@ phi=np.zeros(len(x))
 # for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
 
 for i in range(len(x)):
-    if I[i] == 0:
-        phi[i]= 0
-    else:
+    try:
         phi[i]=phiEI[i]/(E_staal*I[i])
+    except ZeroDivisionError:
+        phi[i] = 0
 
 v=np.zeros(len(x))
 for i in range(len(x)):
-    if I[i] == 0:
-        v[i]= 0
-    else:
+    try: 
         v[i]=vEI[i]/(E_staal*I[i])
+    except ZeroDivisionError:
+        v[i] = 0
+        
 
 #Waarde en locatie maximaal moment
 max_index = np.argmax(M)
