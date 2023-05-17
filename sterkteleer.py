@@ -153,12 +153,7 @@ for i in range(len(x)):
     else:
         phi[i]=phiEI[i]/(E_staal*I[i])
 
-v=np.zeros(len(x))
-for i in range(len(x)):
-    if I[i] == 0:
-        v[i]= 0
-    else:
-        v[i]=vEI[i]/(E_staal*I[i])
+
 
 #Waarde en locatie maximaal moment
 max_index = np.argmax(M)
@@ -166,9 +161,20 @@ M_max = M[max_index]
 Loc_M_max = x[max_index]
 
 #Integratie constanten
-phi_loc_Mmax = np.interp(Loc_M_max, x, phi)
-C=phi_loc_Mmax
+phi_Mmax = np.interp(Loc_M_max, x, phi)
+C=phi_Mmax
 
+phi= phi + C
+
+
+vEI=(integrate.cumtrapz(phi,x,initial=0))
+
+v=np.zeros(len(x))
+for i in range(len(x)):
+    if I[i] == 0:
+        v[i]= 0
+    else:
+        v[i]=vEI[i]/(E_staal*I[i])
 
 
 # Maximaal toelaatbaar moment
