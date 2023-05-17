@@ -5,30 +5,6 @@ from sterkteleer import x,p,G,q,V,M,theta,v,tanklast,vb_cont,vb_last
 
 
 class plot():
-    def p():
-        plt.plot(x,p)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Opwaartsekracht (p) [N/m]')
-        plt.title('Opwaartsekracht uitgezet tegen de totale lengte')
-        plt.grid()
-        plt.show()
-
-    def G():
-        plt.plot(x,G)
-        
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Zwaartekracht als verdeelde belasting (G) [N/m]')
-        plt.title('Zwaartekracht uitgezet tegen de totale lengte')
-        plt.grid()
-        plt.show()
-
-    def q():
-        plt.plot(x,q)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Nettobelasting (q) [N/m]')
-        plt.title('Nettobelasting uitgezet tegen de totale lengte')
-        plt.grid()
-        plt.show()
 
     def vb():
         figure = plt.figure(figsize=(10,15))
@@ -88,14 +64,7 @@ class plot():
         plt.title(r'Doorbuiging uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
-    def alles():
-        plt.figure(figsize=(16,9))
-        plt.plot(x,q)
-        plt.plot(x,G)
-        plt.plot(x,p)
-        plt.plot(x,theta)
-        plt.plot(x,v)
-        plt.plot(x,M)
+  
 
 plot.vb()
 plot.V()
