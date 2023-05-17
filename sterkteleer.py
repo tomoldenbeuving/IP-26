@@ -138,14 +138,14 @@ for i in range(len(x)):
 q= p+G+vb_cont+tanklast+vb_last
 
 
-# integratie lijnen
+# integratie lijnen dwarskracht en moment
 V = integrate.cumtrapz(q,x,initial=0) 
 M = integrate.cumtrapz(V,x,initial=0)
+
+
+#Hoekverdraaiing zonder integratie constante
 phiEI=(integrate.cumtrapz(M,x,initial=0))
-
-
 phi=np.zeros(len(x))
-# for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
 
 for i in range(len(x)):
     try:
@@ -153,33 +153,37 @@ for i in range(len(x)):
     except ZeroDivisionError:
         phi[i] = 0
 
-
-
 #Waarde en locatie maximaal moment
-max_index = np.argmax(M)
-M_max = M[max_index]
-Loc_M_max = x[max_index]
+Mmax_index = np.argmax(M)
+M_max = M[Mmax_index] #Waarde maximaal moment
+Loc_M_max = x[Mmax_index] #Locatie maximaal moment
 
-#Integratie constanten
-phi_Mmax = np.interp(Loc_M_max, x, phi)
+#Integratie constante
+phi_Mmax = phi[Mmax_index]
 C=phi_Mmax
 
-phi= phi + C
-
-
-v=integrate.cumtrapz(phi,x,initial=0)
-
+#Uiteindelijke verdraaiingslijn
+phi= phi - C
 
 #Waarde en locatie maximale hoekverdraaiing
-max_index = np.argmax(phi)
-phi_max = phi[max_index]
-Loc_phi_max = x[max_index]
+phimax_index = np.argmax(phi)
+phi_max = phi[phimax_index] #Waarde maximale Hoekverdraaiing
+Loc_phi_max = x[phimax_index] #Locatie maximale hoekverdraaiing
 
-#Integratie constanten
+#Doorbuiging zonder integratie constante
+v=integrate.cumtrapz(phi,x,initial=0)
+
+#Integratie constante
 v_phimax = np.interp(Loc_phi_max, x, v)
 D=v_phimax
 
+#Uiteindelijke doorbuigingslijn
 v= v + D
+
+#Waarde en locatie maximale doorbuiging
+vmax_index = np.argmax(v)
+v_max = v[vmax_index] #Waarde maximale Hoekverdraaiing
+Loc_v_max = x[vmax_index] #Locatie maximale hoekverdraaiing
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
