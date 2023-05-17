@@ -136,7 +136,6 @@ for i in range(len(x)):
 
 #verdeelde belasting
 q= p+G+vb_cont+tanklast+vb_last
-plt.plot(x,q)
 
 # integratie lijnen
 V = integrate.cumtrapz(q,x,initial=0) 
@@ -149,7 +148,7 @@ phi=np.zeros(len(x))
 
 for i in range(len(x)):
     try:
-        phi[i]=phiEI[i]/(E_staal*I[i])
+        phi[i]=phiEI[i]/(E_staal*df.iloc[114, 7])
     except ZeroDivisionError:
         phi[i] = 0
 
@@ -167,14 +166,8 @@ C=phi_Mmax
 phi= phi + C
 
 
-vEI=integrate.cumtrapz(phi,x,initial=0)
+v=integrate.cumtrapz(phi,x,initial=0)
 
-v=np.zeros(len(x))
-for i in range(len(x)):
-    try:
-        v[i]=vEI[i]/(E_staal*I[i])
-    except ZeroDivisionError:
-        v[i] = 0
 
 #Waarde en locatie maximale hoekverdraaiing
 max_index = np.argmax(phi)
