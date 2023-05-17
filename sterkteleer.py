@@ -108,8 +108,8 @@ arm_c = -1*(P_punt[0]*COB +G_punt[0]*COV +G_tank*x_tank +F_last*x_last)/F_c
 start_cont=arm_c-(0.5*abay*Cl)
 eind_cont=arm_c+(0.5*abay*Cl)
 
-x_vd=np.arange(start_cont,eind_cont,0.5)
-G_cont_overlengte=G_cont/(len(x_vd))
+
+G_cont_overlengte=G_cont/(eind_cont-start_cont)
 
 vb_cont=np.zeros(len(x))
 
@@ -121,8 +121,8 @@ for i in range(len(x)):
 
 
 #verdeeldebelasting last op platform
-x_platform=np.arange(11.8,16.2,0.5)
-F_last_overlengte=F_last/(len(x_platform))
+x_platform=[11.8,16.2]
+F_last_overlengte=F_last/(x_platform[1]-x_platform[0])
 
 vb_last=np.zeros(len(x))
 
