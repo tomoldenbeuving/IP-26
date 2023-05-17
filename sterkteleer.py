@@ -87,7 +87,7 @@ F_c=G_cont
 F_tank=sum(tanklast)
 
 
-F_last = -P_punt  -G_punt  -F_c  -G_tank
+F_last = -P_punt[0]  -G_punt[0]  -F_c  -G_tank
 #tijdelijke last
 
 #F_last = 99399464.7
@@ -99,7 +99,7 @@ x_last = 13.5
 COB = df.iloc[20,1]
 COV = df.iloc[21,1]
 
-arm_c = -1*(P_punt*COB +G_punt*COV +G_tank*x_tank +F_last*x_last)/F_c
+arm_c = -1*(P_punt[0]*COB +G_punt[0]*COV +G_tank*x_tank +F_last*x_last)/F_c
 
 
 #verdeeldebelasting container
