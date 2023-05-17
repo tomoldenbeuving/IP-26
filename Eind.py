@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,vb_cont,vb_last
+from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,vb_cont,vb_last,C,D
 
 
 
@@ -74,7 +74,7 @@ class plot():
         plt.show()
 
     def phi():
-        plt.plot(x,phi)
+        plt.plot(x,phi+C)
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$hoekverdraaing (phi) [radialen]$')
         plt.title(r'de hoekverdraaing')

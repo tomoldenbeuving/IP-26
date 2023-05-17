@@ -144,7 +144,6 @@ M = integrate.cumtrapz(V,x,initial=0)
 phiEI=(integrate.cumtrapz(M,x,initial=0))
 vEI=(integrate.cumtrapz(phiEI,x,initial=0))
 
-
 phi=np.zeros(len(x))
 # for loop zodat elke de waardes van het traagheidsmoment die nul zijn niet worden gebruikt om door te delen
 
