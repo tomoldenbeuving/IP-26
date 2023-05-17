@@ -169,6 +169,8 @@ Loc_M_max = x[max_index]
 phi_loc_Mmax = np.interp(Loc_M_max, x, phi)
 C=phi_loc_Mmax
 
+
+
 # Maximaal toelaatbaar moment
 sigma_max=190E6
 I_midship=df.iloc[114, 7]

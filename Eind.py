@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,vb_cont,vb_last,C,D
+from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,vb_cont,vb_last
 
 
 
