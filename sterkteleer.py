@@ -142,14 +142,14 @@ V = integrate.cumtrapz(q,x,initial=0)
 M = integrate.cumtrapz(V,x,initial=0)
 
 #Hoekverdraaiing zonder integratie constante
-phiEI=(integrate.cumtrapz(M,x,initial=0))
-phi=np.zeros(len(x))
+thetaEI=(integrate.cumtrapz(M,x,initial=0))
+theta=np.zeros(len(x))
 
 for i in range(len(x)):
     try:
-        phi[i]=phiEI[i]/(E_staal*df.iloc[114, 7])
+        theta[i]=thetaEI[i]/(E_staal*df.iloc[114, 7])
     except ZeroDivisionError:
-        phi[i] = 0
+        theta[i] = 0
 
 #Waarde en locatie maximaal moment
 Mmax_index = np.argmax(M)
@@ -157,22 +157,22 @@ M_max = M[Mmax_index] #Waarde maximaal moment
 Loc_M_max = x[Mmax_index] #Locatie maximaal moment
 
 #Integratie constante
-phi_Mmax = phi[Mmax_index]
-C=phi_Mmax
+theta_Mmax = theta[Mmax_index]
+C=theta_Mmax
 
 #Uiteindelijke verdraaiingslijn
-phi= phi - C
+theta= theta - C
 
 #Waarde en locatie maximale hoekverdraaiing
-phimax_index = np.argmax(phi)
-phi_max = phi[phimax_index] #Waarde maximale Hoekverdraaiing
-Loc_phi_max = x[phimax_index] #Locatie maximale hoekverdraaiing
+thetamax_index = np.argmax(theta)
+theta_max = theta[thetamax_index] #Waarde maximale Hoekverdraaiing
+Loc_theta_max = x[thetamax_index] #Locatie maximale hoekverdraaiing
 
 #Doorbuiging zonder integratie constante
-v=integrate.cumtrapz(phi,x,initial=0)
+v=integrate.cumtrapz(theta,x,initial=0)
 
 #Integratie constante
-v_phimax = np.interp(Loc_phi_max, x, v)
+v_phimax = np.interp(Loc_theta_max, x, v)
 D=v_phimax
 
 #Uiteindelijke doorbuigingslijn
