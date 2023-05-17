@@ -1,35 +1,10 @@
 import matplotlib.pyplot as plt
-from sterkteleer import x,p,G,q,V,M,phi,v,tanklast,vb_cont,vb_last
+from sterkteleer import x,p,G,q,V,M,theta,v,tanklast,vb_cont,vb_last
 
 
 
 
-#plots in een class runnen met plot.q() om bijv q te ploten
 class plot():
-    def p():
-        plt.plot(x,p)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Opwaartsekracht (p) [N/m]')
-        plt.title('Opwaartsekracht uitgezet tegen de totale lengte')
-        plt.grid()
-        plt.show()
-
-    def G():
-        plt.plot(x,G)
-        
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Zwaartekracht als verdeelde belasting (G) [N/m]')
-        plt.title('Zwaartekracht uitgezet tegen de totale lengte')
-        plt.grid()
-        plt.show()
-
-    def q():
-        plt.plot(x,q)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Nettobelasting (q) [N/m]')
-        plt.title('Nettobelasting uitgezet tegen de totale lengte')
-        plt.grid()
-        plt.show()
 
     def vb():
         figure = plt.figure(figsize=(10,15))
@@ -56,44 +31,43 @@ class plot():
         plt.show()
  
     def V():
-        plt.plot(x,V)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Dwarskracht (V) [N]')
-        plt.title('Dwarskracht uitgezet tegen de totale lengte')
+        figure = plt.figure(figsize=(10,12))
+        plt.plot(x,-V)
+        plt.xlabel(r'$L_{oa} [m]$')
+        plt.ylabel(r'$Dwarskracht \;(V) [N]$')
+        plt.title(r'Dwarskracht uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
 
     def M():
+        figure = plt.figure(figsize=(10,12))
         plt.plot(x,M)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('Moment (M) [Nm]')
-        plt.title('Intern moment uitgezet tegen de totale lengte')
+        plt.xlabel(r'$L_{oa} [m]$')
+        plt.ylabel(r'$Moment\; (M) [Nm]$')
+        plt.title(r'Intern moment uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
 
-    def phi():
-        plt.plot(x,phi)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('hoekverdraaing (phi) [radialen]')
-        plt.title('de hoekverdraaing')
+    def theta():
+        figure = plt.figure(figsize=(10,12))
+        plt.plot(x,theta)
+        plt.xlabel(r'$L_{oa} [m]$')
+        plt.ylabel(r'$Hoekverdraaiing\; (\theta)[rad]$')
+        plt.title(r'Hoekverdraaiing uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
     def v():
+        figure = plt.figure(figsize=(10,12))
         plt.plot(x,v)
-        plt.xlabel('L.O.A. [m]')
-        plt.ylabel('doorbuiging (v) [m]')
-        plt.title('doorbuiging')
+        plt.xlabel(r'$L_{oa} [m]$')
+        plt.ylabel(r'$Doorbuiging \; (v) [m]$')
+        plt.title(r'Doorbuiging uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
-    def alles():
-        plt.figure(figsize=(16,9))
-        plt.plot(x,q)
-        plt.plot(x,G)
-        plt.plot(x,p)
-        plt.plot(x,phi)
-        plt.plot(x,v)
-        plt.plot(x,M)
+  
 
 plot.vb()
 plot.V()
 plot.M()
+plot.theta()
+plot.v()
