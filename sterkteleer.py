@@ -2,7 +2,23 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
-from container import abay, Cl, G_cont
+
+#containers
+Cl=6.06   #container lengte
+Cb=2.44  #container breedte
+Ch=2.59   #container hoogte
+Cw=30E3  #container weight
+
+#aantal containers
+n=234
+#aantal rijen in de hoogte
+atiers=3
+#aantal containers in breedte
+arij=13
+#aantal containers in lengte
+abay= 6
+
+
 
 rho_staal = 7.85E3
 E_staal=210E9
@@ -15,6 +31,9 @@ nul = np.zeros(1)
 Loa= df.iloc[0,1]
 eind = np.array([Loa])
 onderwater= df.iloc[42:64,0]
+
+#het gewicht van de containers punt belasting
+G_cont=n*Cw*g
 
 x=np.arange(0,Loa,0.5)
 
