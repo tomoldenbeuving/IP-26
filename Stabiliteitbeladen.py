@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import math as m
-from Sterkteleerbeladen import Cw, n, Ch,V_tank,atiers,F_last
+from Sterkteleerbeladen import Cw, n, Ch,V_tank,atiers,F_last,arm_c,x_tank,x_last
 
 
 rho_staal = 7.85E3
@@ -20,7 +20,7 @@ onderwater= df.iloc[42:64,0]
 Lwl=df.iloc[4,1]
 
 LCB = df.iloc[20,1]
-LCF = df.iloc[26,1]
+
 
 
 
@@ -43,6 +43,11 @@ KG_nieuw= (KG*gewichtschip+KGcont*n*Cw+KGlast*F_last/g)/(gewichtschip+n*Cw+F_las
 
 GM_t = KB + BM_t - KG_nieuw 
 
+
+
+#LCG
+LCF = df.iloc[26,1]
+LCGNieuw=(LCF*gewichtschip+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(gewichtschip+n*Cw+F_last/g+V_tank*rho_water)
 #GM langsrichting
 It_y = df.iloc[27,2]
 BM_l = It_y/displacement
