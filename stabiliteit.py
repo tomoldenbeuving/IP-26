@@ -2,15 +2,16 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import math as m
-from sterkteleer import Cw, n, Ch,V_tank
+from sterkteleer import Cw, n, Ch,V_tank,atiers
 
-H=df.iloc[2,1]
+
 rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
 tp_factor=1
 df = pd.read_excel("IP.xlsx",'VB schip van Goris')
+H=df.iloc[2,1]
 df = df.round(4)
 nul = np.zeros(1)
 Loa= df.iloc[0,1]
