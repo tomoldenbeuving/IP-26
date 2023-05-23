@@ -2,7 +2,9 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import math as m
+from sterkteleer import Cw, n, Ch,V_tank
 
+H=df.iloc[2,1]
 rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
@@ -27,6 +29,11 @@ displacement = df.iloc[18,1]
 BM_t = It_x/displacement
 KB = df.iloc[20,3]
 KG = df.iloc[26,3]
+gewichtschip=displacement*rho_water*g
+KGcont=H+Ch*atiers/2
+KGtank=df.iloc[33,3]
+
+KG_nieuw= KG*gewichtschip+KGcont*n*Cw+KGtank*V_tank*g/(gewichtschip+n*Cw+V_tank*g)
 
 GM_t = KB + BM_t - KG 
 
