@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from sterkteleer import x,p,G,q,V,M,theta,v,tanklast,vb_cont,vb_last
+from sterkteleer import x,p,G,q,V,M,theta,v,sigma,tanklast,vb_cont,vb_last
 
 class plot():
 
@@ -62,9 +62,18 @@ class plot():
         plt.grid()
         plt.show()
   
+    def sigma():
+        figure = plt.figure(figsize=(10,12))
+        plt.plot(x,sigma)
+        plt.xlabel(r'$L_{oa} [m]$')
+        plt.ylabel(r'$Spanningsverdeling \; (\sigma) [m]$')
+        plt.title(r'Spanningsverdeling uitgezet tegen de totale lengte')
+        plt.grid()
+        plt.show()
 
 plot.vb()
 plot.V()
 plot.M()
 plot.theta()
 plot.v()
+plot.sigma()
