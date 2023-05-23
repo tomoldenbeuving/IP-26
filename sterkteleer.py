@@ -170,9 +170,6 @@ for i in range(len(x)):
         theta[i]=thetaEI[i]/(E_staal*I[i])
     except ZeroDivisionError:
         theta[i] = 0
-    if x[i]<max(x)-10:
-        theta[i] = 0
-        
 
     
          
