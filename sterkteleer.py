@@ -35,7 +35,7 @@ onderwater= df.iloc[42:64,0]
 #het gewicht van de containers punt belasting
 G_cont=n*Cw*g
 
-x=np.arange(0,Loa,0.5)
+x=np.arange(0,Loa,0.05)
 
 p=np.zeros(len(x))
 
@@ -170,8 +170,6 @@ for i in range(len(x)):
         theta[i]=thetaEI[i]/(E_staal*I[i])
     except ZeroDivisionError:
         theta[i] = 0
-
-    
          
 #Waarde en locatie maximaal moment
 Mmax_index = np.argmax(M)
