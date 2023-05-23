@@ -215,6 +215,18 @@ y_boven=df.iloc[101:123,10]-df.iloc[101:123,5]
 y_onder=df.iloc[101:123,5]-df.iloc[101:123,9]
 W=df.iloc[101:123,7]/y_boven
 
-#Spanningsverdeling
-sigma=M/W
+W=np.append(W,nul)
+x_W = df.iloc[101:123,0]
+x_W=np.append(x_W,eind)
+W_func = interpolate.interp1d(x_W,W)
+W = W_func(x)
 
+
+#Spanningsverdeling
+sigma=np.zeros(len(x))
+
+for i in range(len(x)):
+    try:
+        sigma[i]=M[i]/(W[i])
+    except ZeroDivisionError:
+        sigma[i] = 0
