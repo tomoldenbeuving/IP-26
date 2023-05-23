@@ -109,7 +109,7 @@ start_cont=arm_c-(0.5*abay*Cl)
 eind_cont=arm_c+(0.5*abay*Cl)
 
 x_vd=np.arange(start_cont,eind_cont,0.5)
-G_cont_overlengte=G_cont/(len(x_vd))
+G_cont_overlengte=G_cont/(eind_cont-start_cont)
 
 vb_cont=np.zeros(len(x))
 
