@@ -166,10 +166,15 @@ theta=np.zeros(len(x))
 
 for i in range(len(x)):
     try:
-        theta[i]=thetaEI[i]/(E_staal*df.iloc[114, 7])
+        theta[i]=thetaEI[i]/(E_staal*I[i])
     except ZeroDivisionError:
         theta[i] = 0
+    if x[i]<max(x)-10:
+        theta[i] = 0
+        
 
+    
+         
 #Waarde en locatie maximaal moment
 Mmax_index = np.argmax(M)
 M_max = M[Mmax_index] #Waarde maximaal moment
