@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from sterkteleer import x,p,G,q,V,M,theta,v,sigma,tanklast,vb_cont,vb_last
+from Sterkteleerbeladen import x,p,G,q,V,M,theta,v,sigma,tanklast,vb_cont,vb_last
 import numpy as np
 
 class plot():
