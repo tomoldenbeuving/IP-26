@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
+from sterkteleer import start_cont, eind_cont
 
 
 rho_staal = 7.85E3
@@ -32,8 +33,8 @@ arij=13
 abay= 6
 
 # waar de verdeelde belasting van de container begint in de lengte-as dus y-as
-containerbegin = 180.363
-containereind  = 216.711
+containerbegin = start_cont
+containereind  = eind_cont
 
 #het gewicht van de containers punt belasting
 G_cont=n*Cw*g
