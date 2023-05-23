@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from sterkteleer import x,p,G,q,V,M,theta,v,sigma,tanklast,vb_cont,vb_last
+import numpy as np
 
 class plot():
 
@@ -47,7 +48,7 @@ class plot():
 
     def theta():
         figure = plt.figure(figsize=(10,12))
-        plt.plot(x,theta)
+        plt.plot(x[0:3000],theta[0:3000])
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$Hoekverdraaiing\; (\theta)[rad]$')
         plt.title(r'Hoekverdraaiing uitgezet tegen de totale lengte')
@@ -55,7 +56,7 @@ class plot():
         plt.show()
     def v():
         figure = plt.figure(figsize=(10,12))
-        plt.plot(x,v)
+        plt.plot(x[0:3000],v[0:3000])
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$Doorbuiging \; (v) [m]$')
         plt.title(r'Doorbuiging uitgezet tegen de totale lengte')
