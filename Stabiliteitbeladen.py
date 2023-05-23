@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import math as m
-from sterkteleer import Cw, n, Ch,V_tank,atiers,F_last
+from Sterkteberekeningen zware lading import Cw, n, Ch,V_tank,atiers,F_last
 
 
 rho_staal = 7.85E3
