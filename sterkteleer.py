@@ -188,5 +188,7 @@ y=H-KG_y
 
 moment_max=(sigma_max*I_midship)/y
 
+#Weerstandsmoment
+W=I_midship/y
 
 
