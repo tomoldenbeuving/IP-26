@@ -191,4 +191,6 @@ moment_max=(sigma_max*I_midship)/y
 #Weerstandsmoment
 W=I_midship/y
 
+#Spanningsverdeling
+sigma=M/W
 
