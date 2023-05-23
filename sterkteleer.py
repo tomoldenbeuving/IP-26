@@ -208,7 +208,9 @@ y=H-KG_y
 moment_max=(sigma_max*I_midship)/y
 
 #Weerstandsmoment
-W=I_midship/y
+y_boven=df.iloc[101:123,10]-df.iloc[101:123,5]
+y_onder=df.iloc[101:123,5]-df.iloc[101:123,9]
+W=df.iloc[101:123,7]/y_boven
 
 #Spanningsverdeling
 sigma=M/W
