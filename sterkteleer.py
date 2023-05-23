@@ -107,6 +107,7 @@ F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
 
 
 F_last = -P_punt[0]  -G_punt[0]  -F_c  -F_tank[0]
+
 #tijdelijke last
 
 #F_last = 99399464.7
@@ -119,7 +120,7 @@ COB = df.iloc[20,1]
 COV = df.iloc[21,1]
 #tijdelijke arm
 #arm_c=216
-arm_c = -1*(P_punt[0]*COB +G_punt[0]*COV +G_tank*x_tank +F_last*x_last)/F_c
+arm_c = -1*(P_punt[0]*COB +G_punt[0]*COV +F_tank[0]*x_tank +F_last*x_last)/F_c
 
 
 #verdeeldebelasting container
