@@ -48,7 +48,7 @@ class plot():
 
     def theta():
         figure = plt.figure(figsize=(10,12))
-        plt.plot(x[0:3000],theta[0:3000])
+        plt.plot(x[0:3700],theta[0:3700])
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$Hoekverdraaiing\; (\theta)[rad]$')
         plt.title(r'Hoekverdraaiing uitgezet tegen de totale lengte')
@@ -56,7 +56,7 @@ class plot():
         plt.show()
     def v():
         figure = plt.figure(figsize=(10,12))
-        plt.plot(x[0:3000],v[0:3000])
+        plt.plot(x[0:3700],v[0:3700])
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$Doorbuiging \; (v) [m]$')
         plt.title(r'Doorbuiging uitgezet tegen de totale lengte')
@@ -65,7 +65,7 @@ class plot():
   
     def sigma():
         figure = plt.figure(figsize=(10,12))
-        plt.plot(x,sigma)
+        plt.plot(x[0:4000],sigma[0:4000])
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$Spanningsverdeling \; (\sigma) [m]$')
         plt.title(r'Spanningsverdeling uitgezet tegen de totale lengte')
