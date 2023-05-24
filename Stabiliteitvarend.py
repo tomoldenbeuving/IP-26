@@ -101,7 +101,7 @@ BM_t = It_x/displacement1
 KGcont_v=H+(Ch*atiers/2)
 KGtank_v=df.iloc[33,3]
 
-KG_nieuw= (KG*G_punt[0]+KGcont*n*Cw+KGtank*volumetank*rho_water)/(G_punt[0]+n*Cw+volumetank*rho_water)
+KG_nieuw= (KG*G_punt[0]+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt[0]+n*Cw+volumetank*rho_water)
 
 GM_t_v = KB + BM_t - KG_nieuw 
 
