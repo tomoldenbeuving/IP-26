@@ -3,7 +3,7 @@ from imports import df
 from Sterkteleerbeladen import F_last,n,atiers,arij,abay,arm_c,F_tank,x_tank,M_max,Loc_M_max,tp_factor,v_max,Loc_v_max
 from Stabiliteitbeladen import KGtank,KGcont,KG_nieuw,LCGNieuw,GM_t
 from Stabiliteitvarend import displacement, LCG_c, KGcont_v, GM_t_v, R_tot_max,Fillheight,Ftank,KGtank_v,xtank
-from Stabiliteitleeg import dp_leeg,Gschip_leeg,COB_leeg,KB_leeg,KG_romp_leeg,BM_leeg_t,BM_leeg_l,GM_leeg_l,GM_leeg_t,Foutmarge
+from Stabiliteitleeg import dp_leeg,Gschip_leeg,COB_leeg,KB_leeg,KG_romp_leeg,BM_leeg_t,BM_leeg_l,GM_leeg_l,GM_leeg_t,theta,Foutmarge
 
 print("Foutmarge, leegscheepse conditie",Foutmarge,'%')
 print('Last=',F_last)
@@ -42,17 +42,22 @@ def tabel():
     print('VCG ballast containers gesleept=',KGcont_v)
     print('GM dwarsscheeps varend=', GM_t_v)
     print('Weerstand bij 19kts=', R_tot_max)
-    print('Cstern=')
+    print('Cstern=',df.iloc[7,2])
     print('Vulhoogte tank varend=',Fillheight*100,'%')
     print('Ballast tank gewicht varend=',Ftank)
     print('KG ballast tank varend=',KGtank_v)
     print('LCG ballast tank varend=',xtank)
     print('Deplacement leeg=',dp_leeg)
     print('LSW=',Gschip_leeg[0])
-    print('COB zonder trim leeg=',COB_leeg)
+    print('Longitudonaal COB zonder trim leeg=',COB_leeg)
+    print('Berekende trim (graden)',theta)
     print('KB leeg=',KB_leeg)
     print('KG staal=',KG_romp_leeg)
     print('BM leeg dwarsscheeps=',BM_leeg_t)
     print('BM leeg langsscheeps=', BM_leeg_l)
     print('GM leeg dwarsscheeps=',GM_leeg_t)
     print('GM leeg langsscheeps=', GM_leeg_l)
+
+
+
+
