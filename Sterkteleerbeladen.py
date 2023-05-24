@@ -200,6 +200,10 @@ D=v_thetamax
 #Uiteindelijke doorbuigingslijn
 v= v + D
 
+#Waarde en locatie maximale doorbuiging
+vmax_index = np.argmax(v)
+v_max = v[vmax_index] #Waarde maximale doorbuiging
+Loc_v_max = x[vmax_index] #Locatie maximale doorbuiging
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
