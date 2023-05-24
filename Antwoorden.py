@@ -3,7 +3,7 @@ from imports import df
 from Sterkteleerbeladen import F_last,n,atiers,arij,abay,arm_c,F_tank,x_tank,M_max,Loc_M_max,tp_factor,v_max,Loc_v_max
 from Stabiliteitbeladen import KGtank,KGcont,KG_nieuw,LCGNieuw,GM_t
 from Stabiliteitvarend import displacement, LCG_c, KGcont_v, GM_t_v, R_tot_max,Fillheight,Ftank,KGtank_v,xtank
-from Stabiliteitleeg import dp_leeg,Gschip_leeg,COB_leeg,KB_leeg,KG_romp_leeg,BM_leeg_t,BM_leeg_l,GM_leeg_l,GM_leeg_t
+from Stabiliteitleeg import dp_leeg,Gschip_leeg,COB_leeg,KB_leeg,KG_romp_leeg,BM_leeg_t,BM_leeg_l,GM_leeg_l,GM_leeg_t,fou
 
 print("Foutmarge, leegscheepse conditie",Foutmarge,"\n \n")
 
