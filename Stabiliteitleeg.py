@@ -57,5 +57,19 @@ for i in range(len(x)):
 #Som van de krachten
 G_punt=integrate.quad(G_func,0,Loa)
 P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
+F_net=P_punt+G_punt
+Foutmarge=((P_punt[0]+G_punt[0])/G_punt[0])*100
 
-print(P_punt[0]+G_punt[0])
+#Momentenstelling
+COV=df_leeg.iloc[21,1]
+arm_p= -1*(G_punt[0]*COV)/P_punt[0]
+
+#Waarden
+dp_leeg=P_punt[0]/(rho_water*g)*-1
+Gschip_leeg=G_punt
+COB_leeg=df_leeg.iloc[20,1]
+KB_leeg=df_leeg.iloc[20,3]
+KG_romp_leeg=df_leeg[21.3]
+
+
+print()

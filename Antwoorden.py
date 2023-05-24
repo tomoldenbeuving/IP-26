@@ -1,9 +1,10 @@
 import pandas as pd
+from imports import df
 from Sterkteleerbeladen import F_last,n,atiers,arij,abay,arm_c,F_tank,x_tank,M_max,Loc_M_max,tp_factor,v_max,Loc_v_max
 from Stabiliteitbeladen import KGtank,KGcont,KG_nieuw,LCGNieuw,GM_t
 from Stabiliteitvarend import displacement, LCG_c, KGcont_v, GM_t_v, R_tot_max,Fillheight,Ftank,KGtank_v,xtank
+from Stabiliteitleeg import dp_leeg,Gschip_leeg,COB_leeg,KB_leeg,KG_romp_leeg
 
-df = pd.read_excel("IP.xlsx",'VB schip van Goris')
 
 print('LOA=',df.iloc[0,1])
 print('Breedte=',df.iloc[1,1])
@@ -37,3 +38,8 @@ print('Vulhoogte tank varend=',Fillheight*100,'%')
 print('Ballast tank gewicht varend=',Ftank)
 print('KG ballast tank varend=',KGtank_v)
 print('LCG ballast tank varend=',xtank)
+print('Deplacement leeg=',dp_leeg)
+print('LSW=',Gschip_leeg)
+print('COB zonder trim leeg=',COB_leeg)
+print('KB leeg=',KB_leeg)
+print('KG staal=',KG_romp_leeg)
