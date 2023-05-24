@@ -5,7 +5,7 @@ from Stabiliteitbeladen import KGtank,KGcont,KG_nieuw,LCGNieuw,GM_t
 from Stabiliteitvarend import displacement, LCG_c, KGcont_v, GM_t_v, R_tot_max,Fillheight,Ftank,KGtank_v,xtank
 from Stabiliteitleeg import dp_leeg,Gschip_leeg,COB_leeg,KB_leeg,KG_romp_leeg,BM_leeg_t,BM_leeg_l,GM_leeg_l,GM_leeg_t,Foutmarge
 
-print("Foutmarge, leegscheepse conditie",Foutmarge,"\n \n")
+print("Foutmarge, leegscheepse conditie",Foutmarge,'%',"\n \n")
 
 print('LOA=',df.iloc[0,1])
 print('Breedte=',df.iloc[1,1])
