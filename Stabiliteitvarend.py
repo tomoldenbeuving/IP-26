@@ -2,14 +2,13 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
-from imports import df_varend
+from imports import df_varend, tp_factor
 
 
 rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
-tp_factor=1
 nul = np.zeros(1)
 Loa= df_varend.iloc[0,1] +df_varend.iloc[67,0]
 eind = np.array([Loa])
