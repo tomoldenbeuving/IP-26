@@ -71,7 +71,10 @@ Ftank = -1*(G_punt[0] + P_punt[0] +Fc)
 xtank=df.iloc[33,1]
 volumetank=Ftank/rho_water/g
 
-volumetankmax=df.iloc[32,1]/df.iloc[33,1]*100
+volumetankmax=df.iloc[32,1]/df.iloc[35,1]*100
+
+
+Fillheight=volumetank/volumetankmax
 
 #som momenten
 LCG_c= -1*(P_punt[0]*COB +G_punt[0]*COV +Ftank*xtank)/Fc
