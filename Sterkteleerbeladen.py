@@ -201,7 +201,7 @@ D=v_thetamax
 v= v + D
 
 #Waarde en locatie maximale doorbuiging
-vmax_index = np.argmax(v)
+vmax_index = np.argmin(v)
 v_max = v[vmax_index] #Waarde maximale doorbuiging
 Loc_v_max = x[vmax_index] #Locatie maximale doorbuiging
 
