@@ -207,7 +207,7 @@ Loc_v_max = x[vmax_index] #Locatie maximale doorbuiging
 
 # Maximaal toelaatbaar moment
 sigma_max=190E6
-I_midship=df.iloc[114, 7]
+I_midship=df.iloc[114, 7]*tp_factor
 H=df.iloc[2,1]
 KG_y=df.iloc[21,3]
 y=H-KG_y
