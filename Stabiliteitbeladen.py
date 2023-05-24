@@ -3,7 +3,7 @@ import numpy as np
 from scipy import integrate, interpolate
 import math as m
 from Sterkteleerbeladen import Cw, n, Ch,V_tank,atiers,F_last,arm_c,x_tank,x_last,G_punt
-from imports import df
+from imports import df, tp_factor
 
 rho_staal = 7.85E3
 E_staal=210E9
