@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import math as m
-from Sterkteleerbeladen import Cw, n, Ch,V_tank,atiers,F_last,arm_c,x_tank,x_last
+from Sterkteleerbeladen import Cw, n, Ch,V_tank,atiers,F_last,arm_c,x_tank,x_last,G_punt
 
 
 rho_staal = 7.85E3
@@ -39,7 +39,7 @@ KGcont=H+(Ch*atiers/2)
 KGtank=df.iloc[33,3]
 KGlast=H+2.7
 
-KG_nieuw= (KG*gewichtschip+KGcont*n*Cw+KGlast*F_last/g)/(gewichtschip+n*Cw+F_last/g)
+KG_nieuw= (KG*G_punt[0]/g+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*x_tank)/(G_punt[0]/g+n*Cw+F_last/g+V_tank*rho_water)
 
 GM_t = KB + BM_t - KG_nieuw 
 
