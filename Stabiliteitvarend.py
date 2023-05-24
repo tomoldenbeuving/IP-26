@@ -18,6 +18,12 @@ Loa= df.iloc[0,1]
 eind = np.array([Loa])
 onderwater= df.iloc[42:64,0]
 F_tank1=F_tank[0]/0.5*0.43
+
+
+#som krachten
+P_uitgebalanceerd = (G_punt[0] + F_tank1 +F_c)
+
+#som momenten
 LCG_c= -1*(P_punt[0]*COB +G_punt[0]*COV +F_tank1*x_tank)/F_c
 displacement = df.iloc[18,1]
 gewichtschip=displacement*rho_water
@@ -32,5 +38,3 @@ KB = df.iloc[20,3]
 KG = df.iloc[21,3]
 
 KG1=KG*gewichtschip+F_tank1
-
-print(COB, COV)
