@@ -59,4 +59,3 @@ for i in range(len(x)):
 #Som van de krachten
 G_punt=integrate.quad(G_func,0,Loa)
 P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
-print(G_punt[0]+P_punt[0])
