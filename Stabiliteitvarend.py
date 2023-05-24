@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
-from Sterkteleerbeladen import Ch, atiers
 
 
 rho_staal = 7.85E3
@@ -16,11 +15,25 @@ nul = np.zeros(1)
 Loa= df.iloc[0,1] +df.iloc[67,0]
 eind = np.array([Loa])
 onderwater= df.iloc[42:64,0]
-Cw=30E3  #container weight
-n=234 #aantal containers
 COB=df.iloc[20,1]
 COV=df.iloc[21,1]
 x=np.arange(0,Loa,0.05)
+
+
+#containers
+Cl=6.06   #container lengte
+Cb=2.44  #container breedte
+Ch=2.59   #container hoogte
+Cw=30E3  #container weight
+
+#aantal containers
+n=234
+#aantal rijen in de hoogte
+atiers=1
+#aantal containers in breedte
+arij=13
+#aantal containers in lengte
+abay= n/arij
 
 
 #opwaartsekracht verdeelde belasting
@@ -101,7 +114,7 @@ BM_t = It_x/displacement1
 KGcont_v=H+(Ch*atiers/2)
 KGtank_v=df.iloc[33,3]
 
-KG_nieuw= (KG*G_punt[0]+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt[0]+n*Cw+volumetank*rho_water)
+KG_nieuw= (KG*G_punt[0]/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt[0]/g+n*Cw+volumetank*rho_water)
 
 GM_t_v = KB + BM_t - KG_nieuw 
 
