@@ -37,6 +37,11 @@ gewichtschip=displacement*rho_water
 KB = df.iloc[20,3]
 KG = df.iloc[21,3]
 
-KG1=(KG*gewichtschip+F_tank1/g*tankx+F_cont*VCG_c/g)/(F_cont/g+gewichtschip+F_tank1)
+#KG1=(KG*gewichtschip+F_tank1/g*tankx+F_cont*VCG_c/g)/(F_cont/g+gewichtschip+F_tank1)
 
 print(COB, COV)
+
+V_s = df.iloc[152:165,1]
+R_tot = df.iloc[152:165,3]
+
+R_tot_max = df.iloc[165,3]
