@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from Sterkteleerbeladen import x,p,G,q,V,M,theta,v,sigma,tanklast,vb_cont,vb_last
+from Stabiliteitvarend import V_s, R_tot
 import numpy as np
 
 class plot():
@@ -48,7 +49,7 @@ class plot():
 
     def theta():
         figure = plt.figure(figsize=(10,12))
-        plt.plot(x[0:3700],theta[0:3700])
+        plt.plot(x,theta)
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$Hoekverdraaiing\; (\theta)[rad]$')
         plt.title(r'Hoekverdraaiing uitgezet tegen de totale lengte')
@@ -56,7 +57,7 @@ class plot():
         plt.show()
     def v():
         figure = plt.figure(figsize=(10,12))
-        plt.plot(x[0:3700],v[0:3700])
+        plt.plot(x,v)
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$Doorbuiging \; (v) [m]$')
         plt.title(r'Doorbuiging uitgezet tegen de totale lengte')
@@ -71,10 +72,12 @@ class plot():
         plt.title(r'Spanningsverdeling uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
+    def R_tot():
+        figure = plt.figure(figsize=(10,12))
+        plt.plot(V_s,R_tot)
+        plt.xlabel(r'$v_{s} [ms^{-1}]$')
+        plt.ylabel(r'$R_{tot}[N]$')
+        plt.title(r'Totale scheepsweerstand uitgezet over de snelheid')
+        plt.grid()
+        plt.show()        
 
-plot.vb()
-plot.V()
-plot.M()
-plot.theta()
-plot.v()
-plot.sigma()
