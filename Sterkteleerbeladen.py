@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
+from imports import df
+
 
 
 #containers
@@ -25,8 +27,6 @@ E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
 tp_factor=1
-df = pd.read_excel("IP.xlsx",'VB schip van Goris')
-df = df.round(4)
 nul = np.zeros(1)
 Loa= df.iloc[0,1] +df.iloc[67,0]
 eind = np.array([Loa])
