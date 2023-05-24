@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from Sterkteleerbeladen import x,p,G,q,V,M,theta,v,sigma,tanklast,vb_cont,vb_last
+from Stabiliteitvarend import V_s, R_tot
 import numpy as np
 
 class plot():
@@ -71,10 +72,12 @@ class plot():
         plt.title(r'Spanningsverdeling uitgezet tegen de totale lengte')
         plt.grid()
         plt.show()
+    def R_tot():
+        figure = plt.figure(figsize=(10,12))
+        plt.plot(V_s,R_tot)
+        plt.xlabel(r'$v_{s} [ms^{-1}]$')
+        plt.ylabel(r'$R_{tot}[N]$')
+        plt.title(r'Totale scheepsweerstand uitgezet over de snelheid')
+        plt.grid()
+        plt.show()        
 
-plot.vb()
-plot.V()
-plot.M()
-plot.theta()
-plot.v()
-plot.sigma()
