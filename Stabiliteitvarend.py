@@ -20,8 +20,8 @@ onderwater= df.iloc[42:64,0]
 F_tank1=F_tank[0]/0.5*0.43
 
 
-#som krachten
-P_uitgebalanceerd = (G_punt[0] + F_tank1 +F_c)
+#som krachten 6 staat voor de 6 meter diepgang
+Ftank6 = (G6[0] + P6 +Fc6)
 
 #som momenten
 LCG_c= -1*(P_punt[0]*COB +G_punt[0]*COV +F_tank1*x_tank)/F_c
