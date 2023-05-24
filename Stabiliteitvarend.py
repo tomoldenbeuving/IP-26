@@ -14,7 +14,7 @@ tp_factor=1
 df = pd.read_excel("IP.xlsx",'VB schip van Goris')
 df = df.round(4)
 nul = np.zeros(1)
-Loa= df.iloc[0,1]
+Loa= df.iloc[0,1] +df.iloc[67,0]
 eind = np.array([Loa])
 onderwater= df.iloc[42:64,0]
 F_tank1=F_tank[0]/0.5*0.43
@@ -27,7 +27,6 @@ P_uitgebalanceerd = (G_punt[0] + F_tank1 +F_c)
 LCG_c= -1*(P_punt[0]*COB +G_punt[0]*COV +F_tank1*x_tank)/F_c
 displacement = df.iloc[18,1]
 gewichtschip=displacement*rho_water
-
 
 
 
