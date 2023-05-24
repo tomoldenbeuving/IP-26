@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
+from Sterkteleerbeladen import Ch, atiers
 
 
 rho_staal = 7.85E3
@@ -71,20 +72,48 @@ Ftank = -1*(G_punt[0] + P_punt[0] +Fc)
 xtank=df.iloc[33,1]
 volumetank=Ftank/rho_water/g
 
-volumetankmax=df.iloc[32,1]/df.iloc[33,1]*100
+volumetankmax=df.iloc[32,1]/df.iloc[35,1]*100
+
+
+Fillheight=volumetank/volumetankmax
 
 #som momenten
 LCG_c= -1*(P_punt[0]*COB +G_punt[0]*COV +Ftank*xtank)/Fc
+
 displacement = df.iloc[18,1]
 gewichtschip=displacement*rho_water
+H=df.iloc[2,1]
 
 
 
 
-#GM berekenen
+#GM dwarsrichting
+It_x = df.iloc[27,1]
+displacement = df.iloc[18,1]
 
 KB = df.iloc[20,3]
 KG = df.iloc[21,3]
+
+#berekening displacement nieuw nadat containers erop zijn
+gewichtschip=displacement*rho_water
+displacement1=(gewichtschip+Cw*n)/rho_water
+BM_t = It_x/displacement1
+KGcont=H+(Ch*atiers/2)
+KGtank=df.iloc[33,3]
+
+KG_nieuw= (KG*gewichtschip+KGcont*n*Cw+KGtank*volumetank*rho_water)/(gewichtschip+n*Cw+volumetank*rho_water)
+
+GM_t = KB + BM_t - KG_nieuw 
+
+
+
+#LCG
+LCF = df.iloc[26,1]
+LCGNieuw=(LCF*gewichtschip+LCG_c*n*Cw+xtank*volumetank*rho_water)/(gewichtschip+n*Cw+volumetank*rho_water)
+#GM langsrichting
+It_y = df.iloc[27,2]
+BM_l = It_y/displacement
+GM_l = KB +BM_l-KG
 
 #KG1=(KG*gewichtschip+F_tank1/g*tankx+F_cont*VCG_c/g)/(F_cont/g+gewichtschip+F_tank1)
 
