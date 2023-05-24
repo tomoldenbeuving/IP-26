@@ -58,6 +58,7 @@ def tabel():
     print('GM leeg dwarsscheeps=',GM_leeg_t)
     print('GM leeg langsscheeps=', GM_leeg_l)
 
+tabel()
 
 
 
