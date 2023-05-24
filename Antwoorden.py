@@ -1,7 +1,7 @@
 import pandas as pd
 from Sterkteleerbeladen import F_last,n,atiers,arij,abay,arm_c,F_tank,x_tank,M_max,Loc_M_max,tp_factor,v_max,Loc_v_max
 from Stabiliteitbeladen import KGtank,KGcont,KG_nieuw,LCGNieuw,GM_t
-from Stabiliteitvarend import displacement, LCG_c
+from Stabiliteitvarend import displacement, LCG_c, KGcont_v, GM_t_v, R_tot_max,Fillheight,Ftank,KGtank_v,xtank
 
 df = pd.read_excel("IP.xlsx",'VB schip van Goris')
 
@@ -15,7 +15,7 @@ print('Aantal rows=',arij)
 print('Aantal bays=',abay)
 print('LCG containers beladen=',arm_c)
 print('VCG containers beladen=',KGcont)
-print('Vulhoogte tank=',df.iloc[35,1])
+print('Vulhoogte tank beladen=',df.iloc[35,1])
 print('Ballast tank gewicht=',F_tank)
 print('KG ballast tank beladen=',KGtank)
 print('LCG ballast tank=',x_tank)
@@ -29,4 +29,11 @@ print('Maximale doorbuiging=',v_max)
 print('Locatie maximale doorbuiging=',Loc_v_max)
 print('Deplacement gesleept=',displacement)
 print('LCG ballast containers gesleept=',LCG_c)
-print('VCG ballast containers gesleept=',)
+print('VCG ballast containers gesleept=',KGcont_v)
+print('GM dwarsscheeps varend=', GM_t_v)
+print('Weerstand bij 19kts=', R_tot_max)
+print('Cstern=')
+print('Vulhoogte tank varend=',Fillheight)
+print('Ballast tank gewicht varend=',Ftank)
+print('KG ballast tank varend=',KGtank_v)
+print('LCG ballast tank varend=',xtank)

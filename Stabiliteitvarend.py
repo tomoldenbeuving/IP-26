@@ -98,12 +98,12 @@ KG = df.iloc[21,3]
 gewichtschip=displacement*rho_water
 displacement1=(gewichtschip+Cw*n)/rho_water
 BM_t = It_x/displacement1
-KGcont=H+(Ch*atiers/2)
-KGtank=df.iloc[33,3]
+KGcont_v=H+(Ch*atiers/2)
+KGtank_v=df.iloc[33,3]
 
-KG_nieuw= (KG*gewichtschip+KGcont*n*Cw+KGtank*volumetank*rho_water)/(gewichtschip+n*Cw+volumetank*rho_water)
+KG_nieuw= (KG*gewichtschip+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(gewichtschip+n*Cw+volumetank*rho_water)
 
-GM_t = KB + BM_t - KG_nieuw 
+GM_t_v = KB + BM_t - KG_nieuw 
 
 
 
