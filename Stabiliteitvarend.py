@@ -133,4 +133,4 @@ GM_l = KB +BM_l-KG
 V_s = df_varend.iloc[152:165,1]
 R_tot = df_varend.iloc[152:165,3]
 
-R_tot_max = df_varend.iloc[166,3]
+R_tot_max = df_varend.iloc[150,3]
