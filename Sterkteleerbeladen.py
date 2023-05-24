@@ -99,6 +99,7 @@ for i in range(len(x)):
 
 
 
+
 #last op platfrom uitrekenen	
 
 #som van de krachten
