@@ -70,6 +70,6 @@ Gschip_leeg=G_punt
 COB_leeg=df_leeg.iloc[20,1]
 KB_leeg=df_leeg.iloc[20,3]
 KG_romp_leeg=df_leeg.iloc[21,3]
-
+BM_leeg_t=
 
 print()
