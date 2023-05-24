@@ -9,7 +9,6 @@ rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
 g = 9.81
-tp_factor=1
 H=df.iloc[2,1]
 nul = np.zeros(1)
 Loa= df.iloc[0,1] +df.iloc[67,0]
