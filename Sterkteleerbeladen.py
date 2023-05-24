@@ -37,6 +37,8 @@ G_cont=n*Cw*g
 
 x=np.arange(0,Loa,0.05)
 
+
+#opwaartsekracht verdeelde belasting
 p=np.zeros(len(x))
 
 p = -df.iloc[42:64,1]*rho_water*g
@@ -47,14 +49,14 @@ x_p = np.append(0,x_p)
 x_p = np.append(x_p,max(onderwater))
 p_func = interpolate.interp1d(x_p,p)
 
-
+#gewicht verdeelde belasting
 G = df.iloc[101:123,2]*rho_staal*g*tp_factor
 G=np.append(G,nul)
 x_G = df.iloc[101:123,0]
 x_G=np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
 
-
+#traagheidsmoment over de lengte
 I = df.iloc[101:123,6]*tp_factor
 I=np.append(I,nul)
 x_I = df.iloc[101:123,0]
