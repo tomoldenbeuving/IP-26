@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
+from Sterkteleerbeladen import Ch, atiers
 
 
 rho_staal = 7.85E3
@@ -81,11 +82,10 @@ LCG_c= -1*(P_punt[0]*COB +G_punt[0]*COV +Ftank*xtank)/Fc
 
 displacement = df.iloc[18,1]
 gewichtschip=displacement*rho_water
+H=df.iloc[2,1]
 
 
 
-
-#GM berekenen
 
 #GM dwarsrichting
 It_x = df.iloc[27,1]
@@ -100,9 +100,8 @@ displacement1=(gewichtschip+Cw*n)/rho_water
 BM_t = It_x/displacement1
 KGcont=H+(Ch*atiers/2)
 KGtank=df.iloc[33,3]
-KGlast=H+2.7
 
-KG_nieuw= (KG*gewichtschip+KGcont*n*Cw+KGlast*F_last/g)/(gewichtschip+n*Cw+F_last/g)
+KG_nieuw= (KG*gewichtschip+KGcont*n*Cw)/(gewichtschip+n*Cw)
 
 GM_t = KB + BM_t - KG_nieuw 
 
@@ -110,7 +109,7 @@ GM_t = KB + BM_t - KG_nieuw
 
 #LCG
 LCF = df.iloc[26,1]
-LCGNieuw=(LCF*gewichtschip+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(gewichtschip+n*Cw+F_last/g+V_tank*rho_water)
+LCGNieuw=(LCF*gewichtschip+LCG_c*n*Cw+xtank*volumetank*rho_water)/(gewichtschip+n*Cw+volumetank*rho_water)
 #GM langsrichting
 It_y = df.iloc[27,2]
 BM_l = It_y/displacement
