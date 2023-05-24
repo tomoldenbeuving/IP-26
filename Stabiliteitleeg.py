@@ -62,7 +62,8 @@ Foutmarge=((P_punt[0]+G_punt[0])/G_punt[0])*100
 
 #Momentenstelling
 COV=df_leeg.iloc[21,1]
-arm_p= -1*(G_punt[0]*COV)/P_punt[0]
+COB=df_leeg.iloc[20,1]
+moment=(COV-COB)*P_punt[0]
 
 #Waarden
 dp_leeg=P_punt[0]/(rho_water*g)*-1
@@ -77,4 +78,6 @@ BM_leeg_l = It_y/dp_leeg
 GM_leeg_t=KB_leeg+BM_leeg_t-KG_romp_leeg
 GM_leeg_l=KB_leeg+BM_leeg_l-KG_romp_leeg
 
-print()
+#Trim
+GZ_theta=moment/(dp_leeg*rho_water*g)
+theta=(np.arcsin(GZ_theta/GM_leeg_l))*(180/np.pi)
