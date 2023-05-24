@@ -78,6 +78,7 @@ Fillheight=volumetank/volumetankmax
 
 #som momenten
 LCG_c= -1*(P_punt[0]*COB +G_punt[0]*COV +Ftank*xtank)/Fc
+
 displacement = df.iloc[18,1]
 gewichtschip=displacement*rho_water
 
