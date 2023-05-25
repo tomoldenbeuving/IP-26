@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 from imports import df, tp_factor
+import matplotlib.pyplot as plt
 
 
 
