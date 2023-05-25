@@ -5,7 +5,9 @@ from Stabiliteitbeladen import KGtank,KGcont,KG_nieuw,LCGNieuw,GM_t
 from Stabiliteitvarend import displacement, LCG_c, KGcont_v, GM_t_v, R_tot_max,Fillheight,Ftank,KGtank_v,xtank
 from Stabiliteitleeg import dp_leeg,Gschip_leeg,COB_leeg,KB_leeg,KG_romp_leeg,BM_leeg_t,BM_leeg_l,GM_leeg_l,GM_leeg_t,theta,Foutmarge
 
+print("\n \n")
 print("Foutmarge, leegscheepse conditie",Foutmarge,'%')
+print('Blokcoeëficiënt',df.iloc[19,1]/(df.iloc[0,1]*df.iloc[1,1]*df.iloc[2,1]))
 print('Last=',F_last)
 print('Vulhoogte tank varend=',Fillheight*100,'%')
 print('GM dwarsscheeps varend=', GM_t_v)
@@ -59,7 +61,7 @@ def tabel():
     print('GM leeg dwarsscheeps=',GM_leeg_t)
     print('GM leeg langsscheeps=', GM_leeg_l)
 
-tabel()
+
 
 
 
