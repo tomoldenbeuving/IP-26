@@ -2,16 +2,16 @@ import matplotlib.pyplot as plt
 import pandas as pd 
 import numpy as np 
 
-x= np.array([[1,2,3,4],
+y= np.array([[1,2,3,4],
             [1.5,2.5,3.5,4.5]])
-y = np.array([1,2,3,4])
+x = np.array([1,2,3,4])
 
 def trendplot(x,y):
     figure = plt.figure(figsize=(10,15))
     ax = plt.subplot(111)
 
     for i in range(np.shape(y)[0]):
-        plt.plot(x[i:],y)
+        plt.plot(x,y[i,])
     plt.xlabel('[m]')
     plt.ylabel('[N/m]')
     plt.title('Belasting uitgezet tegen de totale lengte')
@@ -26,4 +26,4 @@ def trendplot(x,y):
             fancybox=True, shadow=True, ncol=3)
     plt.show()
 
-    trendplot(x,y)
+trendplot(x,y)
