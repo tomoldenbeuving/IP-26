@@ -271,7 +271,7 @@ def beladen(df):
     Msl=rho_water*g*displacement*GM_l*(theta)
     #Msl=rho_water*g*displacement*GM_l*theta
     BB1=It_y/displacement*np.tan(theta)
-    return [float(F_last),float(GM_t),float(arm_c)]
+    return [F_last,GM_t,arm_c,v_max,]
     
 def varend(df_varend):   
     rho_staal = 7.85E3
@@ -439,7 +439,7 @@ def trendplotinelkeaar(filepath):
 
 
 def trendplot(filepath):
-    datalabel = ["Last", "GM dwars", "arm van de containers"]
+    datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$v_{max}$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
     variable = wb.sheetnames
     data = [0,0,0]
