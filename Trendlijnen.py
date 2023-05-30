@@ -439,27 +439,29 @@ def trendplotinelkeaar(filepath):
 
 
 def trendplot(filepath):
-    data = ["Last", "GM dwars", "arm van de containers"]
+    datalabel = ["Last", "GM dwars", "arm van de containers"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
     variable = wb.sheetnames
-
+    data = [0,0,0]
     for i in variable:
         df = pd.read_excel(filepath, i)
-        data = pd.DataFrame((data, beladen(df)))
+        data = np.vstack((data, beladen(df)))
 
-    variable = [float(numeric_string) for numeric_string in variable]
-    figure, axes = plt.subplots(np.shape(data)[1], 1, figsize=(10, 15))
+    data = data[1:,]
+
+    variable = [int(numeric_string) for numeric_string in variable]
+    
+    figure, axes = plt.subplots(np.shape(data)[1], 1, figsize=(8, 12))
 
     for i, ax in enumerate(axes):
-        ax.plot(variable, data[1:, i], label=data[0, i])
+        ax.plot(variable, data[:,i], label=datalabel[i])
 #        ax.set_xlabel('[m]')
 #        ax.set_ylabel('[N/m]')
-        ax.set_title(data[0,i])
+        ax.set_title(datalabel[i])
         ax.grid()
         ax.legend()
 
     # Adjust spacing between subplots
-    plt.tight_layout()
     plt.show()
 
 
