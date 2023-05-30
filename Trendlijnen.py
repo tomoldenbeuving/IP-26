@@ -2,9 +2,16 @@ import matplotlib.pyplot as plt
 import pandas as pd 
 import numpy as np 
 
-y= np.array([[1,2,3,4],
-            [1.5,2.5,3.5,4.5]])
-x = np.array([1,2,3,4])
+def get_sheetnames_xlsx(filepath):
+    wb = load_workbook(filepath, read_only=True, keep_links=False)
+    return wb.sheetnames
+
+radii= get_sheetnames_xlsx("bilge radius.xlsx")
+
+for i in radii:
+    data = pd.read_excel("bilge radius.xlsx", i)
+
+
 
 def trendplot(x,y):
     figure = plt.figure(figsize=(10,15))
