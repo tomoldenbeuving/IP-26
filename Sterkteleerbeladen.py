@@ -56,7 +56,7 @@ x_G = df.iloc[101:123,0]
 G_func = interpolate.interp1d(x_G,G)
 
 #traagheidsmoment over de lengte
-I = df.iloc[101:123,6]*tp_factor
+I = df.iloc[101:123,7]*tp_factor
 #I=np.append(I,nul)
 x_I = df.iloc[101:123,0]
 #x_I=np.append(x_I,eind)
