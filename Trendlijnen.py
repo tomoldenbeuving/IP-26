@@ -442,7 +442,7 @@ def trendplot(filepath):
     datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$v_{max}$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
     variable = wb.sheetnames
-    data = [0,0,0]
+    data = [0,0,0,0]
     for i in variable:
         df = pd.read_excel(filepath, i)
         data = np.vstack((data, beladen(df)))
@@ -462,7 +462,7 @@ def trendplot(filepath):
         ax.legend()
 
     # Adjust spacing between subplots
+    plt.tight_layout()
     plt.show()
-
 
 trendplot("breedte verandering.xlsx")
