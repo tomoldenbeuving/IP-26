@@ -165,7 +165,7 @@ M_max = M[Mmax_index] #Waarde maximaal moment
 Loc_M_max = x[Mmax_index] #Locatie maximaal moment
 
 #Hoekverdraaiing zonder integratie constante
-thetaEI=integrate.cumtrapz(M/(E_staal*I[i]),x,initial=0)
+thetaEI=integrate.cumtrapz(M/(E_staal*I),x,initial=0)
 
 #Integratie constante
 vEI=integrate.cumtrapz(thetaEI,x,initial=0)
