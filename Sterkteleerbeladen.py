@@ -175,20 +175,8 @@ C=(np.max(vEI))/Loa
 #Uiteindelijke verdraaiingslijn
 theta= thetaEI - C
 
-#Waarde en locatie maximale hoekverdraaiing
-thetamax_index = np.argmax(theta)
-theta_max = theta[thetamax_index] #Waarde maximale Hoekverdraaiing
-Loc_theta_max = x[thetamax_index] #Locatie maximale hoekverdraaiing
-
 #Doorbuiging met integratie constante
 v=integrate.cumtrapz(theta,x,initial=0)
-
-#Integratie constante
-#v_thetamax = v[theta_max] #np.interp(Loc_theta_max, x, v)
-#D=v_thetamax
-
-#Uiteindelijke doorbuigingslijn
-#v= v + D
 
 #Waarde en locatie maximale doorbuiging
 vmax_index = np.argmin(v)
