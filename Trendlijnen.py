@@ -4,6 +4,9 @@ import numpy as np
 from openpyxl import load_workbook
 from scipy import integrate, interpolate
 
+import warnings
+warnings.filterwarnings("ignore")
+
 
 #containers
 Cl=6.06   #container lengte
@@ -215,6 +218,7 @@ def beladen(df):
         except ZeroDivisionError:
             sigma[i] = 0
 
+
     rho_staal = 7.85E3
     E_staal=210E9
     rho_water = 1.025E3
@@ -267,11 +271,8 @@ def beladen(df):
     Msl=rho_water*g*displacement*GM_l*(theta)
     #Msl=rho_water*g*displacement*GM_l*theta
     BB1=It_y/displacement*np.tan(theta)
-    return [F_last,GM_t,arm_c]
+    return [float(F_last),float(GM_t),float(arm_c)]
     
-
-
-
 def varend(df_varend):   
     rho_staal = 7.85E3
     E_staal=210E9
@@ -404,26 +405,24 @@ def varend(df_varend):
     R_tot_max = df_varend.iloc[150,3]
     return [GM_t_v, Fillheight*100]
 
-def get_sheetnames_xlsx(filepath):
+
+def trendplotinelkeaar(filepath):
+    data = ["Last","GM dwars,","arm van de containers"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
-    return wb.sheetnames
+    variable= wb.sheetnames
 
-variable= get_sheetnames_xlsx("bilge radius.xlsx")
+    for i in variable:
+        df = pd.read_excel(filepath,i)
+        data = np.vstack((data,beladen(df)))
 
-data = ["Last","GM dwars,","arm van de containers"]
-
-for i in variable:
-    df = pd.read_excel("bilge radius.xlsx",i)
-    data = np.vstack((data,beladen(df)))
-
-
-
-def trendplot(x,y):
+    variable = [int(numeric_string) for numeric_string in variable]
     figure = plt.figure(figsize=(10,15))
     ax = plt.subplot(111)
-
-    for i in range(np.shape(y)[0]):
-        plt.plot(x,y[i,])
+#    for i in range(np.shape(data)[1]):
+ #       plt.plot(variable,data[1:,i],label=data[0,i])
+    plt.plot(variable,data[1:,0],label=data[0,0])
+    plt.plot(variable,data[1:,1],label=data[0,1])
+    plt.plot(variable,data[1:,2],label=data[0,2])
     plt.xlabel('[m]')
     plt.ylabel('[N/m]')
     plt.title('Belasting uitgezet tegen de totale lengte')
@@ -437,3 +436,31 @@ def trendplot(x,y):
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1),
             fancybox=True, shadow=True, ncol=3)
     plt.show()
+
+
+def trendplot(filepath):
+    data = ["Last", "GM dwars", "arm van de containers"]
+    wb = load_workbook(filepath, read_only=True, keep_links=False)
+    variable = wb.sheetnames
+
+    for i in variable:
+        df = pd.read_excel(filepath, i)
+        data = pd.DataFrame((data, beladen(df)))
+
+    variable = [float(numeric_string) for numeric_string in variable]
+    figure, axes = plt.subplots(np.shape(data)[1], 1, figsize=(10, 15))
+
+    for i, ax in enumerate(axes):
+        ax.plot(variable, data[1:, i], label=data[0, i])
+#        ax.set_xlabel('[m]')
+#        ax.set_ylabel('[N/m]')
+        ax.set_title(data[0,i])
+        ax.grid()
+        ax.legend()
+
+    # Adjust spacing between subplots
+    plt.tight_layout()
+    plt.show()
+
+
+trendplot("breedte verandering.xlsx")
