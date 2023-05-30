@@ -81,3 +81,6 @@ class plot():
         plt.grid()
         plt.show()        
 
+plot.M()
+plot.theta()
+plot.v()

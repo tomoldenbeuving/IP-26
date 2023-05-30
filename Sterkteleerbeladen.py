@@ -5,7 +5,6 @@ from imports import df, tp_factor
 import matplotlib.pyplot as plt
 
 
-
 #containers
 Cl=6.06   #container lengte
 Cb=2.44  #container breedte
@@ -24,7 +23,7 @@ abay= 6
 
 
 rho_staal = 7.85E3
-E_staal=210E9
+E_staal=210000*(10**6)
 rho_water = 1.025E3
 g = 9.81
 nul = np.zeros(1)
@@ -111,10 +110,6 @@ F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
 
 F_last = -P_punt[0]  -G_punt[0]  -F_c  -F_tank[0]
 
-#tijdelijke last
-
-#F_last = 99399464.7
-
 
 # som van momenten
 x_tank = df.iloc[33,1]
@@ -164,42 +159,36 @@ q= p+G+vb_cont+tanklast+vb_last
 V = integrate.cumtrapz(q,x,initial=0) 
 M = integrate.cumtrapz(V,x,initial=0)
 
-#Hoekverdraaiing zonder integratie constante
-thetaEI=(integrate.cumtrapz(M,x,initial=0))
-theta=np.zeros(len(x))
-
-for i in range(len(x)):
-    try:
-        theta[i]=thetaEI[i]/(E_staal*I[i])
-    except ZeroDivisionError:
-        theta[i] = 0
-         
 #Waarde en locatie maximaal moment
 Mmax_index = np.argmax(M)
 M_max = M[Mmax_index] #Waarde maximaal moment
 Loc_M_max = x[Mmax_index] #Locatie maximaal moment
 
+#Hoekverdraaiing zonder integratie constante
+thetaEI=integrate.cumtrapz(M/(E_staal*I[i]),x,initial=0)
+
 #Integratie constante
-theta_Mmax = theta[Mmax_index]
-C=theta_Mmax
+vEI=integrate.cumtrapz(thetaEI,x,initial=0)
+theta_Mmax = thetaEI[Mmax_index]
+C=(np.max(vEI))/Loa
 
 #Uiteindelijke verdraaiingslijn
-theta= theta - C
+theta= thetaEI - C
 
 #Waarde en locatie maximale hoekverdraaiing
 thetamax_index = np.argmax(theta)
 theta_max = theta[thetamax_index] #Waarde maximale Hoekverdraaiing
 Loc_theta_max = x[thetamax_index] #Locatie maximale hoekverdraaiing
 
-#Doorbuiging zonder integratie constante
+#Doorbuiging met integratie constante
 v=integrate.cumtrapz(theta,x,initial=0)
 
 #Integratie constante
-v_thetamax = np.interp(Loc_theta_max, x, v)
-D=v_thetamax
+#v_thetamax = v[theta_max] #np.interp(Loc_theta_max, x, v)
+#D=v_thetamax
 
 #Uiteindelijke doorbuigingslijn
-v= v + D
+#v= v + D
 
 #Waarde en locatie maximale doorbuiging
 vmax_index = np.argmin(v)
