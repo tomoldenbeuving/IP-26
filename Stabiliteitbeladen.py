@@ -51,7 +51,7 @@ LCGNieuw=(LCF*G_punt[0]+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(G_p
 #GM langsrichting
 It_y = df.iloc[27,2]
 BM_l = It_y/displacement
-GM_l = KB +BM_l-KG
+GM_l = KB +BM_l-KG_nieuw-gg1
 
 #momentstelling stabiliteit
 trim_max = 7/180*np.pi   #of negatieve trimhoek
