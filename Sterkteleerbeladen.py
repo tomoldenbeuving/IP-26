@@ -101,11 +101,11 @@ def berekeningen_sigma_max(tp_factor):
 
     #last op platfrom uitrekenen	
 
-    #som van de krachten
-    G_punt=integrate.quad(G_func,0,Loa)
-    P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
-    F_c=G_cont
-    F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
+#som van de krachten
+G_punt=integrate.quad(G_func,0,Loa,epsabs=8E-6,epsrel=8E-6)
+P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
+F_c=G_cont
+F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
 
 
     F_last = -P_punt[0]  -G_punt[0]  -F_c  -F_tank[0]

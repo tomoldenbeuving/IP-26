@@ -30,24 +30,28 @@ KG = df.iloc[21,3]
 
 #berekening displacement nieuw nadat containers erop zijn
 gewichtschip=displacement*rho_water
-displacement1=(gewichtschip+Cw*n)/rho_water
-BM_t = It_x/displacement1
+
+
+BM_t = It_x/displacement
 KGcont=H+(Ch*atiers/2)
 KGtank=df.iloc[33,3]
 KGlast=H+2.7
 
 KG_nieuw= (KG*G_punt[0]/g+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(G_punt[0]/g+n*Cw+F_last/g+V_tank*rho_water)
 
-GM_t = KB + BM_t - KG_nieuw 
+#vloeistof reductie
+I_water=df.iloc[38,1]
+gg1=I_water/displacement
+GM_t = KB + BM_t - KG_nieuw-gg1
 
 
 
 #LCG
 LCF = df.iloc[26,1]
-LCGNieuw=(LCF*gewichtschip+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(gewichtschip+n*Cw+F_last/g+V_tank*rho_water)
+LCGNieuw=(LCF*G_punt[0]+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(G_punt[0]+n*Cw+F_last/g+V_tank*rho_water)
 #GM langsrichting
 It_y = df.iloc[27,2]
-BM_l = It_y/displacement1
+BM_l = It_y/displacement
 GM_l = KB +BM_l-KG
 
 #momentstelling stabiliteit
