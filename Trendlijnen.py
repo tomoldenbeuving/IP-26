@@ -271,7 +271,7 @@ def beladen(df):
     Msl=rho_water*g*displacement*GM_l*(theta)
     #Msl=rho_water*g*displacement*GM_l*theta
     BB1=It_y/displacement*np.tan(theta)
-    return [F_last,GM_t,arm_c,v_max,]
+    return [F_last,GM_t,arm_c,max(sigma)]
     
 def varend(df_varend):   
     rho_staal = 7.85E3
@@ -439,10 +439,10 @@ def trendplotinelkeaar(filepath):
 
 
 def trendplot(filepath):
-    datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$v_{max}$"]
+    datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$\sigma_{max}$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
     variable = wb.sheetnames
-    data = [0,0,0,0]
+    data = np.zeros(len(datalabel))
     for i in variable:
         df = pd.read_excel(filepath, i)
         data = np.vstack((data, beladen(df)))
@@ -465,4 +465,4 @@ def trendplot(filepath):
     plt.tight_layout()
     plt.show()
 
-trendplot("breedte verandering.xlsx")
+trendplot("lengte verandering.xlsx")
