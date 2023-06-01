@@ -4,7 +4,7 @@ from scipy import integrate, interpolate
 from imports import df, tp_factor
 import matplotlib.pyplot as plt
 
-def berekeningen_sigma_max(tp_factor):
+def sterkteleer_berekeningen(tp_factor):
     #containers
     Cl=6.06   #container lengte
     Cb=2.44  #container breedte
@@ -214,15 +214,16 @@ def berekeningen_sigma_max(tp_factor):
             sigma[i] = 0
 
     sigma_max=np.max(sigma)
-
     return sigma_max
 
+
+#plaatdikte uitrekenen
 sigma_maxtoelaatbaar=190E6
-sigma_max = berekeningen_sigma_max(tp_factor)
+sigma_max = sterkteleer_berekeningen(tp_factor)
 
 while sigma_max != sigma_maxtoelaatbaar:
     tp_factor += 10  # Verhoog tp_factor met 1
-    sigma_max = berekeningen_sigma_max(tp_factor)
+    sigma_max = sterkteleer_berekeningen(tp_factor)
     
     if sigma_max <= sigma_maxtoelaatbaar:
         print("tp_factor waarbij sigma_max gelijk is aan sigma_toelaatbaar:", tp_factor)
