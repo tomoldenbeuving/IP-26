@@ -2,9 +2,10 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import math as m
-from Sterkteleerbeladen import Cw, n, Ch,V_tank,atiers,F_last,arm_c,x_tank,x_last,G_punt
+from Sterkteleerbeladen import Cw, n, Ch,V_tank,atiers,F_last,arm_c,x_tank,x_last,G_punt,P_punt
 from imports import df, tp_factor
 
+dp_leeg=P_punt[0]/(rho_water*g)*-1
 rho_staal = 7.85E3
 E_staal=210E9
 rho_water = 1.025E3
@@ -37,7 +38,7 @@ KGcont=H+(Ch*atiers/2)
 KGtank=df.iloc[33,3]
 KGlast=H+2.7
 
-KG_nieuw= (KG*G_punt[0]/g+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(G_punt[0]/g+n*Cw+F_last/g+V_tank*rho_water)
+KG_nieuw= (KG*dp_leeg*rho_water+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(rho_water*dp_leeg+n*Cw+F_last/g+V_tank*rho_water)
 
 #vloeistof reductie
 I_water=df.iloc[38,1]
