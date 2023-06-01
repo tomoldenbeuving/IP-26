@@ -30,7 +30,7 @@ KG = df.iloc[21,3]
 
 #berekening displacement nieuw nadat containers erop zijn
 gewichtschip=displacement*rho_water
-displacement1=(gewichtschip+Cw*n)/rho_water
+displacement1=(gewichtschip+Cw*n)/rho_water+V_tank
 BM_t = It_x/displacement1
 KGcont=H+(Ch*atiers/2)
 KGtank=df.iloc[33,3]
