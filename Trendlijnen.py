@@ -41,7 +41,6 @@ def beladen(df):
 
     x=np.arange(0,Loa,0.05)
 
-
     #opwaartsekracht verdeelde belasting
     p=np.zeros(len(x))
 
@@ -107,7 +106,7 @@ def beladen(df):
     #last op platfrom uitrekenen	
 
     #som van de krachten
-    G_punt=integrate.quad(G_func,0,Loa)
+    G_punt=integrate.quad(G_func,0,Loa,epsabs=8E-6,epsrel=8E-6)
     P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
     F_c=G_cont
     F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
@@ -189,34 +188,35 @@ def beladen(df):
     Loc_v_max = x[vmax_index] #Locatie maximale doorbuiging
 
     # Maximaal toelaatbaar moment
-    sigma_max=190E6
+    sigma_maxtoelaatbaar=190E6
     I_midship=df.iloc[114, 7]*tp_factor
     H=df.iloc[2,1]
     KG_y=df.iloc[21,3]
-    y=H-KG_y
+    y=H-KG_y+(tp_factor*0.001)
 
-    moment_max=(sigma_max*I_midship)/y
+    moment_max=(sigma_maxtoelaatbaar*I_midship)/y
 
     #Weerstandsmoment
     y_boven=df.iloc[101:123,10]-df.iloc[101:123,5]
     y_onder=df.iloc[101:123,5]-df.iloc[101:123,9]
-    W=df.iloc[101:123,7]/y_boven
+    W=df.iloc[101:123,7]*tp_factor/y_onder
 
-    W=np.append(W,nul)
     x_W = df.iloc[101:123,0]
-    x_W=np.append(x_W,eind)
     W_func = interpolate.interp1d(x_W,W)
     W = W_func(x)
 
 
     #Spanningsverdeling
+
     sigma=np.zeros(len(x))
 
     for i in range(len(x)):
-        try:
-            sigma[i]=M[i]/(W[i])
-        except ZeroDivisionError:
+        if M[i]>0:
+            sigma[i]=M[i]/W[i]
+        else:
             sigma[i] = 0
+
+    sigma_max=np.max(sigma)
 
 
     rho_staal = 7.85E3
@@ -231,7 +231,7 @@ def beladen(df):
     Lwl=df.iloc[4,1]
 
     LCB = df.iloc[20,1]
-
+    dp_leeg=P_punt[0]/(rho_water*g)*-1
 
 
 
@@ -244,25 +244,28 @@ def beladen(df):
 
     #berekening displacement nieuw nadat containers erop zijn
     gewichtschip=displacement*rho_water
-    displacement1=(gewichtschip+Cw*n)/rho_water
-    BM_t = It_x/displacement1
+
+
+    BM_t = It_x/displacement
     KGcont=H+(Ch*atiers/2)
     KGtank=df.iloc[33,3]
     KGlast=H+2.7
 
-    KG_nieuw= (KG*G_punt[0]/g+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(G_punt[0]/g+n*Cw+F_last/g+V_tank*rho_water)
+    KG_nieuw= (KG*dp_leeg*rho_water+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(rho_water*dp_leeg+n*Cw+F_last/g+V_tank*rho_water)
 
-    GM_t = KB + BM_t - KG_nieuw 
-
-
+    #vloeistof reductie
+    I_water=df.iloc[38,1]
+    gg1=I_water/displacement
+    GM_t = KB + BM_t - KG_nieuw-gg1
 
     #LCG
     LCF = df.iloc[26,1]
-    LCGNieuw=(LCF*gewichtschip+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(gewichtschip+n*Cw+F_last/g+V_tank*rho_water)
+    LCGNieuw=(LCF*G_punt[0]+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(G_punt[0]+n*Cw+F_last/g+V_tank*rho_water)
+
     #GM langsrichting
     It_y = df.iloc[27,2]
-    BM_l = It_y/displacement1
-    GM_l = KB +BM_l-KG
+    BM_l = It_y/displacement
+    GM_l = KB +BM_l-KG_nieuw-gg1
 
     #momentstelling stabiliteit
     trim_max = 7/180*np.pi   #of negatieve trimhoek
@@ -271,6 +274,7 @@ def beladen(df):
     Msl=rho_water*g*displacement*GM_l*(theta)
     #Msl=rho_water*g*displacement*GM_l*theta
     BB1=It_y/displacement*np.tan(theta)
+
     return [F_last,GM_t,arm_c,max(sigma)]
     
 def varend(df_varend):   
@@ -449,7 +453,7 @@ def trendplot(filepath):
 
     data = data[1:,]
 
-    variable = [int(numeric_string) for numeric_string in variable]
+    variable = [float(numeric_string) for numeric_string in variable]
     
     figure, axes = plt.subplots(np.shape(data)[1], 1, figsize=(8, 12))
 
@@ -465,4 +469,4 @@ def trendplot(filepath):
     plt.tight_layout()
     plt.show()
 
-trendplot("lengte verandering.xlsx")
+trendplot("diepgangs verandering.xlsx")
