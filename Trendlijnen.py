@@ -23,7 +23,7 @@ arij=13
 #aantal containers in lengte
 abay= 6
 
-tp_factor = 1
+tp_factor = 45
 
 
 def beladen(df):
