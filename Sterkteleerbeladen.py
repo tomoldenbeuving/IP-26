@@ -221,10 +221,10 @@ def sterkteleer_berekeningen(tp_factor):
 sigma_maxtoelaatbaar=190E6
 sigma_max = sterkteleer_berekeningen(tp_factor)
 
-while sigma_max != sigma_maxtoelaatbaar:
-    tp_factor += 10  # Verhoog tp_factor met 1
+while sigma_max >= sigma_maxtoelaatbaar:
     sigma_max = sterkteleer_berekeningen(tp_factor)
     
-    if sigma_max <= sigma_maxtoelaatbaar:
-        print("tp_factor waarbij sigma_max gelijk is aan sigma_toelaatbaar:", tp_factor)
-        break
+        
+    tp_factor += 5  # Verhoog tp_factor met 1
+else:
+    print("tp_factor waarbij sigma_max gelijk is aan sigma_toelaatbaar:", tp_factor)
