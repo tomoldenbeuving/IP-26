@@ -17,8 +17,8 @@ onderwater= df.iloc[42:64,0]
 Lwl=df.iloc[4,1]
 
 LCB = df.iloc[20,1]
-
 dp_leeg=P_punt[0]/(rho_water*g)*-1
+
 
 
 #GM dwarsrichting
