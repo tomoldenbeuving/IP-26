@@ -66,7 +66,7 @@ class plot():
   
     def sigma():
         figure = plt.figure(figsize=(10,12))
-        plt.plot(x[0:4000],sigma[0:4000])
+        plt.plot(x,sigma)
         plt.xlabel(r'$L_{oa} [m]$')
         plt.ylabel(r'$Spanningsverdeling \; (\sigma) [m]$')
         plt.title(r'Spanningsverdeling uitgezet tegen de totale lengte')

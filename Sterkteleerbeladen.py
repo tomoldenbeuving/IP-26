@@ -36,7 +36,6 @@ G_cont=n*Cw*g
 
 x=np.arange(0,Loa,0.05)
 
-
 #opwaartsekracht verdeelde belasting
 p=np.zeros(len(x))
 
@@ -195,38 +194,23 @@ moment_max=(sigma_maxtoelaatbaar*I_midship)/y
 #Weerstandsmoment
 y_boven=df.iloc[101:123,10]-df.iloc[101:123,5]
 y_onder=df.iloc[101:123,5]-df.iloc[101:123,9]
-W=df.iloc[101:123,7]/y_boven
+W=df.iloc[101:123,7]*tp_factor/y_onder
 
-W=np.append(W,nul)
 x_W = df.iloc[101:123,0]
-x_W=np.append(x_W,eind)
 W_func = interpolate.interp1d(x_W,W)
 W = W_func(x)
 
 
 #Spanningsverdeling
+
 sigma=np.zeros(len(x))
 
 for i in range(len(x)):
-    try:
-        sigma[i]=M[i]/(W[i])
-    except ZeroDivisionError:
+    if M[i]>0:
+        sigma[i]=M[i]/W[i]
+    else:
         sigma[i] = 0
 
 sigma_max=np.max(sigma)
-'''
-    return sigma_max
 
-
-#plaatdikte uitrekenen
-sigma_maxtoelaatbaar=190E6
-#\sigma_max = sterkteleer_berekeningen(tp_factor)
-def plaatdikte_rekenen():
-    while sigma_max > sigma_maxtoelaatbaar:
-        if sigma_max < sigma_maxtoelaatbaar:
-            print("tp_factor waarbij sigma_max gelijk is aan sigma_toelaatbaar:", tp_factor)
-            break
-        sigma_max = sterkteleer_berekeningen(tp_factor)
-        print(r"sigma_max",sigma_max,r"t_p",tp_factor) 
-        tp_factor += 5  # Verhoog tp_factor met 1'''
 
