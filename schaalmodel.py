@@ -1,0 +1,1 @@
+sm= pd.read_excel("./schaalmodel/schaalmodel.xlsx",'VB Last')

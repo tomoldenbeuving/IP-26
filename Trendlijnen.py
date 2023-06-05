@@ -4,6 +4,9 @@ import numpy as np
 from openpyxl import load_workbook
 from scipy import integrate, interpolate
 
+import warnings
+warnings.filterwarnings("ignore")
+
 
 #containers
 Cl=6.06   #container lengte
@@ -20,7 +23,7 @@ arij=13
 #aantal containers in lengte
 abay= 6
 
-tp_factor = 1
+tp_factor = 45
 
 
 def beladen(df):
@@ -37,7 +40,6 @@ def beladen(df):
     G_cont=n*Cw*g
 
     x=np.arange(0,Loa,0.05)
-
 
     #opwaartsekracht verdeelde belasting
     p=np.zeros(len(x))
@@ -104,13 +106,12 @@ def beladen(df):
     #last op platfrom uitrekenen	
 
     #som van de krachten
-    G_punt=integrate.quad(G_func,0,Loa)
-    P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
+    G_punt=integrate.simpson(G,x)
+    P_punt=integrate.simpson(p,x)
     F_c=G_cont
-    F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
+    F_tank=integrate.simpson(tanklast,x)
 
-
-    F_last = -P_punt[0]  -G_punt[0]  -F_c  -F_tank[0]
+    F_last = -P_punt  -G_punt  -F_c  -F_tank
 
 
     # som van momenten
@@ -120,7 +121,7 @@ def beladen(df):
     COV = df.iloc[21,1]
     #tijdelijke arm
     #arm_c=216
-    arm_c = -1*(P_punt[0]*COB +G_punt[0]*COV +F_tank[0]*x_tank +F_last*x_last)/F_c
+    arm_c = -1*(P_punt*COB +G_punt*COV +F_tank*x_tank +F_last*x_last)/F_c
 
 
     #verdeeldebelasting container
@@ -186,34 +187,37 @@ def beladen(df):
     Loc_v_max = x[vmax_index] #Locatie maximale doorbuiging
 
     # Maximaal toelaatbaar moment
-    sigma_max=190E6
+    sigma_maxtoelaatbaar=190E6
     I_midship=df.iloc[114, 7]*tp_factor
     H=df.iloc[2,1]
     KG_y=df.iloc[21,3]
-    y=H-KG_y
+    y=H-KG_y+(tp_factor*0.001)
 
-    moment_max=(sigma_max*I_midship)/y
+    moment_max=(sigma_maxtoelaatbaar*I_midship)/y
 
     #Weerstandsmoment
     y_boven=df.iloc[101:123,10]-df.iloc[101:123,5]
     y_onder=df.iloc[101:123,5]-df.iloc[101:123,9]
-    W=df.iloc[101:123,7]/y_boven
+    W=df.iloc[101:123,7]*tp_factor/y_onder
 
-    W=np.append(W,nul)
     x_W = df.iloc[101:123,0]
-    x_W=np.append(x_W,eind)
     W_func = interpolate.interp1d(x_W,W)
     W = W_func(x)
 
 
     #Spanningsverdeling
+
     sigma=np.zeros(len(x))
 
     for i in range(len(x)):
-        try:
-            sigma[i]=M[i]/(W[i])
-        except ZeroDivisionError:
+        if M[i]>0:
+            sigma[i]=M[i]/W[i]
+        else:
             sigma[i] = 0
+
+    sigma_max=np.max(sigma)
+
+
 
     rho_staal = 7.85E3
     E_staal=210E9
@@ -227,7 +231,7 @@ def beladen(df):
     Lwl=df.iloc[4,1]
 
     LCB = df.iloc[20,1]
-
+    dp_leeg=P_punt/(rho_water*g)*-1
 
 
 
@@ -240,25 +244,28 @@ def beladen(df):
 
     #berekening displacement nieuw nadat containers erop zijn
     gewichtschip=displacement*rho_water
-    displacement1=(gewichtschip+Cw*n)/rho_water
-    BM_t = It_x/displacement1
+
+
+    BM_t = It_x/displacement
     KGcont=H+(Ch*atiers/2)
     KGtank=df.iloc[33,3]
     KGlast=H+2.7
 
-    KG_nieuw= (KG*G_punt[0]/g+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(G_punt[0]/g+n*Cw+F_last/g+V_tank*rho_water)
+    KG_nieuw= (KG*G_punt/g+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(G_punt/g+n*Cw+F_last/g+V_tank*rho_water)
 
-    GM_t = KB + BM_t - KG_nieuw 
-
-
+    #vloeistof reductie
+    I_water=df.iloc[38,1]
+    gg1=I_water/displacement
+    GM_t = KB + BM_t - KG_nieuw-gg1
 
     #LCG
     LCF = df.iloc[26,1]
-    LCGNieuw=(LCF*gewichtschip+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(gewichtschip+n*Cw+F_last/g+V_tank*rho_water)
+    LCGNieuw=(LCF*G_punt+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(G_punt+n*Cw+F_last/g+V_tank*rho_water)
+
     #GM langsrichting
     It_y = df.iloc[27,2]
-    BM_l = It_y/displacement1
-    GM_l = KB +BM_l-KG
+    BM_l = It_y/displacement
+    GM_l = KB +BM_l-KG_nieuw-gg1
 
     #momentstelling stabiliteit
     trim_max = 7/180*np.pi   #of negatieve trimhoek
@@ -267,11 +274,9 @@ def beladen(df):
     Msl=rho_water*g*displacement*GM_l*(theta)
     #Msl=rho_water*g*displacement*GM_l*theta
     BB1=It_y/displacement*np.tan(theta)
-    return [F_last,GM_t,arm_c]
+
+    return [F_last,GM_t,arm_c,max(sigma)]
     
-
-
-
 def varend(df_varend):   
     rho_staal = 7.85E3
     E_staal=210E9
@@ -340,14 +345,14 @@ def varend(df_varend):
         else:
             p[i]=p_func(x[i])
 
-    G_punt=integrate.quad(G_func,0,Loa)
-    P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
+    G_punt=integrate.simpson(G_func,x)
+    P_punt=integrate.simpson(p_func,x)
 
 
     #som krachten 6 staat voor de 6 meter diepgang
     Fc=Cw*n*g
 
-    Ftank = -1*(G_punt[0] + P_punt[0] +Fc)
+    Ftank = -1*(G_punt + P_punt +Fc)
     xtank=df_varend.iloc[33,1]
     volumetank=Ftank/rho_water/g
 
@@ -357,7 +362,7 @@ def varend(df_varend):
     Fillheight=volumetank/volumetankmax
 
     #som momenten
-    LCG_c= -1*(P_punt[0]*COB +G_punt[0]*COV +Ftank*xtank)/Fc
+    LCG_c= -1*(P_punt*COB +G_punt*COV +Ftank*xtank)/Fc
 
     displacement = df_varend.iloc[18,1]
     gewichtschip=displacement*rho_water
@@ -380,7 +385,7 @@ def varend(df_varend):
     KGcont_v=H+(Ch*atiers/2)
     KGtank_v=df_varend.iloc[33,3]
 
-    KG_nieuw= (KG*G_punt[0]/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt[0]/g+n*Cw+volumetank*rho_water)
+    KG_nieuw= (KG*G_punt/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt/g+n*Cw+volumetank*rho_water)
 
     GM_t_v = KB + BM_t - KG_nieuw 
 
@@ -388,7 +393,7 @@ def varend(df_varend):
 
     #LCG
     LCF = df_varend.iloc[26,1]
-    LCGNieuw=(LCF*G_punt[0]/g+LCG_c*n*Cw+xtank*volumetank*rho_water)/(G_punt[0]/g+n*Cw+volumetank*rho_water)
+    LCGNieuw=(LCF*G_punt/g+LCG_c*n*Cw+xtank*volumetank*rho_water)/(G_punt/g+n*Cw+volumetank*rho_water)
     #GM langsrichting
     It_y = df_varend.iloc[27,2]
     BM_l = It_y/displacement
@@ -404,36 +409,67 @@ def varend(df_varend):
     R_tot_max = df_varend.iloc[150,3]
     return [GM_t_v, Fillheight*100]
 
-def get_sheetnames_xlsx(filepath):
+
+def trendplotinelkaar(filepath):
+    datalabel = [r"Last", r"GM dwars", r"LCG containers", r"$\sigma_{max}$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
-    return wb.sheetnames
+    variable = wb.sheetnames
+    data = np.zeros(len(datalabel))
+    for i in variable:
+        df = pd.read_excel(filepath, i)
+        data = np.vstack((data, beladen(df)))
 
-variable= get_sheetnames_xlsx("bilge radius.xlsx")
+    data = data[1:,]
 
-data = ["Last","GM dwars,","arm van de containers"]
+    variable = [float(numeric_string) for numeric_string in variable]
 
-for i in variable:
-    df = pd.read_excel("bilge radius.xlsx",i)
-    data = np.vstack((data,beladen(df)))
+    fig, ax = plt.subplots(figsize=(8, 6))
 
+    for i in range(np.shape(data)[1]):
+        line = ax.plot(variable, data[:, i], label=datalabel[i])
+        ax.set_xlabel('[m]')
+        ax.set_title('Line Plots')
+        ax.grid()
+        ax.legend()
 
+        # Create a secondary y-axis
+        ax2 = ax.twinx()
+        ax2.set_ylabel('[Custom Unit]')  # Set your custom unit label for each y-axis
 
-def trendplot(x,y):
-    figure = plt.figure(figsize=(10,15))
-    ax = plt.subplot(111)
+        # Set the y-axis range for each line
+        y_min, y_max = np.min(data[:, i]), np.max(data[:, i])
+        ax2.set_ylim(y_min, y_max)
 
-    for i in range(np.shape(y)[0]):
-        plt.plot(x,y[i,])
-    plt.xlabel('[m]')
-    plt.ylabel('[N/m]')
-    plt.title('Belasting uitgezet tegen de totale lengte')
-    plt.grid()
-    plt.legend()
-    # Shrink current axis's height by 10% on the bottom
-    box = ax.get_position()
-    ax.set_position([box.x0, box.y0 + box.height * 0.1,
-                    box.width, box.height * 0.9])
-    # Put a legend below current axis
-    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1),
-            fancybox=True, shadow=True, ncol=3)
+    plt.tight_layout()
     plt.show()
+
+
+def trendplot(filepath,title):
+    datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$\sigma_{max}$"]
+    wb = load_workbook(filepath, read_only=True, keep_links=False)
+    variable = wb.sheetnames
+    data = np.zeros(len(datalabel))
+    for i in variable:
+        df = pd.read_excel(filepath, i)
+        data = np.vstack((data, beladen(df)))
+
+    data = data[1:,]
+
+    variable = [float(numeric_string) for numeric_string in variable]
+    
+    figure, axes = plt.subplots(np.shape(data)[1], 1, figsize=(8, 12))
+
+    for i, ax in enumerate(axes):
+        ax.plot(variable, data[:,i], label=datalabel[i])
+#        ax.set_xlabel('[m]')
+#        ax.set_ylabel('[N/m]')
+        ax.set_title(datalabel[i])
+        ax.grid()
+        ax.legend()
+
+    # Adjust spacing between subplots
+    plt.tight_layout()
+    plt.show()
+    plt.savefig(r".\variatie onderzoek\ "+title+ ".png")
+
+trendplot(r".\variatie onderzoek\midship length.xlsx","midscheepse lengte")

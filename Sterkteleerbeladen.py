@@ -36,7 +36,6 @@ G_cont=n*Cw*g
 
 x=np.arange(0,Loa,0.05)
 
-
 #opwaartsekracht verdeelde belasting
 p=np.zeros(len(x))
 
@@ -102,13 +101,12 @@ for i in range(len(x)):
 #last op platfrom uitrekenen	
 
 #som van de krachten
-G_punt=integrate.quad(G_func,0,Loa)
-P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
+G_punt=integrate.simpson(G,x)
+P_punt=integrate.simpson(p,x)
 F_c=G_cont
-F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
+F_tank=integrate.simpson(tanklast,x)
 
-
-F_last = -P_punt[0]  -G_punt[0]  -F_c  -F_tank[0]
+F_last = -P_punt  -G_punt  -F_c  -F_tank
 
 
 # som van momenten
@@ -118,7 +116,7 @@ COB = df.iloc[20,1]
 COV = df.iloc[21,1]
 #tijdelijke arm
 #arm_c=216
-arm_c = -1*(P_punt[0]*COB +G_punt[0]*COV +F_tank[0]*x_tank +F_last*x_last)/F_c
+arm_c = -1*(P_punt*COB +G_punt*COV +F_tank*x_tank +F_last*x_last)/F_c
 
 
 #verdeeldebelasting container
@@ -184,31 +182,34 @@ v_max = v[vmax_index] #Waarde maximale doorbuiging
 Loc_v_max = x[vmax_index] #Locatie maximale doorbuiging
 
 # Maximaal toelaatbaar moment
-sigma_max=190E6
+sigma_maxtoelaatbaar=190E6
 I_midship=df.iloc[114, 7]*tp_factor
 H=df.iloc[2,1]
 KG_y=df.iloc[21,3]
-y=H-KG_y
+y=H-KG_y+(tp_factor*0.001)
 
-moment_max=(sigma_max*I_midship)/y
+moment_max=(sigma_maxtoelaatbaar*I_midship)/y
 
 #Weerstandsmoment
 y_boven=df.iloc[101:123,10]-df.iloc[101:123,5]
 y_onder=df.iloc[101:123,5]-df.iloc[101:123,9]
-W=df.iloc[101:123,7]/y_boven
+W=df.iloc[101:123,7]*tp_factor/y_onder
 
-W=np.append(W,nul)
 x_W = df.iloc[101:123,0]
-x_W=np.append(x_W,eind)
 W_func = interpolate.interp1d(x_W,W)
 W = W_func(x)
 
 
 #Spanningsverdeling
+
 sigma=np.zeros(len(x))
 
 for i in range(len(x)):
-    try:
-        sigma[i]=M[i]/(W[i])
-    except ZeroDivisionError:
+    if M[i]>0:
+        sigma[i]=M[i]/W[i]
+    else:
         sigma[i] = 0
+
+sigma_max=np.max(sigma)
+
+
