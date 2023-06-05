@@ -106,13 +106,12 @@ def beladen(df):
     #last op platfrom uitrekenen	
 
     #som van de krachten
-    G_punt=integrate.quad(G_func,0,Loa,epsabs=8E-6,epsrel=8E-6)
-    P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
+    G_punt=integrate.simpson(G,x)
+    P_punt=integrate.simpson(p,x)
     F_c=G_cont
-    F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
+    F_tank=integrate.simpson(tanklast,x)
 
-
-    F_last = -P_punt[0]  -G_punt[0]  -F_c  -F_tank[0]
+    F_last = -P_punt  -G_punt  -F_c  -F_tank
 
 
     # som van momenten
@@ -122,7 +121,7 @@ def beladen(df):
     COV = df.iloc[21,1]
     #tijdelijke arm
     #arm_c=216
-    arm_c = -1*(P_punt[0]*COB +G_punt[0]*COV +F_tank[0]*x_tank +F_last*x_last)/F_c
+    arm_c = -1*(P_punt*COB +G_punt*COV +F_tank*x_tank +F_last*x_last)/F_c
 
 
     #verdeeldebelasting container
@@ -219,6 +218,7 @@ def beladen(df):
     sigma_max=np.max(sigma)
 
 
+
     rho_staal = 7.85E3
     E_staal=210E9
     rho_water = 1.025E3
@@ -231,7 +231,7 @@ def beladen(df):
     Lwl=df.iloc[4,1]
 
     LCB = df.iloc[20,1]
-    dp_leeg=P_punt[0]/(rho_water*g)*-1
+    dp_leeg=P_punt/(rho_water*g)*-1
 
 
 
@@ -251,7 +251,7 @@ def beladen(df):
     KGtank=df.iloc[33,3]
     KGlast=H+2.7
 
-    KG_nieuw= (KG*dp_leeg*rho_water+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(rho_water*dp_leeg+n*Cw+F_last/g+V_tank*rho_water)
+    KG_nieuw= (KG*G_punt/g+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(G_punt/g+n*Cw+F_last/g+V_tank*rho_water)
 
     #vloeistof reductie
     I_water=df.iloc[38,1]
@@ -260,7 +260,7 @@ def beladen(df):
 
     #LCG
     LCF = df.iloc[26,1]
-    LCGNieuw=(LCF*G_punt[0]+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(G_punt[0]+n*Cw+F_last/g+V_tank*rho_water)
+    LCGNieuw=(LCF*G_punt+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(G_punt+n*Cw+F_last/g+V_tank*rho_water)
 
     #GM langsrichting
     It_y = df.iloc[27,2]
@@ -345,14 +345,14 @@ def varend(df_varend):
         else:
             p[i]=p_func(x[i])
 
-    G_punt=integrate.quad(G_func,0,Loa)
-    P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
+    G_punt=integrate.simpson(G_func,x)
+    P_punt=integrate.simpson(p_func,x)
 
 
     #som krachten 6 staat voor de 6 meter diepgang
     Fc=Cw*n*g
 
-    Ftank = -1*(G_punt[0] + P_punt[0] +Fc)
+    Ftank = -1*(G_punt + P_punt +Fc)
     xtank=df_varend.iloc[33,1]
     volumetank=Ftank/rho_water/g
 
@@ -362,7 +362,7 @@ def varend(df_varend):
     Fillheight=volumetank/volumetankmax
 
     #som momenten
-    LCG_c= -1*(P_punt[0]*COB +G_punt[0]*COV +Ftank*xtank)/Fc
+    LCG_c= -1*(P_punt*COB +G_punt*COV +Ftank*xtank)/Fc
 
     displacement = df_varend.iloc[18,1]
     gewichtschip=displacement*rho_water
@@ -385,7 +385,7 @@ def varend(df_varend):
     KGcont_v=H+(Ch*atiers/2)
     KGtank_v=df_varend.iloc[33,3]
 
-    KG_nieuw= (KG*G_punt[0]/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt[0]/g+n*Cw+volumetank*rho_water)
+    KG_nieuw= (KG*G_punt/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt/g+n*Cw+volumetank*rho_water)
 
     GM_t_v = KB + BM_t - KG_nieuw 
 
@@ -393,7 +393,7 @@ def varend(df_varend):
 
     #LCG
     LCF = df_varend.iloc[26,1]
-    LCGNieuw=(LCF*G_punt[0]/g+LCG_c*n*Cw+xtank*volumetank*rho_water)/(G_punt[0]/g+n*Cw+volumetank*rho_water)
+    LCGNieuw=(LCF*G_punt/g+LCG_c*n*Cw+xtank*volumetank*rho_water)/(G_punt/g+n*Cw+volumetank*rho_water)
     #GM langsrichting
     It_y = df_varend.iloc[27,2]
     BM_l = It_y/displacement
