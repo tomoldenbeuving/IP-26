@@ -410,7 +410,7 @@ def varend(df_varend):
     return [GM_t_v, Fillheight*100]
 
 
-def trendplotinelkaar(filepath):
+def trendplotinelkaar(filepath,title):
     datalabel = [r"Last", r"GM dwars", r"LCG containers", r"$\sigma_{max}$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
     variable = wb.sheetnames
@@ -423,26 +423,18 @@ def trendplotinelkaar(filepath):
 
     variable = [float(numeric_string) for numeric_string in variable]
 
-    fig, ax = plt.subplots(figsize=(8, 6))
+    fig, axes = plt.subplots(np.shape(data)[1], 1, figsize=(8, 12), sharex=True)
 
-    for i in range(np.shape(data)[1]):
-        line = ax.plot(variable, data[:, i], label=datalabel[i])
-        ax.set_xlabel('[m]')
-        ax.set_title('Line Plots')
+    for i, ax in enumerate(axes):
+        ax.plot(variable, data[:, i], label=datalabel[i])
+        ax.set_ylabel('[N/m]')
+        ax.set_title(datalabel[i])
         ax.grid()
         ax.legend()
 
-        # Create a secondary y-axis
-        ax2 = ax.twinx()
-        ax2.set_ylabel('[Custom Unit]')  # Set your custom unit label for each y-axis
-
-        # Set the y-axis range for each line
-        y_min, y_max = np.min(data[:, i]), np.max(data[:, i])
-        ax2.set_ylim(y_min, y_max)
-
+    plt.xlabel('[m]')
     plt.tight_layout()
     plt.show()
-
 
 def trendplot(filepath,title):
     datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$\sigma_{max}$"]
