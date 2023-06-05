@@ -17,7 +17,7 @@ onderwater= df.iloc[42:64,0]
 Lwl=df.iloc[4,1]
 
 LCB = df.iloc[20,1]
-dp_leeg=P_punt[0]/(rho_water*g)*-1
+dp_leeg=P_punt/(rho_water*g)*-1
 
 
 
@@ -37,7 +37,7 @@ KGcont=H+(Ch*atiers/2)
 KGtank=df.iloc[33,3]
 KGlast=H+2.7
 
-KG_nieuw= (KG*G_punt[0]/g+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(G_punt[0]/g+n*Cw+F_last/g+V_tank*rho_water)
+KG_nieuw= (KG*G_punt/g+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(G_punt/g+n*Cw+F_last/g+V_tank*rho_water)
 
 #vloeistof reductie
 I_water=df.iloc[38,1]
@@ -46,7 +46,7 @@ GM_t = KB + BM_t - KG_nieuw-gg1
 
 #LCG
 LCF = df.iloc[26,1]
-LCGNieuw=(LCF*G_punt[0]+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(G_punt[0]+n*Cw+F_last/g+V_tank*rho_water)
+LCGNieuw=(LCF*G_punt+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(G_punt+n*Cw+F_last/g+V_tank*rho_water)
 
 #GM langsrichting
 It_y = df.iloc[27,2]
