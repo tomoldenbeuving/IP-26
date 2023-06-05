@@ -120,7 +120,7 @@ GM_t_v = KB + BM_t - KG_nieuw
 
 #LCG
 LCF = df_varend.iloc[26,1]
-LCGNieuw=(LCF*G_punt[0]/g+LCG_c*n*Cw+xtank*volumetank*rho_water)/(G_punt[0]/g+n*Cw+volumetank*rho_water)
+LCGNieuw=(LCF*G_punt/g+LCG_c*n*Cw+xtank*volumetank*rho_water)/(G_punt/g+n*Cw+volumetank*rho_water)
 #GM langsrichting
 It_y = df_varend.iloc[27,2]
 BM_l = It_y/displacement

@@ -46,7 +46,7 @@ GM_t = KB + BM_t - KG_nieuw-gg1
 
 #LCG
 LCF = df.iloc[26,1]
-LCGNieuw=(LCF*G_punt+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(G_punt+n*Cw+F_last/g+V_tank*rho_water)
+LCGNieuw=(LCF*G_punt/g+arm_c*n*Cw+x_last*F_last/g+x_tank*V_tank*rho_water)/(G_punt/g+n*Cw+F_last/g+V_tank*rho_water)
 
 #GM langsrichting
 It_y = df.iloc[27,2]
