@@ -102,13 +102,12 @@ def sterkteleer_berekeningen(tp_factor):
     #last op platfrom uitrekenen	
 
     #som van de krachten
-    G_punt=integrate.quad(G_func,0,Loa,epsabs=8E-6,epsrel=8E-6)
-    P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
+    G_punt=integrate.simpson(G,x)
+    P_punt=integrate.simpson(p,x)
     F_c=G_cont
-    F_tank=integrate.quad(tank_func,min(x_tank),max(x_tank))
+    F_tank=integrate.simpson(tanklast,x)
 
-
-    F_last = -P_punt[0]  -G_punt[0]  -F_c  -F_tank[0]
+    F_last = -P_punt  -G_punt  -F_c  -F_tank
 
 
     # som van momenten
@@ -118,7 +117,7 @@ def sterkteleer_berekeningen(tp_factor):
     COV = df.iloc[21,1]
     #tijdelijke arm
     #arm_c=216
-    arm_c = -1*(P_punt[0]*COB +G_punt[0]*COV +F_tank[0]*x_tank +F_last*x_last)/F_c
+    arm_c = -1*(P_punt*COB +G_punt*COV +F_tank*x_tank +F_last*x_last)/F_c
 
 
     #verdeeldebelasting container
@@ -213,7 +212,6 @@ def sterkteleer_berekeningen(tp_factor):
             sigma[i] = 0
 
     sigma_max=np.max(sigma)
-    
     return sigma_max
 
 

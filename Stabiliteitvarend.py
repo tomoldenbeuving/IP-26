@@ -72,14 +72,14 @@ for i in range(len(x)):
     else:
         p[i]=p_func(x[i])
 
-G_punt=integrate.quad(G_func,0,Loa)
-P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
+G_punt=integrate.simpson(G_func,x)
+P_punt=integrate.simpson(p_func,x)
 
 
 #som krachten 6 staat voor de 6 meter diepgang
 Fc=Cw*n*g
 
-Ftank = -1*(G_punt[0] + P_punt[0] +Fc)
+Ftank = -1*(G_punt + P_punt +Fc)
 xtank=df_varend.iloc[33,1]
 volumetank=Ftank/rho_water/g
 
@@ -89,7 +89,7 @@ volumetankmax=df_varend.iloc[32,1]/df_varend.iloc[35,1]*100
 Fillheight=volumetank/volumetankmax
 
 #som momenten
-LCG_c= -1*(P_punt[0]*COB +G_punt[0]*COV +Ftank*xtank)/Fc
+LCG_c= -1*(P_punt*COB +G_punt*COV +Ftank*xtank)/Fc
 
 displacement = df_varend.iloc[18,1]
 gewichtschip=displacement*rho_water
@@ -112,7 +112,7 @@ BM_t = It_x/displacement1
 KGcont_v=H+(Ch*atiers/2)
 KGtank_v=df_varend.iloc[33,3]
 
-KG_nieuw= (KG*G_punt[0]/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt[0]/g+n*Cw+volumetank*rho_water)
+KG_nieuw= (KG*G_punt/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt/g+n*Cw+volumetank*rho_water)
 
 GM_t_v = KB + BM_t - KG_nieuw 
 
