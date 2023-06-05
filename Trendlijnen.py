@@ -410,39 +410,41 @@ def varend(df_varend):
     return [GM_t_v, Fillheight*100]
 
 
-def trendplotinelkeaar(filepath):
-    data = ["Last","GM dwars,","arm van de containers"]
+def trendplotinelkaar(filepath):
+    datalabel = [r"Last", r"GM dwars", r"LCG containers", r"$\sigma_{max}$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
-    variable= wb.sheetnames
-
+    variable = wb.sheetnames
+    data = np.zeros(len(datalabel))
     for i in variable:
-        df = pd.read_excel(filepath,i)
-        data = np.vstack((data,beladen(df)))
+        df = pd.read_excel(filepath, i)
+        data = np.vstack((data, beladen(df)))
 
-    variable = [int(numeric_string) for numeric_string in variable]
-    figure = plt.figure(figsize=(10,15))
-    ax = plt.subplot(111)
-#    for i in range(np.shape(data)[1]):
- #       plt.plot(variable,data[1:,i],label=data[0,i])
-    plt.plot(variable,data[1:,0],label=data[0,0])
-    plt.plot(variable,data[1:,1],label=data[0,1])
-    plt.plot(variable,data[1:,2],label=data[0,2])
-    plt.xlabel('[m]')
-    plt.ylabel('[N/m]')
-    plt.title('Belasting uitgezet tegen de totale lengte')
-    plt.grid()
-    plt.legend()
-    # Shrink current axis's height by 10% on the bottom
-    box = ax.get_position()
-    ax.set_position([box.x0, box.y0 + box.height * 0.1,
-                    box.width, box.height * 0.9])
-    # Put a legend below current axis
-    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1),
-            fancybox=True, shadow=True, ncol=3)
+    data = data[1:,]
+
+    variable = [float(numeric_string) for numeric_string in variable]
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    for i in range(np.shape(data)[1]):
+        line = ax.plot(variable, data[:, i], label=datalabel[i])
+        ax.set_xlabel('[m]')
+        ax.set_title('Line Plots')
+        ax.grid()
+        ax.legend()
+
+        # Create a secondary y-axis
+        ax2 = ax.twinx()
+        ax2.set_ylabel('[Custom Unit]')  # Set your custom unit label for each y-axis
+
+        # Set the y-axis range for each line
+        y_min, y_max = np.min(data[:, i]), np.max(data[:, i])
+        ax2.set_ylim(y_min, y_max)
+
+    plt.tight_layout()
     plt.show()
 
 
-def trendplot(filepath):
+def trendplot(filepath,title):
     datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$\sigma_{max}$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
     variable = wb.sheetnames
@@ -468,5 +470,6 @@ def trendplot(filepath):
     # Adjust spacing between subplots
     plt.tight_layout()
     plt.show()
+    plt.savefig(r".\variatie onderzoek\ "+title+ ".png")
 
-trendplot("diepgangs verandering.xlsx")
+trendplot(r".\variatie onderzoek\midship length.xlsx","midscheepse lengte")
