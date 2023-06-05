@@ -37,7 +37,7 @@ KGcont=H+(Ch*atiers/2)
 KGtank=df.iloc[33,3]
 KGlast=H+2.7
 
-KG_nieuw= (KG*dp_leeg*rho_water+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(rho_water*dp_leeg+n*Cw+F_last/g+V_tank*rho_water)
+KG_nieuw= (KG*G_punt[0]/g+KGcont*n*Cw+KGlast*F_last/g+V_tank*rho_water*KGtank)/(G_punt[0]/g+n*Cw+F_last/g+V_tank*rho_water)
 
 #vloeistof reductie
 I_water=df.iloc[38,1]
