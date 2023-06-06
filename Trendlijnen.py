@@ -489,4 +489,4 @@ def trendplot(filepath,title):
     plt.show()
 
 
-trendplotinelkaar(r".\variatie onderzoek\midship verandering.xlsx","midship")
+trendplotinelkaar(r".\variatie onderzoek\bilgeradius verandering.xlsx","bilge")
