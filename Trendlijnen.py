@@ -23,7 +23,7 @@ arij=13
 #aantal containers in lengte
 abay= 6
 
-tp_factor = 45
+tp_factor = 66
 
 
 def beladen(df):
@@ -411,30 +411,50 @@ def varend(df_varend):
 
 
 def trendplotinelkaar(filepath,title):
-    datalabel = [r"Last", r"GM dwars", r"LCG containers", r"$\sigma_{max}$"]
+    datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$\sigma_{max}$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
     variable = wb.sheetnames
     data = np.zeros(len(datalabel))
     for i in variable:
-        df = pd.read_excel(filepath, i)
+        df = pd.read_excel(filepath, i)    
         data = np.vstack((data, beladen(df)))
 
     data = data[1:,]
 
     variable = [float(numeric_string) for numeric_string in variable]
+    figure, ax = plt.subplots()
+    figure.subplots_adjust(right=0.75)
 
-    fig, axes = plt.subplots(np.shape(data)[1], 1, figsize=(8, 12), sharex=True)
 
-    for i, ax in enumerate(axes):
-        ax.plot(variable, data[:, i], label=datalabel[i])
-        ax.set_ylabel('[N/m]')
-        ax.set_title(datalabel[i])
-        ax.grid()
-        ax.legend()
+    twin1 = ax.twinx()
+    twin2 = ax.twinx()
+    twin3 = ax.twinx()
 
-    plt.xlabel('[m]')
+    # Offset the right spine of twin2.  The ticks and label have already been
+    # placed on the right by twinx above.
+    twin2.spines.right.set_position(("axes", 1.2))
+
+    p1, = ax.plot(variable,  data[:,0], label=datalabel[0],c="orange")
+    p2, = twin1.plot(variable, data[:,1], label=datalabel[1],c="r")
+    p3, = twin2.plot(variable,  data[:,2],label=datalabel[2],c="g")
+    p4, = twin2.plot(variable,  data[:,3], label=datalabel[3],c="b")
+    twin1.set(ylabel=datalabel[1])
+    twin2.set(ylabel=datalabel[2])
+    twin3.set(ylabel=datalabel[3])
+    ax.yaxis.label.set_color(p1.get_color())
+    twin1.yaxis.label.set_color(p2.get_color())
+    twin2.yaxis.label.set_color(p3.get_color())
+    twin3.yaxis.label.set_color(p4.get_color())
+    ax.tick_params(axis='y', colors=p1.get_color())
+    twin1.tick_params(axis='y', colors=p2.get_color())
+    twin2.tick_params(axis='y', colors=p3.get_color())
+    twin3.tick_params(axis='y', colors=p4.get_color())
+
+    ax.legend(handles=[p1, p2, p3,p4])
+    ax.grid()
     plt.tight_layout()
     plt.show()
+    #plt.savefig(r".\variatie onderzoek\ "+title+ ".png")
 
 def trendplot(filepath,title):
     datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$\sigma_{max}$"]
@@ -464,4 +484,4 @@ def trendplot(filepath,title):
     plt.show()
     #plt.savefig(r".\variatie onderzoek\ "+title+ ".png")
 
-trendplot(r".\variatie onderzoek\midship length.xlsx","midscheepse lengte")
+trendplotinelkaar(r".\variatie onderzoek\midship length.xlsx","midscheepse lengte")
