@@ -422,7 +422,7 @@ def trendplotinelkaar(filepath,title):
     data = data[1:,]
 
     variable = [float(numeric_string) for numeric_string in variable]
-    figure, ax = plt.subplots()
+    figure, ax = plt.subplots(figsize=(10,8))
     figure.subplots_adjust(right=0.75)
 
 
@@ -432,15 +432,18 @@ def trendplotinelkaar(filepath,title):
 
     # Offset the right spine of twin2.  The ticks and label have already been
     # placed on the right by twinx above.
-    twin2.spines.right.set_position(("axes", 1.2))
+    twin2.spines.right.set_position(("axes", 1.1))
+    twin3.spines.right.set_position(("axes", 1.2))
+
 
     p1, = ax.plot(variable,  data[:,0], label=datalabel[0],c="orange")
     p2, = twin1.plot(variable, data[:,1], label=datalabel[1],c="r")
     p3, = twin2.plot(variable,  data[:,2],label=datalabel[2],c="g")
-    p4, = twin2.plot(variable,  data[:,3], label=datalabel[3],c="b")
-    twin1.set(ylabel=datalabel[1])
-    twin2.set(ylabel=datalabel[2])
-    twin3.set(ylabel=datalabel[3])
+    p4, = twin3.plot(variable,  data[:,3], label=datalabel[3],c="b")
+    ax.set(ylabel=datalabel[0],ylim=(min(data[:,0]),max(data[:,0])))
+    twin1.set(ylabel=datalabel[1],ylim=(min(data[:,1]),max(data[:,1])))
+    twin2.set(ylabel=datalabel[2],ylim=(min(data[:,2]),max(data[:,2])))
+    twin3.set(ylabel=datalabel[3],ylim=(min(data[:,3]),max(data[:,3])))
     ax.yaxis.label.set_color(p1.get_color())
     twin1.yaxis.label.set_color(p2.get_color())
     twin2.yaxis.label.set_color(p3.get_color())
@@ -450,7 +453,7 @@ def trendplotinelkaar(filepath,title):
     twin2.tick_params(axis='y', colors=p3.get_color())
     twin3.tick_params(axis='y', colors=p4.get_color())
 
-    ax.legend(handles=[p1, p2, p3,p4])
+#    ax.legend(handles=[p1, p2, p3,p4])
     ax.grid()
     plt.tight_layout()
     plt.show()
@@ -484,4 +487,4 @@ def trendplot(filepath,title):
     plt.show()
     #plt.savefig(r".\variatie onderzoek\ "+title+ ".png")
 
-trendplotinelkaar(r".\variatie onderzoek\midship length.xlsx","midscheepse lengte")
+trendplotinelkaar(r".\variatie onderzoek\diepgangs verandering.xlsx","Carene")
