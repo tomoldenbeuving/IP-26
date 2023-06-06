@@ -462,6 +462,6 @@ def trendplot(filepath,title):
     # Adjust spacing between subplots
     plt.tight_layout()
     plt.show()
-    plt.savefig(r".\variatie onderzoek\ "+title+ ".png")
+    #plt.savefig(r".\variatie onderzoek\ "+title+ ".png")
 
 trendplot(r".\variatie onderzoek\midship length.xlsx","midscheepse lengte")
