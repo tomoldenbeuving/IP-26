@@ -423,7 +423,7 @@ def trendplotinelkaar(filepath,title):
 
     variable = [float(numeric_string) for numeric_string in variable]
     figure, ax = plt.subplots(figsize=(10,8))
-    figure.subplots_adjust(right=0.75)
+#    figure.subplots_adjust(right=0.75)
 
 
     twin1 = ax.twinx()
@@ -456,8 +456,9 @@ def trendplotinelkaar(filepath,title):
 #    ax.legend(handles=[p1, p2, p3,p4])
     ax.grid()
     plt.tight_layout()
+    plt.savefig(r".\variatie onderzoek\ "+title+".png")
     plt.show()
-    #plt.savefig(r".\variatie onderzoek\ "+title+ ".png")
+
 
 def trendplot(filepath,title):
     datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$\sigma_{max}$"]
@@ -484,7 +485,8 @@ def trendplot(filepath,title):
 
     # Adjust spacing between subplots
     plt.tight_layout()
+    plt.savefig("titel.png")
     plt.show()
-    #plt.savefig(r".\variatie onderzoek\ "+title+ ".png")
 
-trendplotinelkaar(r".\variatie onderzoek\diepgangs verandering.xlsx","Carene")
+
+trendplotinelkaar(r".\variatie onderzoek\midship verandering.xlsx","midship")
