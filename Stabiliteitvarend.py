@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
-from imports import df_varend, tp_factor
+from imports import df_varend, tp_factor,n,Cw,Ch,atiers
 
 
 rho_staal = 7.85E3
@@ -18,20 +18,8 @@ COV=df_varend.iloc[21,1]
 x=np.arange(0,Loa,0.05)
 
 
-#containers
-Cl=6.06   #container lengte
-Cb=2.44  #container breedte
-Ch=2.59   #container hoogte
-Cw=30E3  #container weight
 
-#aantal containers
-n=234
-#aantal rijen in de hoogte
-atiers=1
-#aantal containers in breedte
-arij=13
-#aantal containers in lengte
-abay= n/arij
+
 
 
 #opwaartsekracht verdeelde belasting

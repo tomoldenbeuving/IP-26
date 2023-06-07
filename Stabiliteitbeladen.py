@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import math as m
-from Sterkteleerbeladen import Cw, n, Ch,V_tank,atiers,F_last,arm_c,x_tank,x_last,G_punt,P_punt
-from imports import df, tp_factor
+from Sterkteleerbeladen import V_tank,F_last,arm_c,x_tank,x_last,G_punt,P_punt
+from imports import df, tp_factor,Cw,n,Ch,atiers
 
 rho_staal = 7.85E3
 E_staal=210E9
