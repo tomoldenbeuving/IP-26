@@ -317,15 +317,16 @@ def trendplotinelkaar(filepath,title):
     twin2.set(ylabel=datalabel[2],ylim=(min(data[:,2]),max(data[:,2])))
     twin3.set(ylabel=datalabel[3],ylim=(min(data[:,3]),max(data[:,3])))
     try:
-        twin3.set(ylabel=datalabel[4],ylim=(min(data[:,4]),max(data[:,4])))
+        twin4.set(ylabel=datalabel[4],ylim=(min(data[:,4]),max(data[:,4])))
     except ValueError:
-        twin3.set(ylabel=datalabel[4],ylim=(0,10E7))
+        twin4.set(ylabel=datalabel[4],ylim=(0,6000))
 
     ax.yaxis.label.set_color(p1.get_color())
     twin1.yaxis.label.set_color(p2.get_color())
     twin2.yaxis.label.set_color(p3.get_color())
     twin3.yaxis.label.set_color(p4.get_color())
     twin4.yaxis.label.set_color(p5.get_color())
+
     ax.tick_params(axis='y', colors=p1.get_color())
     twin1.tick_params(axis='y', colors=p2.get_color())
     twin2.tick_params(axis='y', colors=p3.get_color())
@@ -334,7 +335,7 @@ def trendplotinelkaar(filepath,title):
 
 #    ax.legend(handles=[p1, p2, p3,p4])
     ax.grid()
-    ax.set_title("title")
+    ax.set_title(title)
     plt.tight_layout()
     plt.savefig(r".\variatie onderzoek\ "+title+".png")
 
