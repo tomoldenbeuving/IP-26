@@ -72,8 +72,8 @@ for i in range(len(x)):
     else:
         p[i]=p_func(x[i])
 
-G_punt=integrate.simpson(G_func,x)
-P_punt=integrate.simpson(p_func,x)
+G_punt=integrate.simpson(G,x)
+P_punt=integrate.simpson(p,x)
 
 
 #som krachten 6 staat voor de 6 meter diepgang

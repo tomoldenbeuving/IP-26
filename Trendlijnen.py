@@ -275,143 +275,11 @@ def beladen(df):
     #Msl=rho_water*g*displacement*GM_l*theta
     BB1=It_y/displacement*np.tan(theta)
 
-    return [F_last,GM_t,arm_c,max(sigma)]
+    return [F_last,GM_t,arm_c,max(sigma),df.iloc[150,3]]
     
-def varend(df_varend):   
-    rho_staal = 7.85E3
-    E_staal=210E9
-    rho_water = 1.025E3
-    g = 9.81
-    nul = np.zeros(1)
-    Loa= df_varend.iloc[0,1] +df_varend.iloc[67,0]
-    eind = np.array([Loa])
-    onderwater= df_varend.iloc[42:64,0]
-    COB=df_varend.iloc[20,1]
-    COV=df_varend.iloc[21,1]
-    x=np.arange(0,Loa,0.05)
-
-
-    #containers
-    Cl=6.06   #container lengte
-    Cb=2.44  #container breedte
-    Ch=2.59   #container hoogte
-    Cw=30E3  #container weight
-
-    #aantal containers
-    n=234
-    #aantal rijen in de hoogte
-    atiers=1
-    #aantal containers in breedte
-    arij=13
-    #aantal containers in lengte
-    abay= n/arij
-
-
-    #opwaartsekracht verdeelde belasting
-    p=np.zeros(len(x))
-
-    p = -df_varend.iloc[42:64,1]*rho_water*g
-    p = np.append(p,nul)
-    p = np.append(nul,p)
-    x_p = df_varend.iloc[42:64,0]
-    x_p = np.append(0,x_p)
-    x_p = np.append(x_p,max(onderwater))
-    p_func = interpolate.interp1d(x_p,p)
-
-    #gewicht verdeelde belasting
-    G = df_varend.iloc[101:123,2]*rho_staal*g*tp_factor
-    #G=np.append(G,nul)
-    x_G = df_varend.iloc[101:123,0]
-    #x_G=np.append(x_G,eind)
-    G_func = interpolate.interp1d(x_G,G)
-
-    #traagheidsmoment over de lengte
-    I = df_varend.iloc[101:123,6]*tp_factor
-    #I=np.append(I,nul)
-    x_I = df_varend.iloc[101:123,0]
-    #x_I=np.append(x_I,eind)
-    I_func = interpolate.interp1d(x_I,I)
-
-
-    G = G_func(x)
-    I= I_func(x)
-    p= np.zeros(len(x))
-    # for loop zodat nadat het onderwater stopt p altijd 0
-    for i in range(len(x)):
-        if x[i] < min(onderwater):
-            p[i] = 0
-        elif x[i] > max(onderwater):
-            p[i]=0
-        else:
-            p[i]=p_func(x[i])
-
-    G_punt=integrate.simpson(G_func,x)
-    P_punt=integrate.simpson(p_func,x)
-
-
-    #som krachten 6 staat voor de 6 meter diepgang
-    Fc=Cw*n*g
-
-    Ftank = -1*(G_punt + P_punt +Fc)
-    xtank=df_varend.iloc[33,1]
-    volumetank=Ftank/rho_water/g
-
-    volumetankmax=df_varend.iloc[32,1]/df_varend.iloc[35,1]*100
-
-
-    Fillheight=volumetank/volumetankmax
-
-    #som momenten
-    LCG_c= -1*(P_punt*COB +G_punt*COV +Ftank*xtank)/Fc
-
-    displacement = df_varend.iloc[18,1]
-    gewichtschip=displacement*rho_water
-    H=df_varend.iloc[2,1]
-
-
-
-
-    #GM dwarsrichting
-    It_x = df_varend.iloc[27,1]
-    displacement = df_varend.iloc[18,1]
-
-    KB = df_varend.iloc[20,3]
-    KG = df_varend.iloc[21,3]
-
-    #berekening displacement nieuw nadat containers erop zijn
-    gewichtschip=displacement*rho_water
-    displacement1=(gewichtschip+Cw*n)/rho_water
-    BM_t = It_x/displacement1
-    KGcont_v=H+(Ch*atiers/2)
-    KGtank_v=df_varend.iloc[33,3]
-
-    KG_nieuw= (KG*G_punt/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt/g+n*Cw+volumetank*rho_water)
-
-    GM_t_v = KB + BM_t - KG_nieuw 
-
-
-
-    #LCG
-    LCF = df_varend.iloc[26,1]
-    LCGNieuw=(LCF*G_punt/g+LCG_c*n*Cw+xtank*volumetank*rho_water)/(G_punt/g+n*Cw+volumetank*rho_water)
-    #GM langsrichting
-    It_y = df_varend.iloc[27,2]
-    BM_l = It_y/displacement
-    GM_l = KB +BM_l-KG
-
-    #KG1=(KG*gewichtschip+F_tank1/g*tankx+F_cont*VCG_c/g)/(F_cont/g+gewichtschip+F_tank1)
-
-
-
-    V_s = df_varend.iloc[152:165,1]
-    R_tot = df_varend.iloc[152:165,3]
-
-    R_tot_max = df_varend.iloc[150,3]
-    return [GM_t_v, Fillheight*100]
-
 
 def trendplotinelkaar(filepath,title):
-    datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$\sigma_{max}$"]
+    datalabel = [r"$Last$", r"$GM_{t}$", r"$LCG_{containers}$",r"$\sigma_{max}$",r"$R_{tot,operationeel}$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
     variable = wb.sheetnames
     data = np.zeros(len(datalabel))
@@ -422,43 +290,54 @@ def trendplotinelkaar(filepath,title):
     data = data[1:,]
 
     variable = [float(numeric_string) for numeric_string in variable]
-    figure, ax = plt.subplots(figsize=(10,8))
+    figure, ax = plt.subplots(figsize=(10,9))
 #    figure.subplots_adjust(right=0.75)
 
 
     twin1 = ax.twinx()
     twin2 = ax.twinx()
     twin3 = ax.twinx()
+    twin4 = ax.twinx()
 
     # Offset the right spine of twin2.  The ticks and label have already been
     # placed on the right by twinx above.
+    twin1.spines.right.set_position(("axes", 1.0))
     twin2.spines.right.set_position(("axes", 1.1))
     twin3.spines.right.set_position(("axes", 1.2))
+    twin4.spines.right.set_position(("axes", 1.3))
 
 
     p1, = ax.plot(variable,  data[:,0], label=datalabel[0],c="orange")
     p2, = twin1.plot(variable, data[:,1], label=datalabel[1],c="r")
     p3, = twin2.plot(variable,  data[:,2],label=datalabel[2],c="g")
     p4, = twin3.plot(variable,  data[:,3], label=datalabel[3],c="b")
+    p5, = twin4.plot(variable,  data[:,4], label=datalabel[4],c="grey")
     ax.set(ylabel=datalabel[0],ylim=(min(data[:,0]),max(data[:,0])))
     twin1.set(ylabel=datalabel[1],ylim=(min(data[:,1]),max(data[:,1])))
     twin2.set(ylabel=datalabel[2],ylim=(min(data[:,2]),max(data[:,2])))
     twin3.set(ylabel=datalabel[3],ylim=(min(data[:,3]),max(data[:,3])))
+    try:
+        twin4.set(ylabel=datalabel[4],ylim=(min(data[:,4]),max(data[:,4])))
+    except ValueError:
+        twin4.set(ylabel=datalabel[4],ylim=(0,6000))
+
     ax.yaxis.label.set_color(p1.get_color())
     twin1.yaxis.label.set_color(p2.get_color())
     twin2.yaxis.label.set_color(p3.get_color())
     twin3.yaxis.label.set_color(p4.get_color())
+    twin4.yaxis.label.set_color(p5.get_color())
+
     ax.tick_params(axis='y', colors=p1.get_color())
     twin1.tick_params(axis='y', colors=p2.get_color())
     twin2.tick_params(axis='y', colors=p3.get_color())
     twin3.tick_params(axis='y', colors=p4.get_color())
+    twin4.tick_params(axis='y', colors=p5.get_color())
 
 #    ax.legend(handles=[p1, p2, p3,p4])
     ax.grid()
+    ax.set_title(title)
     plt.tight_layout()
     plt.savefig(r".\variatie onderzoek\ "+title+".png")
-    plt.show()
-
 
 def trendplot(filepath,title):
     datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$\sigma_{max}$"]
@@ -490,3 +369,9 @@ def trendplot(filepath,title):
 
 
 trendplotinelkaar(r".\variatie onderzoek\bilgeradius verandering.xlsx","bilge")
+trendplotinelkaar(r".\variatie onderzoek\breedte verandering.xlsx","breedte")
+trendplotinelkaar(r".\variatie onderzoek\diepgangs verandering.xlsx","diepgang")
+trendplotinelkaar(r".\variatie onderzoek\holte verandering.xlsx","holte")
+trendplotinelkaar(r".\variatie onderzoek\intrede hoek verandering.xlsx","intrede hoek")
+trendplotinelkaar(r".\variatie onderzoek\lengte verandering.xlsx","midship")
+trendplotinelkaar(r".\variatie onderzoek\breedte verandering.xlsx","breedte")
