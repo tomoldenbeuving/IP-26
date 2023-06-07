@@ -301,6 +301,7 @@ def trendplotinelkaar(filepath,title):
 
     # Offset the right spine of twin2.  The ticks and label have already been
     # placed on the right by twinx above.
+    twin1.spines.right.set_position(("axes", 1.0))
     twin2.spines.right.set_position(("axes", 1.1))
     twin3.spines.right.set_position(("axes", 1.2))
     twin4.spines.right.set_position(("axes", 1.3))
@@ -310,18 +311,22 @@ def trendplotinelkaar(filepath,title):
     p2, = twin1.plot(variable, data[:,1], label=datalabel[1],c="r")
     p3, = twin2.plot(variable,  data[:,2],label=datalabel[2],c="g")
     p4, = twin3.plot(variable,  data[:,3], label=datalabel[3],c="b")
-    p5, = twin3.plot(variable,  data[:,4], label=datalabel[4],c="grey")
+    p5, = twin4.plot(variable,  data[:,4], label=datalabel[4],c="grey")
     ax.set(ylabel=datalabel[0],ylim=(min(data[:,0]),max(data[:,0])))
     twin1.set(ylabel=datalabel[1],ylim=(min(data[:,1]),max(data[:,1])))
     twin2.set(ylabel=datalabel[2],ylim=(min(data[:,2]),max(data[:,2])))
     twin3.set(ylabel=datalabel[3],ylim=(min(data[:,3]),max(data[:,3])))
-    twin3.set(ylabel=datalabel[4],ylim=(min(data[:,4]),max(data[:,4])))
+    try:
+        twin4.set(ylabel=datalabel[4],ylim=(min(data[:,4]),max(data[:,4])))
+    except ValueError:
+        twin4.set(ylabel=datalabel[4],ylim=(0,6000))
 
     ax.yaxis.label.set_color(p1.get_color())
     twin1.yaxis.label.set_color(p2.get_color())
     twin2.yaxis.label.set_color(p3.get_color())
     twin3.yaxis.label.set_color(p4.get_color())
     twin4.yaxis.label.set_color(p5.get_color())
+
     ax.tick_params(axis='y', colors=p1.get_color())
     twin1.tick_params(axis='y', colors=p2.get_color())
     twin2.tick_params(axis='y', colors=p3.get_color())
@@ -330,6 +335,7 @@ def trendplotinelkaar(filepath,title):
 
 #    ax.legend(handles=[p1, p2, p3,p4])
     ax.grid()
+    ax.set_title(title)
     plt.tight_layout()
     plt.savefig(r".\variatie onderzoek\ "+title+".png")
 
@@ -364,7 +370,7 @@ def trendplot(filepath,title):
 
 trendplotinelkaar(r".\variatie onderzoek\bilgeradius verandering.xlsx","bilge")
 trendplotinelkaar(r".\variatie onderzoek\breedte verandering.xlsx","breedte")
-#trendplotinelkaar(r".\variatie onderzoek\diepgangs verandering.xlsx","diepgang")
+trendplotinelkaar(r".\variatie onderzoek\diepgangs verandering.xlsx","diepgang")
 trendplotinelkaar(r".\variatie onderzoek\holte verandering.xlsx","holte")
 trendplotinelkaar(r".\variatie onderzoek\intrede hoek verandering.xlsx","intrede hoek")
 trendplotinelkaar(r".\variatie onderzoek\lengte verandering.xlsx","midship")
