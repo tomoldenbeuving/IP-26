@@ -29,7 +29,7 @@ def tabel():
     print('LCG containers beladen=',arm_c)
     print('VCG containers beladen=',KGcont)
     print('Vulhoogte tank beladen=',df.iloc[35,1])
-    print('Ballast tank gewicht=',F_tank[0])
+    print('Ballast tank gewicht=',F_tank)
     print('KG ballast tank beladen=',KGtank)
     print('LCG ballast tank=',x_tank)
     print('KG totaal beladen=',KG_nieuw)

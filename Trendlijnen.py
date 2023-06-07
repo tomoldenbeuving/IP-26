@@ -23,7 +23,7 @@ arij=13
 #aantal containers in lengte
 abay= 6
 
-tp_factor = 45
+tp_factor = 66
 
 
 def beladen(df):
@@ -345,14 +345,14 @@ def varend(df_varend):
         else:
             p[i]=p_func(x[i])
 
-    G_punt=integrate.quad(G_func,0,Loa)
-    P_punt=integrate.quad(p_func,min(onderwater),max(onderwater))
+    G_punt=integrate.simpson(G_func,x)
+    P_punt=integrate.simpson(p_func,x)
 
 
     #som krachten 6 staat voor de 6 meter diepgang
     Fc=Cw*n*g
 
-    Ftank = -1*(G_punt[0] + P_punt[0] +Fc)
+    Ftank = -1*(G_punt + P_punt +Fc)
     xtank=df_varend.iloc[33,1]
     volumetank=Ftank/rho_water/g
 
@@ -362,7 +362,7 @@ def varend(df_varend):
     Fillheight=volumetank/volumetankmax
 
     #som momenten
-    LCG_c= -1*(P_punt[0]*COB +G_punt[0]*COV +Ftank*xtank)/Fc
+    LCG_c= -1*(P_punt*COB +G_punt*COV +Ftank*xtank)/Fc
 
     displacement = df_varend.iloc[18,1]
     gewichtschip=displacement*rho_water
@@ -385,7 +385,7 @@ def varend(df_varend):
     KGcont_v=H+(Ch*atiers/2)
     KGtank_v=df_varend.iloc[33,3]
 
-    KG_nieuw= (KG*G_punt[0]/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt[0]/g+n*Cw+volumetank*rho_water)
+    KG_nieuw= (KG*G_punt/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt/g+n*Cw+volumetank*rho_water)
 
     GM_t_v = KB + BM_t - KG_nieuw 
 
@@ -393,7 +393,7 @@ def varend(df_varend):
 
     #LCG
     LCF = df_varend.iloc[26,1]
-    LCGNieuw=(LCF*G_punt[0]/g+LCG_c*n*Cw+xtank*volumetank*rho_water)/(G_punt[0]/g+n*Cw+volumetank*rho_water)
+    LCGNieuw=(LCF*G_punt/g+LCG_c*n*Cw+xtank*volumetank*rho_water)/(G_punt/g+n*Cw+volumetank*rho_water)
     #GM langsrichting
     It_y = df_varend.iloc[27,2]
     BM_l = It_y/displacement
@@ -410,39 +410,57 @@ def varend(df_varend):
     return [GM_t_v, Fillheight*100]
 
 
-def trendplotinelkeaar(filepath):
-    data = ["Last","GM dwars,","arm van de containers"]
+def trendplotinelkaar(filepath,title):
+    datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$\sigma_{max}$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
-    variable= wb.sheetnames
-
+    variable = wb.sheetnames
+    data = np.zeros(len(datalabel))
     for i in variable:
-        df = pd.read_excel(filepath,i)
-        data = np.vstack((data,beladen(df)))
+        df = pd.read_excel(filepath, i)    
+        data = np.vstack((data, beladen(df)))
 
-    variable = [int(numeric_string) for numeric_string in variable]
-    figure = plt.figure(figsize=(10,15))
-    ax = plt.subplot(111)
-#    for i in range(np.shape(data)[1]):
- #       plt.plot(variable,data[1:,i],label=data[0,i])
-    plt.plot(variable,data[1:,0],label=data[0,0])
-    plt.plot(variable,data[1:,1],label=data[0,1])
-    plt.plot(variable,data[1:,2],label=data[0,2])
-    plt.xlabel('[m]')
-    plt.ylabel('[N/m]')
-    plt.title('Belasting uitgezet tegen de totale lengte')
-    plt.grid()
-    plt.legend()
-    # Shrink current axis's height by 10% on the bottom
-    box = ax.get_position()
-    ax.set_position([box.x0, box.y0 + box.height * 0.1,
-                    box.width, box.height * 0.9])
-    # Put a legend below current axis
-    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1),
-            fancybox=True, shadow=True, ncol=3)
+    data = data[1:,]
+
+    variable = [float(numeric_string) for numeric_string in variable]
+    figure, ax = plt.subplots(figsize=(10,8))
+#    figure.subplots_adjust(right=0.75)
+
+
+    twin1 = ax.twinx()
+    twin2 = ax.twinx()
+    twin3 = ax.twinx()
+
+    # Offset the right spine of twin2.  The ticks and label have already been
+    # placed on the right by twinx above.
+    twin2.spines.right.set_position(("axes", 1.1))
+    twin3.spines.right.set_position(("axes", 1.2))
+
+
+    p1, = ax.plot(variable,  data[:,0], label=datalabel[0],c="orange")
+    p2, = twin1.plot(variable, data[:,1], label=datalabel[1],c="r")
+    p3, = twin2.plot(variable,  data[:,2],label=datalabel[2],c="g")
+    p4, = twin3.plot(variable,  data[:,3], label=datalabel[3],c="b")
+    ax.set(ylabel=datalabel[0],ylim=(min(data[:,0]),max(data[:,0])))
+    twin1.set(ylabel=datalabel[1],ylim=(min(data[:,1]),max(data[:,1])))
+    twin2.set(ylabel=datalabel[2],ylim=(min(data[:,2]),max(data[:,2])))
+    twin3.set(ylabel=datalabel[3],ylim=(min(data[:,3]),max(data[:,3])))
+    ax.yaxis.label.set_color(p1.get_color())
+    twin1.yaxis.label.set_color(p2.get_color())
+    twin2.yaxis.label.set_color(p3.get_color())
+    twin3.yaxis.label.set_color(p4.get_color())
+    ax.tick_params(axis='y', colors=p1.get_color())
+    twin1.tick_params(axis='y', colors=p2.get_color())
+    twin2.tick_params(axis='y', colors=p3.get_color())
+    twin3.tick_params(axis='y', colors=p4.get_color())
+
+#    ax.legend(handles=[p1, p2, p3,p4])
+    ax.grid()
+    plt.tight_layout()
+    plt.savefig(r".\variatie onderzoek\ "+title+".png")
     plt.show()
 
 
-def trendplot(filepath):
+def trendplot(filepath,title):
     datalabel = [r"Last", r"GM dwars", r"LCG containers",r"$\sigma_{max}$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
     variable = wb.sheetnames
@@ -467,6 +485,8 @@ def trendplot(filepath):
 
     # Adjust spacing between subplots
     plt.tight_layout()
+    plt.savefig("titel.png")
     plt.show()
 
-trendplot("diepgangs verandering.xlsx")
+
+trendplotinelkaar(r".\variatie onderzoek\bilgeradius verandering.xlsx","bilge")
