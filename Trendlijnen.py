@@ -599,11 +599,11 @@ def carene(df):
     #Msl=rho_water*g*displacement*GM_l*theta
     BB1=It_y/displacement*np.tan(theta)
 
-    return [displacement,KB,LCB,KG_nieuw,LCF,It_x,GM_t,It_y,GM_l]
+    return [displacement*10**-4,KB,LCB/10,KG_nieuw/10,LCF/10,It_x*10**-5 ,GM_t/10,It_y*10**-6,GM_l*10**-2]
     
 
-def careneplot(filepath,title):
-    datalabel = [r"$\delta$",r"$KB$",r"$LCB$",r"$KG_{nieuw}$",r"$LCF$",r"$It_x$",r"$GM_t$",r"$It_y$",r"$GM_l$"]
+def careneplot(filepath):
+    datalabel = [r"$\Delta \; (10^4)$",r"$KB$",r"$LCB\; (10^1)$",r"$KG_{nieuw}\; (10^1)$",r"$LCF\; (10^1)$",r"$I_{t,x} \; (10^5)$",r"$GM_t\; (10^1)$",r"$I_{t,y} \; (10^6)$",r"$GM_l\; (10^2)$"]
     wb = load_workbook(filepath, read_only=True, keep_links=False)
     variable = wb.sheetnames
     data = np.zeros(len(datalabel))
@@ -614,9 +614,10 @@ def careneplot(filepath,title):
 
     variable = [float(numeric_string) for numeric_string in variable]
     
-    figure = plt.figure(figsize=(8, 12))
+    figure = plt.figure(figsize=(10,10))
+    ax = plt.subplot(111)
 
-    for i, ax in range(np.shape(data)[1]):
+    for i in range(len(datalabel)):
         plt.plot(variable, data[:,i], label=datalabel[i])
 #        ax.set_xlabel('[m]')
 #        ax.set_ylabel('[N/m]')
@@ -630,10 +631,8 @@ def careneplot(filepath,title):
     # Put a legend below current axis
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1),
             fancybox=True, shadow=True, ncol=3)
-    
-    plt.tight_layout()
 
-    plt.savefig(r".\variatie onderzoek\ "+title+".png")
+    plt.savefig(r".\variatie onderzoek\Carene.png")
 
 
-
+careneplot(r".\variatie onderzoek\Carene the1 v1.2.xlsx")
