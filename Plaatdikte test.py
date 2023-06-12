@@ -1,24 +1,11 @@
 import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
-from imports import df, tp_factor
+from imports import df, tp_factor,Cw,n,abay,arij,atiers,Cl,Ch
 import matplotlib.pyplot as plt
 
 
-#containers
-Cl=6.06   #container lengte
-Cb=2.44  #container breedte
-Ch=2.59   #container hoogte
-Cw=30E3  #container weight
 
-#aantal containers
-n=234
-#aantal rijen in de hoogte
-atiers=3
-#aantal containers in breedte
-arij=13
-#aantal containers in lengte
-abay= 6
 
 
 
