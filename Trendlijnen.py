@@ -618,7 +618,7 @@ def careneplot(filepath):
     ax = plt.subplot(111)
 
     for i in range(len(datalabel)):
-        plt.plot(variable, data[:,i], label=datalabel[i])
+        plt.plot(data[:,i],variable, label=datalabel[i])
 #        ax.set_xlabel('[m]')
 #        ax.set_ylabel('[N/m]')
     plt.grid()
