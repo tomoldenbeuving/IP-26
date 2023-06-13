@@ -619,8 +619,8 @@ def careneplot(filepath):
 
     for i in range(len(datalabel)):
         plt.plot(data[:,i],variable, label=datalabel[i])
-#        ax.set_xlabel('[m]')
-#        ax.set_ylabel('[N/m]')
+    ax.set_xlabel('[m]')
+    ax.set_ylabel('diepgang [m]')
     plt.grid()
     plt.title("Carène diagram")
     plt.legend()
