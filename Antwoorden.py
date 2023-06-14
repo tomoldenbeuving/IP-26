@@ -15,7 +15,7 @@ print('GM dwarsscheeps beladen=',GM_t)
 print('LCG containers beladen=',arm_c)
 print("uitstekende containers",eind_cont-df.iloc[0,1])
 print("\n \n")
-
+print('Weerstand bij 19kts=', R_tot_max)
 
 def tabel():
     print('LOA=',df.iloc[0,1])
@@ -61,4 +61,3 @@ def tabel():
     print('GM leeg dwarsscheeps=',GM_leeg_t)
     print('GM leeg langsscheeps=', GM_leeg_l)
 
-tabel()
