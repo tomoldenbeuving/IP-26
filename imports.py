@@ -7,7 +7,7 @@ df = df.round(4)
 df_varend = pd.read_excel("./experimenten jiswi/the one v4.xlsx",'Varend')
 df_varend = df_varend.round(4)
 
-df_leeg = pd.read_excel("IP_1mm.xlsx",'Leeg')
+df_leeg = pd.read_excel("./experimenten jiswi/the one v4.xlsx",'Leeg')
 df_leeg = df_leeg.round(4)
 
 tp_factor = 69
