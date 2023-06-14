@@ -7,10 +7,10 @@ df = df.round(4)
 df_varend = pd.read_excel("./experimenten jiswi/the one v4.xlsx",'Varend')
 df_varend = df_varend.round(4)
 
-df_leeg = pd.read_excel("IP_1mm.xlsx",'Leeg')
+df_leeg = pd.read_excel("./experimenten jiswi/the one v4.xlsx",'Leeg')
 df_leeg = df_leeg.round(4)
 
-tp_factor = 60
+tp_factor = 69
 
 a=0
 
@@ -21,7 +21,7 @@ Ch=2.59   #container hoogte
 Cw=30E3  #container weight
 B=df.iloc[1,1]
 #aantal containers
-n=250
+n=214
 #aantal rijen in de hoogte
 
 #aantal containers in breedte
