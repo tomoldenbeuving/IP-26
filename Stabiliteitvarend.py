@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
 import matplotlib.pyplot as plt
-from imports import df_varend, tp_factor,n,Cw,Ch,atiers
+from imports import df_varend, tp_factor,n,Cw,Ch,a,atiers_varend
 
 
 rho_staal = 7.85E3
@@ -34,16 +34,16 @@ x_p = np.append(x_p,max(onderwater))
 p_func = interpolate.interp1d(x_p,p)
 
 #gewicht verdeelde belasting
-G = df_varend.iloc[101:123,2]*rho_staal*g*tp_factor
+G = df_varend.iloc[101+a:123+a,2]*rho_staal*g*tp_factor
 #G=np.append(G,nul)
-x_G = df_varend.iloc[101:123,0]
+x_G = df_varend.iloc[101+a:123+a,0]
 #x_G=np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
 
 #traagheidsmoment over de lengte
-I = df_varend.iloc[101:123,6]*tp_factor
+I = df_varend.iloc[101+a:123+a,6]*tp_factor
 #I=np.append(I,nul)
-x_I = df_varend.iloc[101:123,0]
+x_I = df_varend.iloc[101+a:123+a,0]
 #x_I=np.append(x_I,eind)
 I_func = interpolate.interp1d(x_I,I)
 
@@ -97,12 +97,14 @@ KG = df_varend.iloc[21,3]
 gewichtschip=displacement*rho_water
 displacement1=(gewichtschip+Cw*n)/rho_water
 BM_t = It_x/displacement1
-KGcont_v=H+(Ch*atiers/2)
+KGcont_v=H+(Ch*atiers_varend/2)
 KGtank_v=df_varend.iloc[33,3]
 
 KG_nieuw= (KG*G_punt/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt/g+n*Cw+volumetank*rho_water)
+I_water=df_varend.iloc[38,1]
 
-GM_t_v = KB + BM_t - KG_nieuw 
+gg1=I_water/displacement
+GM_t_v = KB + BM_t - KG_nieuw-gg1
 
 
 
@@ -118,7 +120,7 @@ GM_l = KB +BM_l-KG
 
 
 
-V_s = df_varend.iloc[152:165,1]
-R_tot = df_varend.iloc[152:165,3]
+V_s = df_varend.iloc[152+a:165+a,1]
+R_tot = df_varend.iloc[152+a:165+a,3]
 
-R_tot_max = df_varend.iloc[151,3]
+R_tot_max = df_varend.iloc[151+a,3]

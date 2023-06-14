@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy import integrate, interpolate
-from imports import df, tp_factor,n,Cw,atiers,arij,abay,Ch,Cl,Cb
+from imports import df, tp_factor,n,Cw,atiers,arij,abay,Ch,Cl,Cb,a
 import matplotlib.pyplot as plt
 
 
@@ -23,7 +23,6 @@ onderwater= df.iloc[42:64,0]
 x=np.arange(0,Loa,0.05)
 
 def sterkteleer_berekeningen(n):
-    #opwaartsekracht verdeelde belasting
     p=np.zeros(len(x))
 
     p = -df.iloc[42:64,1]*rho_water*g
@@ -35,16 +34,16 @@ def sterkteleer_berekeningen(n):
     p_func = interpolate.interp1d(x_p,p)
 
     #gewicht verdeelde belasting
-    G = df.iloc[101:123,2]*rho_staal*g*tp_factor
+    G = df.iloc[101+a:123+a,2]*rho_staal*g*tp_factor
     #G=np.append(G,nul)
-    x_G = df.iloc[101:123,0]
+    x_G = df.iloc[101+a:123+a,0]
     #x_G=np.append(x_G,eind)
     G_func = interpolate.interp1d(x_G,G)
 
     #traagheidsmoment over de lengte
-    I = df.iloc[101:123,7]*tp_factor
+    I = df.iloc[101+a:123+a,7]*tp_factor
     #I=np.append(I,nul)
-    x_I = df.iloc[101:123,0]
+    x_I = df.iloc[101+a:123+a,0]
     #x_I=np.append(x_I,eind)
     I_func = interpolate.interp1d(x_I,I)
 
@@ -70,8 +69,8 @@ def sterkteleer_berekeningen(n):
     G_tank=V_tank*rho_water*g
     arm_tank= df.iloc[34,1] 
 
-    tank = df.iloc[92:97,1]*rho_water*g#*(df.iloc[35,1]/100)
-    x_tank = df.iloc[92:97,0]
+    tank = df.iloc[92:97+a,1]*rho_water*g#*(df.iloc[35,1]/100)
+    x_tank = df.iloc[92:97+a,0]
     tank_func=interpolate.interp1d(x_tank,tank)
 
     tanklast=np.zeros(len(x))
@@ -171,7 +170,7 @@ def sterkteleer_berekeningen(n):
 
     # Maximaal toelaatbaar moment
     sigma_maxtoelaatbaar=190E6
-    I_midship=df.iloc[114, 7]*tp_factor
+    I_midship=df.iloc[114+a, 7]*tp_factor
     H=df.iloc[2,1]
     KG_y=df.iloc[21,3]
     y=H-KG_y+(tp_factor*0.001)
@@ -179,15 +178,13 @@ def sterkteleer_berekeningen(n):
     moment_max=(sigma_maxtoelaatbaar*I_midship)/y
 
     #Weerstandsmoment
-    y_boven=df.iloc[101:123,10]-df.iloc[101:123,5]
-    y_onder=df.iloc[101:123,5]-df.iloc[101:123,9]
-    W=df.iloc[101:123,7]*tp_factor/y_onder
+    y_boven=df.iloc[101+a:123+a,10]-df.iloc[101+a:123+a,5]
+    y_onder=df.iloc[101+a:123+a,5]-df.iloc[101+a:123+a,9]
+    W=df.iloc[101+a:123+a,7]*tp_factor/y_onder
 
-    x_W = df.iloc[101:123,0]
+    x_W = df.iloc[101+a:123+a,0]
     W_func = interpolate.interp1d(x_W,W)
-    W = W_func(x)
-
-
+    W = W_func(x)   
     #Spanningsverdeling
 
     sigma=np.zeros(len(x))
