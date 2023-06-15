@@ -104,7 +104,7 @@ KG_nieuw= (KG*G_punt/g+KGcont_v*n*Cw+KGtank_v*volumetank*rho_water)/(G_punt/g+n*
 I_water=df_varend.iloc[38,1]
 
 gg1=I_water/displacement
-GM_t_v = KB + BM_t - KG_nieuw-gg1
+GM_t_v = KB + BM_t - KG_nieuw
 
 
 
