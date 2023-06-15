@@ -4,7 +4,7 @@ import numpy as np
 df = pd.read_excel("./experimenten jiswi/eind ontwerp theone.xlsx",'Last')
 df = df.round(4)
 
-df_varend = pd.read_excel("./experimenten jiswi/eind ontwerp theone.xlsx",'Varend27%')
+df_varend = pd.read_excel("./experimenten jiswi/eind ontwerp theone.xlsx",'Varend44%')
 df_varend = df_varend.round(4)
 
 df_leeg = pd.read_excel("./experimenten jiswi/eind ontwerp theone.xlsx",'Leeg')
