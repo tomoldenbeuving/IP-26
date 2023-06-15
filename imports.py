@@ -31,6 +31,6 @@ abay= 5
 atiers=n/abay/arij
 
 
-arij_varend=8
-abay_varend=28
+arij_varend=14
+abay_varend=14
 atiers_varend=n/abay_varend/arij_varend
