@@ -71,7 +71,7 @@ Ftank = -1*(G_punt + P_punt +Fc)
 xtank=df_varend.iloc[33,1]
 volumetank=Ftank/rho_water/g
 
-volumetankmax=df_varend.iloc[37,1]
+volumetankmax=df_varend.iloc[32,1]
 
 
 Fillheight=volumetank/volumetankmax
