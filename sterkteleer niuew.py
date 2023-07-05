@@ -119,14 +119,14 @@ y_ball_totaal = np.zeros(len(x_schip))
 
 for z in range(0,len(x_schip)):
     if x_schip[z] >= x_ball[0]:
-        n_ball = z -1
+        n_ball = z -2
         break
 
 for z in range(0,len(x_schip)):
     if round(x_schip[z],2) >= x_ball[-1]:
         n_ball_eind = z-1
         break
-y_ball_totaal[n_ball:n_ball_eind] = y_ball  
+y_ball_totaal[n_ball:] = y_ball  
 # =============================================================================
 # 
 # =============================================================================
