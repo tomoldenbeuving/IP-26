@@ -123,10 +123,9 @@ for z in range(0,len(x_schip)):
         break
 
 for z in range(0,len(x_schip)):
-    if x_schip[z] >= x_ball[-1]:
-        n_ball_eind = z -1
+    if round(x_schip[z],2) >= x_ball[-1]:
+        n_ball_eind = z-1
         break
-
 y_ball_totaal[n_ball:n_ball_eind] = y_ball  
 # =============================================================================
 # 
