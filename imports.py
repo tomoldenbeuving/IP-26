@@ -1,13 +1,13 @@
 import pandas as pd
 import numpy as np
 
-df = pd.read_excel("./experimenten jiswi/eind ontwerp theone.xlsx",'Last')
+df = pd.read_excel("./Inleveren herkansing/NIET INLEVEREN J 1.6 excel file.xlsx",'Last')
 df = df.round(4)
 
-df_varend = pd.read_excel("./experimenten jiswi/eind ontwerp theone.xlsx",'Varend44%')
+df_varend = pd.read_excel("./Inleveren herkansing/NIET INLEVEREN J 1.6 excel file.xlsx",'Varend')
 df_varend = df_varend.round(4)
 
-df_leeg = pd.read_excel("./experimenten jiswi/eind ontwerp theone.xlsx",'Leeg')
+df_leeg = pd.read_excel("./Inleveren herkansing/NIET INLEVEREN J 1.6 excel file.xlsx",'Leeg')
 df_leeg = df_leeg.round(4)
 
 tp_factor = 66
