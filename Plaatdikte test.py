@@ -99,7 +99,7 @@ def sterkteleer_berekeningen(tp_factor):
 
     # som van momenten
     x_tank = df.iloc[33,1]
-    x_last = 13.5
+    x_last = 13.5+df.iloc[67,0]
     COB = df.iloc[20,1]
     COV = df.iloc[21,1]
     #tijdelijke arm
