@@ -12,7 +12,8 @@ class plot():
         plt.plot(x,-p,'--',label="Buoancy")
         plt.plot(x,-G,'--',label="Gewicht")
         plt.plot(x,-vb_cont,'--',label="Containers")
-        plt.plot(x,-tanklast,'--',label="Balasttank")
+        plt.plot(x,-tanklast,'--',label="Tank")
+#        plt.plot(x,-tanklast,'--',label="Balasttank")
         plt.plot(x,-vb_last,'--',label="Last")
         plt.xlabel('L.O.A. [m]')
         plt.ylabel('Nettobelasting (q) [N/m]')
@@ -80,5 +81,7 @@ class plot():
         plt.title(r'Totale scheepsweerstand uitgezet over de snelheid')
         plt.grid()
         plt.show()        
+
+plot.vb()
 
 plot.vb()
