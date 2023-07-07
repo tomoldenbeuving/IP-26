@@ -68,7 +68,7 @@ V_tank=df.iloc[32,1]
 G_tank=V_tank*rho_water*g
 arm_tank= df.iloc[34,1] 
 
-tank = df.iloc[92:97+a,1]*rho_water*g#*(df.iloc[35,1]/100)
+tank = df.iloc[92:97+a,1]*rho_water*g #*(df.iloc[35,1]/100)
 x_tank = df.iloc[92:97+a,0]
 tank_func=interpolate.interp1d(x_tank,tank)
 
@@ -96,7 +96,7 @@ F_last = -P_punt  -G_punt  -F_c  -F_tank
 
 # som van momenten
 x_tank = df.iloc[33,1]
-x_last = 13.5
+x_last = 13.5+df.iloc[67,0]
 COB = df.iloc[20,1]
 COV = df.iloc[21,1]
 #tijdelijke arm
