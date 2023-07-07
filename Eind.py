@@ -11,7 +11,8 @@ class plot():
         plt.plot(x,-q,label="Totale belasting")
         plt.plot(x,-p,'--',label="Buoancy")
         plt.plot(x,-G,'--',label="Gewicht")
-        plt.plot(x,-vb_cont-tanklast,'--',label="Containers")
+        plt.plot(x,-vb_cont,'--',label="Containers")
+        plt.plot(x,-tanklast,'--',label="Tank")
 #        plt.plot(x,-tanklast,'--',label="Balasttank")
         plt.plot(x,-vb_last,'--',label="Last")
         plt.xlabel('L.O.A. [m]')
@@ -81,3 +82,5 @@ class plot():
         plt.grid()
         plt.show()        
 
+
+plot.vb()

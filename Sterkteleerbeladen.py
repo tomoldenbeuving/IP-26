@@ -142,7 +142,7 @@ q= p+G+vb_cont+tanklast+vb_last
 V = integrate.cumtrapz(q,x,initial=0) 
 M = integrate.cumtrapz(V,x,initial=0)
 
-#Waarde en locatie maximaal moment
+#Waarde en locatie maximaal momentp
 Mmax_index = np.argmax(M)
 M_max = M[Mmax_index] #Waarde maximaal moment
 Loc_M_max = x[Mmax_index] #Locatie maximaal moment

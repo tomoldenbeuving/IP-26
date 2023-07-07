@@ -96,7 +96,7 @@ KG = df_varend.iloc[21,3]
 #berekening displacement nieuw nadat containers erop zijn
 gewichtschip=displacement*rho_water
 displacement1=(gewichtschip+Cw*n)/rho_water
-BM_t = It_x/displacement1
+BM_t = It_x/displacement
 KGcont_v=H+(Ch*atiers_varend/2)
 KGtank_v=df_varend.iloc[33,3]*Fillheight    
 
@@ -114,7 +114,7 @@ LCGNieuw=(LCF*G_punt/g+LCG_c*n*Cw+xtank*volumetank*rho_water)/(G_punt/g+n*Cw+vol
 #GM langsrichting
 It_y = df_varend.iloc[27,2]
 BM_l = It_y/displacement
-GM_l = KB +BM_l-KG
+GM_l = KB +BM_l-KG_nieuw
 
 #KG1=(KG*gewichtschip+F_tank1/g*tankx+F_cont*VCG_c/g)/(F_cont/g+gewichtschip+F_tank1)
 
