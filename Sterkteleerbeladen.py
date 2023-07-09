@@ -12,9 +12,9 @@ E_staal=210000*(10**6)
 rho_water = 1.025E3
 g = 9.81
 nul = np.zeros(1)
-Loa= df.iloc[0,1] +df.iloc[67,0]
+Loa= df.iloc[0,1] 
 eind = np.array([Loa])
-onderwater= df.iloc[42:64,0]
+onderwater= df.iloc[42:64,0] -df.iloc[67,0]
 
 #het gewicht van de containers punt belasting
 G_cont=n*Cw*g
@@ -27,7 +27,7 @@ p=np.zeros(len(x))
 p = -df.iloc[42:64,1]*rho_water*g
 p = np.append(p,nul)
 p = np.append(nul,p)
-x_p = df.iloc[42:64,0]
+x_p = df.iloc[42:64,0] -df.iloc[67,0]
 x_p = np.append(0,x_p)
 x_p = np.append(x_p,max(onderwater))
 p_func = interpolate.interp1d(x_p,p)
@@ -35,14 +35,14 @@ p_func = interpolate.interp1d(x_p,p)
 #gewicht verdeelde belasting
 G = df.iloc[101+a:123+a,2]*rho_staal*g*tp_factor
 #G=np.append(G,nul)
-x_G = df.iloc[101+a:123+a,0]
+x_G = df.iloc[101+a:123+a,0] -df.iloc[67,0]
 #x_G=np.append(x_G,eind)
 G_func = interpolate.interp1d(x_G,G)
 
 #traagheidsmoment over de lengte
 I = df.iloc[101+a:123+a,7]*tp_factor
 #I=np.append(I,nul)
-x_I = df.iloc[101+a:123+a,0]
+x_I = df.iloc[101+a:123+a,0] -df.iloc[67,0]
 #x_I=np.append(x_I,eind)
 I_func = interpolate.interp1d(x_I,I)
 
@@ -52,9 +52,9 @@ I= I_func(x)
 p= np.zeros(len(x))
 # for loop zodat nadat het onderwater stopt p altijd 0
 for i in range(len(x)):
-    if x[i] < min(onderwater):
+    if x[i] <= min(onderwater):
         p[i] = 0
-    elif x[i] > max(onderwater):
+    elif x[i] >= max(onderwater):
         p[i]=0
     else:
         p[i]=p_func(x[i])
@@ -69,7 +69,7 @@ G_tank=V_tank*rho_water*g
 arm_tank= df.iloc[34,1] 
 
 tank = df.iloc[92:97+a,1]*rho_water*g #*(df.iloc[35,1]/100)
-x_tank = df.iloc[92:97+a,0]
+x_tank = df.iloc[92:97+a,0] -df.iloc[67,0]
 tank_func=interpolate.interp1d(x_tank,tank)
 
 tanklast=np.zeros(len(x))
@@ -109,7 +109,7 @@ arm_c = -1*(P_punt*COB +G_punt*COV +F_tank*x_tank +F_last*x_last)/F_c
 start_cont=arm_c-(0.5*abay*Cl)
 eind_cont=arm_c+(0.5*abay*Cl)
 
-x_vd=np.arange(start_cont,eind_cont,0.5)
+x_vd=np.arange(start_cont,eind_cont,0.5) -df.iloc[67,0]
 G_cont_overlengte=G_cont/(eind_cont-start_cont)
 
 vb_cont=np.zeros(len(x))
@@ -122,8 +122,8 @@ for i in range(len(x)):
 
 
 #verdeeldebelasting last op platform
-x_platform=[11.8,16.2]
-F_last_overlengte=F_last/(x_platform[1]-x_platform[0])
+x_platform=[10.8,16.2]
+F_last_overlengte=F_last/(5.4)
 
 vb_last=np.zeros(len(x))
 
@@ -145,7 +145,7 @@ M = integrate.cumtrapz(V,x,initial=0)
 #Waarde en locatie maximaal momentp
 Mmax_index = np.argmax(M)
 M_max = M[Mmax_index] #Waarde maximaal moment
-Loc_M_max = x[Mmax_index] #Locatie maximaal moment
+Loc_M_max = x[Mmax_index]+df.iloc[67,0] #Locatie maximaal moment
 
 #Hoekverdraaiing zonder integratie constante
 thetaEI=integrate.cumtrapz(M/(E_staal*I),x,initial=0)
@@ -164,7 +164,7 @@ v=integrate.cumtrapz(theta,x,initial=0)
 #Waarde en locatie maximale doorbuiging
 vmax_index = np.argmin(v)
 v_max = v[vmax_index] #Waarde maximale doorbuiging
-Loc_v_max = x[vmax_index] #Locatie maximale doorbuiging
+Loc_v_max = x[vmax_index] +df.iloc[67,0]#Locatie maximale doorbuiging
 
 # Maximaal toelaatbaar moment
 sigma_maxtoelaatbaar=190E6
@@ -180,7 +180,7 @@ y_boven=df.iloc[101+a:123+a,10]-df.iloc[101+a:123+a,5]
 y_onder=df.iloc[101+a:123+a,5]-df.iloc[101+a:123+a,9]
 W=df.iloc[101+a:123+a,7]*tp_factor/y_onder
 
-x_W = df.iloc[101+a:123+a,0]
+x_W = df.iloc[101+a:123+a,0] -df.iloc[67,0]
 W_func = interpolate.interp1d(x_W,W)
 W = W_func(x)
 

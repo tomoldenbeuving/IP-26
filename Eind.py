@@ -82,6 +82,5 @@ class plot():
         plt.grid()
         plt.show()        
 
-plot.vb()
 
 plot.vb()
